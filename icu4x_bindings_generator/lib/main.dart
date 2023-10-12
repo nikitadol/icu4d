@@ -19,6 +19,16 @@ const _dynamicLibraryFieldName = 'dynamicLibrary';
 const _subBindingsDir = 'bindings';
 const _ignoreForBindings = 'ignore_for_file: require_trailing_commas';
 
+const _optionalFunctions = {
+  'ICU4XLogger_init_simple_logger',
+  'ICU4XLogger_destroy',
+  'ICU4XDataProvider_create_fs',
+  'ICU4XDataProvider_create_test',
+  'ICU4XDataProvider_create_from_byte_slice',
+  'ICU4XLocale_create_en',
+  'ICU4XLocale_create_bn',
+};
+
 const _needReplaceFieldName = {'toString'};
 const _structuresNeedAllow = {
   'CodePointRangeIterator',
@@ -172,8 +182,16 @@ void main(List<String> args) {
 
   final dynamicLibraryParameter = code_builder.Parameter(
     (b) => b
+      ..name = _dynamicLibraryFieldName
+      ..toThis = true,
+  );
+
+  final dynamicLibraryField = code_builder.Field(
+    (b) => b
+      ..name = _dynamicLibraryFieldName
       ..type = code_builder.refer(_dynamicLibraryType)
-      ..name = _dynamicLibraryFieldName,
+      ..modifier = code_builder.FieldModifier.final$
+      ..annotations.add(code_builder.refer('visibleForTesting')),
   );
 
   for (final MapEntry(key: space, value: functions)
@@ -197,40 +215,47 @@ void main(List<String> args) {
       final dartType = functionToString(function.functionType, true);
       final cType = functionToString(function.functionType, false);
 
-      bindingConstructorBuilder.initializers.add(
-        code_builder
-            .refer(funcName)
-            .assign(
-              code_builder
-                  .refer(_dynamicLibraryFieldName)
-                  .property('lookupFunction')
-                  .call(
-                [
-                  code_builder.literalString(function.name),
-                ],
-                const {},
-                [
-                  code_builder.refer(cType),
-                  code_builder.refer(dartType),
-                ],
-              ),
-            )
-            .code,
+      final lookupFunction = code_builder
+          .refer(_dynamicLibraryFieldName)
+          .property('lookupFunction')
+          .call(
+        [
+          code_builder.literalString(function.name),
+        ],
+        const {
+          'isLeaf': code_builder.literalTrue,
+        },
+        [
+          code_builder.refer(cType),
+          code_builder.refer(dartType),
+        ],
       );
 
-      bindingBuilder.fields.add(code_builder.Field(
-        (b) => b
-          ..name = funcName
-          ..modifier = code_builder.FieldModifier.final$
-          ..type = code_builder.refer(dartType),
-      ));
+      final field = code_builder.FieldBuilder()
+        ..name = funcName
+        ..modifier = code_builder.FieldModifier.final$
+        ..type = code_builder.refer(dartType);
+
+      if (_optionalFunctions.contains(function.name)) {
+        field
+          ..late = true
+          ..assignment = lookupFunction.code;
+      } else {
+        bindingConstructorBuilder.initializers.add(
+          code_builder.refer(funcName).assign(lookupFunction).code,
+        );
+      }
+
+      bindingBuilder.fields.add(field.build());
     }
 
     bindingBuilder
       ..modifier = code_builder.ClassModifier.final$
       ..name = bindingName
       ..modifier = code_builder.ClassModifier.final$
-      ..constructors.add(bindingConstructorBuilder.build());
+      ..constructors.add(bindingConstructorBuilder.build())
+      ..fields.add(dynamicLibraryField)
+      ..fields.sort(_fieldCompare);
 
     fileNamaToBindingClass[name.snakeCase] = code_builder.Library(
       (b) => b
@@ -271,37 +296,13 @@ void main(List<String> args) {
                     .code,
             ],
           )
-          ..requiredParameters.add(
-            code_builder.Parameter(
-              (b) => b
-                ..name = _dynamicLibraryFieldName
-                ..toThis = true,
-            ),
-          ),
+          ..requiredParameters.add(dynamicLibraryParameter),
       ),
     )
     ..name = '$_bindingsPrefix$_bindingsSuffix'
-    ..fields.add(
-      code_builder.Field(
-        (b) => b
-          ..name = _dynamicLibraryFieldName
-          ..type = code_builder.refer(_dynamicLibraryType)
-          ..modifier = code_builder.FieldModifier.final$
-          ..annotations.add(code_builder.refer('visibleForTesting')),
-      ),
-    );
+    ..fields.add(dynamicLibraryField);
 
-  allBindingsClassBuilder.fields.sort(
-    (a, b) {
-      final result = b.annotations.length.compareTo(a.annotations.length);
-
-      if (result == 0) {
-        return a.name.compareTo(b.name);
-      }
-
-      return result;
-    },
-  );
+  allBindingsClassBuilder.fields.sort(_fieldCompare);
 
   print('Saving...');
 
@@ -455,15 +456,29 @@ void main(List<String> args) {
   print('Done!');
 }
 
+int _fieldCompare(code_builder.Field a, code_builder.Field b) {
+  final result = b.annotations.length.compareTo(a.annotations.length);
+
+  if (result == 0) {
+    return a.name.compareTo(b.name);
+  }
+
+  return result;
+}
+
 extension on File {
   void writeSpec(code_builder.Spec spec) {
     if (!existsSync()) {
       createSync(recursive: true);
     }
 
+    final emitter = code_builder.DartEmitter(
+      useNullSafetySyntax: true,
+    );
+
     writeAsStringSync(
       formatter.format(
-        spec.accept(code_builder.DartEmitter()).toString(),
+        spec.accept(emitter).toString(),
       ),
     );
   }

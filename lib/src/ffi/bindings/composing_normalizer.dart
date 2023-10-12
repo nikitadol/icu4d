@@ -3,21 +3,27 @@
 part of '../bindings.dart';
 
 final class _ComposingNormalizer {
-  _ComposingNormalizer(ffi.DynamicLibrary dynamicLibrary)
+  _ComposingNormalizer(this.dynamicLibrary)
       : createNfc = dynamicLibrary.lookupFunction<
             ResultICU4XComposingNormalizerOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
             ),
             ResultICU4XComposingNormalizerOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
-            )>('ICU4XComposingNormalizer_create_nfc'),
+            )>(
+          'ICU4XComposingNormalizer_create_nfc',
+          isLeaf: true,
+        ),
         createNfkc = dynamicLibrary.lookupFunction<
             ResultICU4XComposingNormalizerOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
             ),
             ResultICU4XComposingNormalizerOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
-            )>('ICU4XComposingNormalizer_create_nfkc'),
+            )>(
+          'ICU4XComposingNormalizer_create_nfkc',
+          isLeaf: true,
+        ),
         normalize = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XComposingNormalizer> self,
@@ -30,7 +36,10 @@ final class _ComposingNormalizer {
               ffi.Pointer<ffi.Uint8> s_data,
               int s_len,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XComposingNormalizer_normalize'),
+            )>(
+          'ICU4XComposingNormalizer_normalize',
+          isLeaf: true,
+        ),
         isNormalized = dynamicLibrary.lookupFunction<
             ffi.Bool Function(
               ffi.Pointer<ICU4XComposingNormalizer> self,
@@ -41,14 +50,23 @@ final class _ComposingNormalizer {
               ffi.Pointer<ICU4XComposingNormalizer> self,
               ffi.Pointer<ffi.Uint8> s_data,
               int s_len,
-            )>('ICU4XComposingNormalizer_is_normalized'),
+            )>(
+          'ICU4XComposingNormalizer_is_normalized',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XComposingNormalizer> self,
             ),
             void Function(
               ffi.Pointer<ICU4XComposingNormalizer> self,
-            )>('ICU4XComposingNormalizer_destroy');
+            )>(
+          'ICU4XComposingNormalizer_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final ResultICU4XComposingNormalizerOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
@@ -58,12 +76,9 @@ final class _ComposingNormalizer {
     ffi.Pointer<ICU4XDataProvider> provider,
   ) createNfkc;
 
-  final ResultVoidOrICU4XError Function(
+  final void Function(
     ffi.Pointer<ICU4XComposingNormalizer> self,
-    ffi.Pointer<ffi.Uint8> s_data,
-    int s_len,
-    ffi.Pointer<DiplomatWriteable> write,
-  ) normalize;
+  ) destroy;
 
   final bool Function(
     ffi.Pointer<ICU4XComposingNormalizer> self,
@@ -71,7 +86,10 @@ final class _ComposingNormalizer {
     int s_len,
   ) isNormalized;
 
-  final void Function(
+  final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XComposingNormalizer> self,
-  ) destroy;
+    ffi.Pointer<ffi.Uint8> s_data,
+    int s_len,
+    ffi.Pointer<DiplomatWriteable> write,
+  ) normalize;
 }

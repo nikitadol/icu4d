@@ -3,14 +3,17 @@
 part of '../bindings.dart';
 
 final class _BidiInfo {
-  _BidiInfo(ffi.DynamicLibrary dynamicLibrary)
+  _BidiInfo(this.dynamicLibrary)
       : paragraphCount = dynamicLibrary.lookupFunction<
             ffi.Size Function(
               ffi.Pointer<ICU4XBidiInfo> self,
             ),
             int Function(
               ffi.Pointer<ICU4XBidiInfo> self,
-            )>('ICU4XBidiInfo_paragraph_count'),
+            )>(
+          'ICU4XBidiInfo_paragraph_count',
+          isLeaf: true,
+        ),
         paragraphAt = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XBidiParagraph> Function(
               ffi.Pointer<ICU4XBidiInfo> self,
@@ -19,14 +22,20 @@ final class _BidiInfo {
             ffi.Pointer<ICU4XBidiParagraph> Function(
               ffi.Pointer<ICU4XBidiInfo> self,
               int n,
-            )>('ICU4XBidiInfo_paragraph_at'),
+            )>(
+          'ICU4XBidiInfo_paragraph_at',
+          isLeaf: true,
+        ),
         size = dynamicLibrary.lookupFunction<
             ffi.Size Function(
               ffi.Pointer<ICU4XBidiInfo> self,
             ),
             int Function(
               ffi.Pointer<ICU4XBidiInfo> self,
-            )>('ICU4XBidiInfo_size'),
+            )>(
+          'ICU4XBidiInfo_size',
+          isLeaf: true,
+        ),
         levelAt = dynamicLibrary.lookupFunction<
             ffi.Uint8 Function(
               ffi.Pointer<ICU4XBidiInfo> self,
@@ -35,18 +44,32 @@ final class _BidiInfo {
             int Function(
               ffi.Pointer<ICU4XBidiInfo> self,
               int pos,
-            )>('ICU4XBidiInfo_level_at'),
+            )>(
+          'ICU4XBidiInfo_level_at',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XBidiInfo> self,
             ),
             void Function(
               ffi.Pointer<ICU4XBidiInfo> self,
-            )>('ICU4XBidiInfo_destroy');
+            )>(
+          'ICU4XBidiInfo_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
+
+  final void Function(
+    ffi.Pointer<ICU4XBidiInfo> self,
+  ) destroy;
 
   final int Function(
     ffi.Pointer<ICU4XBidiInfo> self,
-  ) paragraphCount;
+    int pos,
+  ) levelAt;
 
   final ffi.Pointer<ICU4XBidiParagraph> Function(
     ffi.Pointer<ICU4XBidiInfo> self,
@@ -55,14 +78,9 @@ final class _BidiInfo {
 
   final int Function(
     ffi.Pointer<ICU4XBidiInfo> self,
-  ) size;
+  ) paragraphCount;
 
   final int Function(
     ffi.Pointer<ICU4XBidiInfo> self,
-    int pos,
-  ) levelAt;
-
-  final void Function(
-    ffi.Pointer<ICU4XBidiInfo> self,
-  ) destroy;
+  ) size;
 }

@@ -3,21 +3,27 @@
 part of '../bindings.dart';
 
 final class _DecomposingNormalizer {
-  _DecomposingNormalizer(ffi.DynamicLibrary dynamicLibrary)
+  _DecomposingNormalizer(this.dynamicLibrary)
       : createNfd = dynamicLibrary.lookupFunction<
             ResultICU4XDecomposingNormalizerOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
             ),
             ResultICU4XDecomposingNormalizerOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
-            )>('ICU4XDecomposingNormalizer_create_nfd'),
+            )>(
+          'ICU4XDecomposingNormalizer_create_nfd',
+          isLeaf: true,
+        ),
         createNfkd = dynamicLibrary.lookupFunction<
             ResultICU4XDecomposingNormalizerOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
             ),
             ResultICU4XDecomposingNormalizerOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
-            )>('ICU4XDecomposingNormalizer_create_nfkd'),
+            )>(
+          'ICU4XDecomposingNormalizer_create_nfkd',
+          isLeaf: true,
+        ),
         normalize = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDecomposingNormalizer> self,
@@ -30,7 +36,10 @@ final class _DecomposingNormalizer {
               ffi.Pointer<ffi.Uint8> s_data,
               int s_len,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XDecomposingNormalizer_normalize'),
+            )>(
+          'ICU4XDecomposingNormalizer_normalize',
+          isLeaf: true,
+        ),
         isNormalized = dynamicLibrary.lookupFunction<
             ffi.Bool Function(
               ffi.Pointer<ICU4XDecomposingNormalizer> self,
@@ -41,14 +50,23 @@ final class _DecomposingNormalizer {
               ffi.Pointer<ICU4XDecomposingNormalizer> self,
               ffi.Pointer<ffi.Uint8> s_data,
               int s_len,
-            )>('ICU4XDecomposingNormalizer_is_normalized'),
+            )>(
+          'ICU4XDecomposingNormalizer_is_normalized',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XDecomposingNormalizer> self,
             ),
             void Function(
               ffi.Pointer<ICU4XDecomposingNormalizer> self,
-            )>('ICU4XDecomposingNormalizer_destroy');
+            )>(
+          'ICU4XDecomposingNormalizer_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final ResultICU4XDecomposingNormalizerOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
@@ -58,12 +76,9 @@ final class _DecomposingNormalizer {
     ffi.Pointer<ICU4XDataProvider> provider,
   ) createNfkd;
 
-  final ResultVoidOrICU4XError Function(
+  final void Function(
     ffi.Pointer<ICU4XDecomposingNormalizer> self,
-    ffi.Pointer<ffi.Uint8> s_data,
-    int s_len,
-    ffi.Pointer<DiplomatWriteable> write,
-  ) normalize;
+  ) destroy;
 
   final bool Function(
     ffi.Pointer<ICU4XDecomposingNormalizer> self,
@@ -71,7 +86,10 @@ final class _DecomposingNormalizer {
     int s_len,
   ) isNormalized;
 
-  final void Function(
+  final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XDecomposingNormalizer> self,
-  ) destroy;
+    ffi.Pointer<ffi.Uint8> s_data,
+    int s_len,
+    ffi.Pointer<DiplomatWriteable> write,
+  ) normalize;
 }

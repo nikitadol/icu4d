@@ -3,14 +3,20 @@
 part of '../bindings.dart';
 
 final class _DisplayNamesOptionsV1 {
-  _DisplayNamesOptionsV1(ffi.DynamicLibrary dynamicLibrary)
+  _DisplayNamesOptionsV1(this.dynamicLibrary)
       : destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XDisplayNamesOptionsV1> self,
             ),
             void Function(
               ffi.Pointer<ICU4XDisplayNamesOptionsV1> self,
-            )>('ICU4XDisplayNamesOptionsV1_destroy');
+            )>(
+          'ICU4XDisplayNamesOptionsV1_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final void Function(
     ffi.Pointer<ICU4XDisplayNamesOptionsV1> self,

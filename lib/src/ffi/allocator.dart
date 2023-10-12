@@ -1,13 +1,13 @@
-part of icu4d_ffi_bindings;
+part of icu4d_ffi;
 
 class Icu4XAllocator {
   const Icu4XAllocator();
 
   ffi.Pointer<ffi.Uint8> allocate(int size, int align) {
-    return bindings.diplomatAlloc(size, align);
+    return icu4XBindings.diplomat.alloc(size, align);
   }
 
   void free(ffi.Pointer<ffi.Uint8> pointer, int size, int align) {
-    bindings.diplomatFree(pointer, size, align);
+    icu4XBindings.diplomat.free(pointer, size, align);
   }
 }

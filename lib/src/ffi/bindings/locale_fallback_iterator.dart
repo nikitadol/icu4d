@@ -3,28 +3,44 @@
 part of '../bindings.dart';
 
 final class _LocaleFallbackIterator {
-  _LocaleFallbackIterator(ffi.DynamicLibrary dynamicLibrary)
+  _LocaleFallbackIterator(this.dynamicLibrary)
       : get = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XLocale> Function(
               ffi.Pointer<ICU4XLocaleFallbackIterator> self,
             ),
             ffi.Pointer<ICU4XLocale> Function(
               ffi.Pointer<ICU4XLocaleFallbackIterator> self,
-            )>('ICU4XLocaleFallbackIterator_get'),
+            )>(
+          'ICU4XLocaleFallbackIterator_get',
+          isLeaf: true,
+        ),
         step = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XLocaleFallbackIterator> self,
             ),
             void Function(
               ffi.Pointer<ICU4XLocaleFallbackIterator> self,
-            )>('ICU4XLocaleFallbackIterator_step'),
+            )>(
+          'ICU4XLocaleFallbackIterator_step',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XLocaleFallbackIterator> self,
             ),
             void Function(
               ffi.Pointer<ICU4XLocaleFallbackIterator> self,
-            )>('ICU4XLocaleFallbackIterator_destroy');
+            )>(
+          'ICU4XLocaleFallbackIterator_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
+
+  final void Function(
+    ffi.Pointer<ICU4XLocaleFallbackIterator> self,
+  ) destroy;
 
   final ffi.Pointer<ICU4XLocale> Function(
     ffi.Pointer<ICU4XLocaleFallbackIterator> self,
@@ -33,8 +49,4 @@ final class _LocaleFallbackIterator {
   final void Function(
     ffi.Pointer<ICU4XLocaleFallbackIterator> self,
   ) step;
-
-  final void Function(
-    ffi.Pointer<ICU4XLocaleFallbackIterator> self,
-  ) destroy;
 }

@@ -3,33 +3,13 @@
 part of '../bindings.dart';
 
 final class _DataProvider {
-  _DataProvider(ffi.DynamicLibrary dynamicLibrary)
-      : createFs = dynamicLibrary.lookupFunction<
-            ResultICU4XDataProviderOrICU4XError Function(
-              ffi.Pointer<ffi.Uint8> path_data,
-              ffi.Size path_len,
-            ),
-            ResultICU4XDataProviderOrICU4XError Function(
-              ffi.Pointer<ffi.Uint8> path_data,
-              int path_len,
-            )>('ICU4XDataProvider_create_fs'),
-        createTest = dynamicLibrary.lookupFunction<
+  _DataProvider(this.dynamicLibrary)
+      : createEmpty = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XDataProvider> Function(),
-            ffi.Pointer<ICU4XDataProvider>
-                Function()>('ICU4XDataProvider_create_test'),
-        createFromByteSlice = dynamicLibrary.lookupFunction<
-            ResultICU4XDataProviderOrICU4XError Function(
-              ffi.Pointer<ffi.Uint8> blob_data,
-              ffi.Size blob_len,
-            ),
-            ResultICU4XDataProviderOrICU4XError Function(
-              ffi.Pointer<ffi.Uint8> blob_data,
-              int blob_len,
-            )>('ICU4XDataProvider_create_from_byte_slice'),
-        createEmpty = dynamicLibrary.lookupFunction<
-            ffi.Pointer<ICU4XDataProvider> Function(),
-            ffi.Pointer<ICU4XDataProvider>
-                Function()>('ICU4XDataProvider_create_empty'),
+            ffi.Pointer<ICU4XDataProvider> Function()>(
+          'ICU4XDataProvider_create_empty',
+          isLeaf: true,
+        ),
         forkByKey = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> self,
@@ -38,7 +18,10 @@ final class _DataProvider {
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> self,
               ffi.Pointer<ICU4XDataProvider> other,
-            )>('ICU4XDataProvider_fork_by_key'),
+            )>(
+          'ICU4XDataProvider_fork_by_key',
+          isLeaf: true,
+        ),
         forkByLocale = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> self,
@@ -47,14 +30,20 @@ final class _DataProvider {
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> self,
               ffi.Pointer<ICU4XDataProvider> other,
-            )>('ICU4XDataProvider_fork_by_locale'),
+            )>(
+          'ICU4XDataProvider_fork_by_locale',
+          isLeaf: true,
+        ),
         enableLocaleFallback = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> self,
             ),
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> self,
-            )>('ICU4XDataProvider_enable_locale_fallback'),
+            )>(
+          'ICU4XDataProvider_enable_locale_fallback',
+          isLeaf: true,
+        ),
         enableLocaleFallbackWith = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> self,
@@ -63,38 +52,68 @@ final class _DataProvider {
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> self,
               ffi.Pointer<ICU4XLocaleFallbacker> fallbacker,
-            )>('ICU4XDataProvider_enable_locale_fallback_with'),
+            )>(
+          'ICU4XDataProvider_enable_locale_fallback_with',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XDataProvider> self,
             ),
             void Function(
               ffi.Pointer<ICU4XDataProvider> self,
-            )>('ICU4XDataProvider_destroy');
+            )>(
+          'ICU4XDataProvider_destroy',
+          isLeaf: true,
+        );
 
-  final ResultICU4XDataProviderOrICU4XError Function(
-    ffi.Pointer<ffi.Uint8> path_data,
-    int path_len,
-  ) createFs;
-
-  final ffi.Pointer<ICU4XDataProvider> Function() createTest;
-
-  final ResultICU4XDataProviderOrICU4XError Function(
-    ffi.Pointer<ffi.Uint8> blob_data,
-    int blob_len,
-  ) createFromByteSlice;
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final ffi.Pointer<ICU4XDataProvider> Function() createEmpty;
 
-  final ResultVoidOrICU4XError Function(
-    ffi.Pointer<ICU4XDataProvider> self,
-    ffi.Pointer<ICU4XDataProvider> other,
-  ) forkByKey;
+  late final ResultICU4XDataProviderOrICU4XError Function(
+    ffi.Pointer<ffi.Uint8> blob_data,
+    int blob_len,
+  ) createFromByteSlice = dynamicLibrary.lookupFunction<
+      ResultICU4XDataProviderOrICU4XError Function(
+        ffi.Pointer<ffi.Uint8> blob_data,
+        ffi.Size blob_len,
+      ),
+      ResultICU4XDataProviderOrICU4XError Function(
+        ffi.Pointer<ffi.Uint8> blob_data,
+        int blob_len,
+      )>(
+    'ICU4XDataProvider_create_from_byte_slice',
+    isLeaf: true,
+  );
 
-  final ResultVoidOrICU4XError Function(
+  late final ResultICU4XDataProviderOrICU4XError Function(
+    ffi.Pointer<ffi.Uint8> path_data,
+    int path_len,
+  ) createFs = dynamicLibrary.lookupFunction<
+      ResultICU4XDataProviderOrICU4XError Function(
+        ffi.Pointer<ffi.Uint8> path_data,
+        ffi.Size path_len,
+      ),
+      ResultICU4XDataProviderOrICU4XError Function(
+        ffi.Pointer<ffi.Uint8> path_data,
+        int path_len,
+      )>(
+    'ICU4XDataProvider_create_fs',
+    isLeaf: true,
+  );
+
+  late final ffi.Pointer<ICU4XDataProvider> Function() createTest =
+      dynamicLibrary.lookupFunction<ffi.Pointer<ICU4XDataProvider> Function(),
+          ffi.Pointer<ICU4XDataProvider> Function()>(
+    'ICU4XDataProvider_create_test',
+    isLeaf: true,
+  );
+
+  final void Function(
     ffi.Pointer<ICU4XDataProvider> self,
-    ffi.Pointer<ICU4XDataProvider> other,
-  ) forkByLocale;
+  ) destroy;
 
   final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> self,
@@ -105,7 +124,13 @@ final class _DataProvider {
     ffi.Pointer<ICU4XLocaleFallbacker> fallbacker,
   ) enableLocaleFallbackWith;
 
-  final void Function(
+  final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> self,
-  ) destroy;
+    ffi.Pointer<ICU4XDataProvider> other,
+  ) forkByKey;
+
+  final ResultVoidOrICU4XError Function(
+    ffi.Pointer<ICU4XDataProvider> self,
+    ffi.Pointer<ICU4XDataProvider> other,
+  ) forkByLocale;
 }

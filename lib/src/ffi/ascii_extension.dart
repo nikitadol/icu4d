@@ -1,4 +1,4 @@
-part of icu4d_ffi_bindings;
+part of icu4d_ffi;
 
 extension StringAsciiPointer on String {
   ({ffi.Pointer<ffi.Uint8> bytes, int length}) toAscii() {
@@ -7,7 +7,7 @@ extension StringAsciiPointer on String {
       return (bytes: ffi.nullptr, length: 0);
     }
 
-    final pointer = bindings.allocator.allocate(length, 1);
+    final pointer = icu4XAllocator.allocate(length, 1);
     final buffer = pointer.asTypedList(length);
 
     for (int i = 0; i < length; i++) {

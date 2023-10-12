@@ -3,7 +3,7 @@
 part of '../bindings.dart';
 
 final class _Time {
-  _Time(ffi.DynamicLibrary dynamicLibrary)
+  _Time(this.dynamicLibrary)
       : create = dynamicLibrary.lookupFunction<
             ResultICU4XTimeOrICU4XError Function(
               ffi.Uint8 hour,
@@ -16,42 +16,63 @@ final class _Time {
               int minute,
               int second,
               int nanosecond,
-            )>('ICU4XTime_create'),
+            )>(
+          'ICU4XTime_create',
+          isLeaf: true,
+        ),
         hour = dynamicLibrary.lookupFunction<
             ffi.Uint8 Function(
               ffi.Pointer<ICU4XTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XTime> self,
-            )>('ICU4XTime_hour'),
+            )>(
+          'ICU4XTime_hour',
+          isLeaf: true,
+        ),
         minute = dynamicLibrary.lookupFunction<
             ffi.Uint8 Function(
               ffi.Pointer<ICU4XTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XTime> self,
-            )>('ICU4XTime_minute'),
+            )>(
+          'ICU4XTime_minute',
+          isLeaf: true,
+        ),
         second = dynamicLibrary.lookupFunction<
             ffi.Uint8 Function(
               ffi.Pointer<ICU4XTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XTime> self,
-            )>('ICU4XTime_second'),
+            )>(
+          'ICU4XTime_second',
+          isLeaf: true,
+        ),
         nanosecond = dynamicLibrary.lookupFunction<
             ffi.Uint32 Function(
               ffi.Pointer<ICU4XTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XTime> self,
-            )>('ICU4XTime_nanosecond'),
+            )>(
+          'ICU4XTime_nanosecond',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XTime> self,
             ),
             void Function(
               ffi.Pointer<ICU4XTime> self,
-            )>('ICU4XTime_destroy');
+            )>(
+          'ICU4XTime_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final ResultICU4XTimeOrICU4XError Function(
     int hour,
@@ -59,6 +80,10 @@ final class _Time {
     int second,
     int nanosecond,
   ) create;
+
+  final void Function(
+    ffi.Pointer<ICU4XTime> self,
+  ) destroy;
 
   final int Function(
     ffi.Pointer<ICU4XTime> self,
@@ -70,13 +95,9 @@ final class _Time {
 
   final int Function(
     ffi.Pointer<ICU4XTime> self,
-  ) second;
+  ) nanosecond;
 
   final int Function(
     ffi.Pointer<ICU4XTime> self,
-  ) nanosecond;
-
-  final void Function(
-    ffi.Pointer<ICU4XTime> self,
-  ) destroy;
+  ) second;
 }

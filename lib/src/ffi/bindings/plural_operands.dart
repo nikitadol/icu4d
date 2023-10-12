@@ -3,7 +3,7 @@
 part of '../bindings.dart';
 
 final class _PluralOperands {
-  _PluralOperands(ffi.DynamicLibrary dynamicLibrary)
+  _PluralOperands(this.dynamicLibrary)
       : createFromString = dynamicLibrary.lookupFunction<
             ResultICU4XPluralOperandsOrICU4XError Function(
               ffi.Pointer<ffi.Uint8> s_data,
@@ -12,14 +12,23 @@ final class _PluralOperands {
             ResultICU4XPluralOperandsOrICU4XError Function(
               ffi.Pointer<ffi.Uint8> s_data,
               int s_len,
-            )>('ICU4XPluralOperands_create_from_string'),
+            )>(
+          'ICU4XPluralOperands_create_from_string',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XPluralOperands> self,
             ),
             void Function(
               ffi.Pointer<ICU4XPluralOperands> self,
-            )>('ICU4XPluralOperands_destroy');
+            )>(
+          'ICU4XPluralOperands_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final ResultICU4XPluralOperandsOrICU4XError Function(
     ffi.Pointer<ffi.Uint8> s_data,

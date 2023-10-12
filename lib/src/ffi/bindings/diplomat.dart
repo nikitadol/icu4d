@@ -3,7 +3,7 @@
 part of '../bindings.dart';
 
 final class _Diplomat {
-  _Diplomat(ffi.DynamicLibrary dynamicLibrary)
+  _Diplomat(this.dynamicLibrary)
       : simpleWriteable = dynamicLibrary.lookupFunction<
             DiplomatWriteable Function(
               ffi.Pointer<ffi.Uint8> buf,
@@ -12,7 +12,10 @@ final class _Diplomat {
             DiplomatWriteable Function(
               ffi.Pointer<ffi.Uint8> buf,
               int buf_size,
-            )>('diplomat_simple_writeable'),
+            )>(
+          'diplomat_simple_writeable',
+          isLeaf: true,
+        ),
         alloc = dynamicLibrary.lookupFunction<
             ffi.Pointer<ffi.Uint8> Function(
               ffi.Size size,
@@ -21,7 +24,10 @@ final class _Diplomat {
             ffi.Pointer<ffi.Uint8> Function(
               int size,
               int align,
-            )>('diplomat_alloc'),
+            )>(
+          'diplomat_alloc',
+          isLeaf: true,
+        ),
         free = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ffi.Uint8> ptr,
@@ -32,37 +38,38 @@ final class _Diplomat {
               ffi.Pointer<ffi.Uint8> ptr,
               int size,
               int align,
-            )>('diplomat_free'),
+            )>(
+          'diplomat_free',
+          isLeaf: true,
+        ),
         bufferWriteableCreate = dynamicLibrary.lookupFunction<
             ffi.Pointer<DiplomatWriteable> Function(
               ffi.Size cap,
             ),
             ffi.Pointer<DiplomatWriteable> Function(
               int cap,
-            )>('diplomat_buffer_writeable_create'),
+            )>(
+          'diplomat_buffer_writeable_create',
+          isLeaf: true,
+        ),
         bufferWriteableDestroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<DiplomatWriteable> this_,
             ),
             void Function(
               ffi.Pointer<DiplomatWriteable> this_,
-            )>('diplomat_buffer_writeable_destroy');
+            )>(
+          'diplomat_buffer_writeable_destroy',
+          isLeaf: true,
+        );
 
-  final DiplomatWriteable Function(
-    ffi.Pointer<ffi.Uint8> buf,
-    int buf_size,
-  ) simpleWriteable;
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final ffi.Pointer<ffi.Uint8> Function(
     int size,
     int align,
   ) alloc;
-
-  final void Function(
-    ffi.Pointer<ffi.Uint8> ptr,
-    int size,
-    int align,
-  ) free;
 
   final ffi.Pointer<DiplomatWriteable> Function(
     int cap,
@@ -71,4 +78,15 @@ final class _Diplomat {
   final void Function(
     ffi.Pointer<DiplomatWriteable> this_,
   ) bufferWriteableDestroy;
+
+  final void Function(
+    ffi.Pointer<ffi.Uint8> ptr,
+    int size,
+    int align,
+  ) free;
+
+  final DiplomatWriteable Function(
+    ffi.Pointer<ffi.Uint8> buf,
+    int buf_size,
+  ) simpleWriteable;
 }

@@ -3,7 +3,7 @@
 part of '../bindings.dart';
 
 final class _DateTime {
-  _DateTime(ffi.DynamicLibrary dynamicLibrary)
+  _DateTime(this.dynamicLibrary)
       : createFromIsoInCalendar = dynamicLibrary.lookupFunction<
             ResultICU4XDateTimeOrICU4XError Function(
               ffi.Int32 year,
@@ -24,7 +24,10 @@ final class _DateTime {
               int second,
               int nanosecond,
               ffi.Pointer<ICU4XCalendar> calendar,
-            )>('ICU4XDateTime_create_from_iso_in_calendar'),
+            )>(
+          'ICU4XDateTime_create_from_iso_in_calendar',
+          isLeaf: true,
+        ),
         createFromCodesInCalendar = dynamicLibrary.lookupFunction<
             ResultICU4XDateTimeOrICU4XError Function(
               ffi.Pointer<ffi.Uint8> era_code_data,
@@ -51,7 +54,10 @@ final class _DateTime {
               int second,
               int nanosecond,
               ffi.Pointer<ICU4XCalendar> calendar,
-            )>('ICU4XDateTime_create_from_codes_in_calendar'),
+            )>(
+          'ICU4XDateTime_create_from_codes_in_calendar',
+          isLeaf: true,
+        ),
         createFromDateAndTime = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XDateTime> Function(
               ffi.Pointer<ICU4XDate> date,
@@ -60,28 +66,40 @@ final class _DateTime {
             ffi.Pointer<ICU4XDateTime> Function(
               ffi.Pointer<ICU4XDate> date,
               ffi.Pointer<ICU4XTime> time,
-            )>('ICU4XDateTime_create_from_date_and_time'),
+            )>(
+          'ICU4XDateTime_create_from_date_and_time',
+          isLeaf: true,
+        ),
         date = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XDate> Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             ffi.Pointer<ICU4XDate> Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_date'),
+            )>(
+          'ICU4XDateTime_date',
+          isLeaf: true,
+        ),
         time = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XTime> Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             ffi.Pointer<ICU4XTime> Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_time'),
+            )>(
+          'ICU4XDateTime_time',
+          isLeaf: true,
+        ),
         toIso = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XIsoDateTime> Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             ffi.Pointer<ICU4XIsoDateTime> Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_to_iso'),
+            )>(
+          'ICU4XDateTime_to_iso',
+          isLeaf: true,
+        ),
         toCalendar = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XDateTime> Function(
               ffi.Pointer<ICU4XDateTime> self,
@@ -90,49 +108,70 @@ final class _DateTime {
             ffi.Pointer<ICU4XDateTime> Function(
               ffi.Pointer<ICU4XDateTime> self,
               ffi.Pointer<ICU4XCalendar> calendar,
-            )>('ICU4XDateTime_to_calendar'),
+            )>(
+          'ICU4XDateTime_to_calendar',
+          isLeaf: true,
+        ),
         hour = dynamicLibrary.lookupFunction<
             ffi.Uint8 Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_hour'),
+            )>(
+          'ICU4XDateTime_hour',
+          isLeaf: true,
+        ),
         minute = dynamicLibrary.lookupFunction<
             ffi.Uint8 Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_minute'),
+            )>(
+          'ICU4XDateTime_minute',
+          isLeaf: true,
+        ),
         second = dynamicLibrary.lookupFunction<
             ffi.Uint8 Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_second'),
+            )>(
+          'ICU4XDateTime_second',
+          isLeaf: true,
+        ),
         nanosecond = dynamicLibrary.lookupFunction<
             ffi.Uint32 Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_nanosecond'),
+            )>(
+          'ICU4XDateTime_nanosecond',
+          isLeaf: true,
+        ),
         dayOfMonth = dynamicLibrary.lookupFunction<
             ffi.Uint32 Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_day_of_month'),
+            )>(
+          'ICU4XDateTime_day_of_month',
+          isLeaf: true,
+        ),
         dayOfWeek = dynamicLibrary.lookupFunction<
             ffi.Int32 Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_day_of_week'),
+            )>(
+          'ICU4XDateTime_day_of_week',
+          isLeaf: true,
+        ),
         weekOfMonth = dynamicLibrary.lookupFunction<
             ffi.Uint32 Function(
               ffi.Pointer<ICU4XDateTime> self,
@@ -141,7 +180,10 @@ final class _DateTime {
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
               int first_weekday,
-            )>('ICU4XDateTime_week_of_month'),
+            )>(
+          'ICU4XDateTime_week_of_month',
+          isLeaf: true,
+        ),
         weekOfYear = dynamicLibrary.lookupFunction<
             ResultICU4XWeekOfOrICU4XError Function(
               ffi.Pointer<ICU4XDateTime> self,
@@ -150,14 +192,20 @@ final class _DateTime {
             ResultICU4XWeekOfOrICU4XError Function(
               ffi.Pointer<ICU4XDateTime> self,
               ffi.Pointer<ICU4XWeekCalculator> calculator,
-            )>('ICU4XDateTime_week_of_year'),
+            )>(
+          'ICU4XDateTime_week_of_year',
+          isLeaf: true,
+        ),
         ordinalMonth = dynamicLibrary.lookupFunction<
             ffi.Uint32 Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_ordinal_month'),
+            )>(
+          'ICU4XDateTime_ordinal_month',
+          isLeaf: true,
+        ),
         monthCode = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDateTime> self,
@@ -166,14 +214,20 @@ final class _DateTime {
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDateTime> self,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XDateTime_month_code'),
+            )>(
+          'ICU4XDateTime_month_code',
+          isLeaf: true,
+        ),
         yearInEra = dynamicLibrary.lookupFunction<
             ffi.Int32 Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_year_in_era'),
+            )>(
+          'ICU4XDateTime_year_in_era',
+          isLeaf: true,
+        ),
         era = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDateTime> self,
@@ -182,53 +236,67 @@ final class _DateTime {
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XDateTime> self,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XDateTime_era'),
+            )>(
+          'ICU4XDateTime_era',
+          isLeaf: true,
+        ),
         monthsInYear = dynamicLibrary.lookupFunction<
             ffi.Uint8 Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_months_in_year'),
+            )>(
+          'ICU4XDateTime_months_in_year',
+          isLeaf: true,
+        ),
         daysInMonth = dynamicLibrary.lookupFunction<
             ffi.Uint8 Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_days_in_month'),
+            )>(
+          'ICU4XDateTime_days_in_month',
+          isLeaf: true,
+        ),
         daysInYear = dynamicLibrary.lookupFunction<
             ffi.Uint32 Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             int Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_days_in_year'),
+            )>(
+          'ICU4XDateTime_days_in_year',
+          isLeaf: true,
+        ),
         calendar = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XCalendar> Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             ffi.Pointer<ICU4XCalendar> Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_calendar'),
+            )>(
+          'ICU4XDateTime_calendar',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XDateTime> self,
             ),
             void Function(
               ffi.Pointer<ICU4XDateTime> self,
-            )>('ICU4XDateTime_destroy');
+            )>(
+          'ICU4XDateTime_destroy',
+          isLeaf: true,
+        );
 
-  final ResultICU4XDateTimeOrICU4XError Function(
-    int year,
-    int month,
-    int day,
-    int hour,
-    int minute,
-    int second,
-    int nanosecond,
-    ffi.Pointer<ICU4XCalendar> calendar,
-  ) createFromIsoInCalendar;
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
+
+  final ffi.Pointer<ICU4XCalendar> Function(
+    ffi.Pointer<ICU4XDateTime> self,
+  ) calendar;
 
   final ResultICU4XDateTimeOrICU4XError Function(
     ffi.Pointer<ffi.Uint8> era_code_data,
@@ -249,22 +317,45 @@ final class _DateTime {
     ffi.Pointer<ICU4XTime> time,
   ) createFromDateAndTime;
 
+  final ResultICU4XDateTimeOrICU4XError Function(
+    int year,
+    int month,
+    int day,
+    int hour,
+    int minute,
+    int second,
+    int nanosecond,
+    ffi.Pointer<ICU4XCalendar> calendar,
+  ) createFromIsoInCalendar;
+
   final ffi.Pointer<ICU4XDate> Function(
     ffi.Pointer<ICU4XDateTime> self,
   ) date;
 
-  final ffi.Pointer<ICU4XTime> Function(
+  final int Function(
     ffi.Pointer<ICU4XDateTime> self,
-  ) time;
+  ) dayOfMonth;
 
-  final ffi.Pointer<ICU4XIsoDateTime> Function(
+  final int Function(
     ffi.Pointer<ICU4XDateTime> self,
-  ) toIso;
+  ) dayOfWeek;
 
-  final ffi.Pointer<ICU4XDateTime> Function(
+  final int Function(
     ffi.Pointer<ICU4XDateTime> self,
-    ffi.Pointer<ICU4XCalendar> calendar,
-  ) toCalendar;
+  ) daysInMonth;
+
+  final int Function(
+    ffi.Pointer<ICU4XDateTime> self,
+  ) daysInYear;
+
+  final void Function(
+    ffi.Pointer<ICU4XDateTime> self,
+  ) destroy;
+
+  final ResultVoidOrICU4XError Function(
+    ffi.Pointer<ICU4XDateTime> self,
+    ffi.Pointer<DiplomatWriteable> write,
+  ) era;
 
   final int Function(
     ffi.Pointer<ICU4XDateTime> self,
@@ -274,9 +365,14 @@ final class _DateTime {
     ffi.Pointer<ICU4XDateTime> self,
   ) minute;
 
+  final ResultVoidOrICU4XError Function(
+    ffi.Pointer<ICU4XDateTime> self,
+    ffi.Pointer<DiplomatWriteable> write,
+  ) monthCode;
+
   final int Function(
     ffi.Pointer<ICU4XDateTime> self,
-  ) second;
+  ) monthsInYear;
 
   final int Function(
     ffi.Pointer<ICU4XDateTime> self,
@@ -284,11 +380,24 @@ final class _DateTime {
 
   final int Function(
     ffi.Pointer<ICU4XDateTime> self,
-  ) dayOfMonth;
+  ) ordinalMonth;
 
   final int Function(
     ffi.Pointer<ICU4XDateTime> self,
-  ) dayOfWeek;
+  ) second;
+
+  final ffi.Pointer<ICU4XTime> Function(
+    ffi.Pointer<ICU4XDateTime> self,
+  ) time;
+
+  final ffi.Pointer<ICU4XDateTime> Function(
+    ffi.Pointer<ICU4XDateTime> self,
+    ffi.Pointer<ICU4XCalendar> calendar,
+  ) toCalendar;
+
+  final ffi.Pointer<ICU4XIsoDateTime> Function(
+    ffi.Pointer<ICU4XDateTime> self,
+  ) toIso;
 
   final int Function(
     ffi.Pointer<ICU4XDateTime> self,
@@ -302,39 +411,5 @@ final class _DateTime {
 
   final int Function(
     ffi.Pointer<ICU4XDateTime> self,
-  ) ordinalMonth;
-
-  final ResultVoidOrICU4XError Function(
-    ffi.Pointer<ICU4XDateTime> self,
-    ffi.Pointer<DiplomatWriteable> write,
-  ) monthCode;
-
-  final int Function(
-    ffi.Pointer<ICU4XDateTime> self,
   ) yearInEra;
-
-  final ResultVoidOrICU4XError Function(
-    ffi.Pointer<ICU4XDateTime> self,
-    ffi.Pointer<DiplomatWriteable> write,
-  ) era;
-
-  final int Function(
-    ffi.Pointer<ICU4XDateTime> self,
-  ) monthsInYear;
-
-  final int Function(
-    ffi.Pointer<ICU4XDateTime> self,
-  ) daysInMonth;
-
-  final int Function(
-    ffi.Pointer<ICU4XDateTime> self,
-  ) daysInYear;
-
-  final ffi.Pointer<ICU4XCalendar> Function(
-    ffi.Pointer<ICU4XDateTime> self,
-  ) calendar;
-
-  final void Function(
-    ffi.Pointer<ICU4XDateTime> self,
-  ) destroy;
 }

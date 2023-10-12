@@ -3,21 +3,27 @@
 part of '../bindings.dart';
 
 final class _ReorderedIndexMap {
-  _ReorderedIndexMap(ffi.DynamicLibrary dynamicLibrary)
+  _ReorderedIndexMap(this.dynamicLibrary)
       : asSlice = dynamicLibrary.lookupFunction<
             DiplomatUsizeView Function(
               ffi.Pointer<ICU4XReorderedIndexMap> self,
             ),
             DiplomatUsizeView Function(
               ffi.Pointer<ICU4XReorderedIndexMap> self,
-            )>('ICU4XReorderedIndexMap_as_slice'),
+            )>(
+          'ICU4XReorderedIndexMap_as_slice',
+          isLeaf: true,
+        ),
         len = dynamicLibrary.lookupFunction<
             ffi.Size Function(
               ffi.Pointer<ICU4XReorderedIndexMap> self,
             ),
             int Function(
               ffi.Pointer<ICU4XReorderedIndexMap> self,
-            )>('ICU4XReorderedIndexMap_len'),
+            )>(
+          'ICU4XReorderedIndexMap_len',
+          isLeaf: true,
+        ),
         get = dynamicLibrary.lookupFunction<
             ffi.Size Function(
               ffi.Pointer<ICU4XReorderedIndexMap> self,
@@ -26,29 +32,38 @@ final class _ReorderedIndexMap {
             int Function(
               ffi.Pointer<ICU4XReorderedIndexMap> self,
               int index,
-            )>('ICU4XReorderedIndexMap_get'),
+            )>(
+          'ICU4XReorderedIndexMap_get',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XReorderedIndexMap> self,
             ),
             void Function(
               ffi.Pointer<ICU4XReorderedIndexMap> self,
-            )>('ICU4XReorderedIndexMap_destroy');
+            )>(
+          'ICU4XReorderedIndexMap_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final DiplomatUsizeView Function(
     ffi.Pointer<ICU4XReorderedIndexMap> self,
   ) asSlice;
 
-  final int Function(
+  final void Function(
     ffi.Pointer<ICU4XReorderedIndexMap> self,
-  ) len;
+  ) destroy;
 
   final int Function(
     ffi.Pointer<ICU4XReorderedIndexMap> self,
     int index,
   ) get;
 
-  final void Function(
+  final int Function(
     ffi.Pointer<ICU4XReorderedIndexMap> self,
-  ) destroy;
+  ) len;
 }

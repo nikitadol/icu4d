@@ -3,7 +3,7 @@
 part of '../bindings.dart';
 
 final class _GeneralCategoryNameToMaskMapper {
-  _GeneralCategoryNameToMaskMapper(ffi.DynamicLibrary dynamicLibrary)
+  _GeneralCategoryNameToMaskMapper(this.dynamicLibrary)
       : getStrict = dynamicLibrary.lookupFunction<
             ffi.Uint32 Function(
               ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
@@ -14,7 +14,10 @@ final class _GeneralCategoryNameToMaskMapper {
               ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
               ffi.Pointer<ffi.Uint8> name_data,
               int name_len,
-            )>('ICU4XGeneralCategoryNameToMaskMapper_get_strict'),
+            )>(
+          'ICU4XGeneralCategoryNameToMaskMapper_get_strict',
+          isLeaf: true,
+        ),
         getLoose = dynamicLibrary.lookupFunction<
             ffi.Uint32 Function(
               ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
@@ -25,27 +28,37 @@ final class _GeneralCategoryNameToMaskMapper {
               ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
               ffi.Pointer<ffi.Uint8> name_data,
               int name_len,
-            )>('ICU4XGeneralCategoryNameToMaskMapper_get_loose'),
+            )>(
+          'ICU4XGeneralCategoryNameToMaskMapper_get_loose',
+          isLeaf: true,
+        ),
         load = dynamicLibrary.lookupFunction<
             ResultICU4XGeneralCategoryNameToMaskMapperOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
             ),
             ResultICU4XGeneralCategoryNameToMaskMapperOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
-            )>('ICU4XGeneralCategoryNameToMaskMapper_load'),
+            )>(
+          'ICU4XGeneralCategoryNameToMaskMapper_load',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
             ),
             void Function(
               ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-            )>('ICU4XGeneralCategoryNameToMaskMapper_destroy');
+            )>(
+          'ICU4XGeneralCategoryNameToMaskMapper_destroy',
+          isLeaf: true,
+        );
 
-  final int Function(
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
+
+  final void Function(
     ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-    ffi.Pointer<ffi.Uint8> name_data,
-    int name_len,
-  ) getStrict;
+  ) destroy;
 
   final int Function(
     ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
@@ -53,11 +66,13 @@ final class _GeneralCategoryNameToMaskMapper {
     int name_len,
   ) getLoose;
 
+  final int Function(
+    ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
+    ffi.Pointer<ffi.Uint8> name_data,
+    int name_len,
+  ) getStrict;
+
   final ResultICU4XGeneralCategoryNameToMaskMapperOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
   ) load;
-
-  final void Function(
-    ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-  ) destroy;
 }

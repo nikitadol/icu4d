@@ -3,7 +3,7 @@
 part of '../bindings.dart';
 
 final class _DataStruct {
-  _DataStruct(ffi.DynamicLibrary dynamicLibrary)
+  _DataStruct(this.dynamicLibrary)
       : createDecimalSymbolsV1 = dynamicLibrary.lookupFunction<
             ResultICU4XDataStructOrICU4XError Function(
               ffi.Pointer<ffi.Uint8> plus_sign_prefix_data,
@@ -42,14 +42,23 @@ final class _DataStruct {
               int min_group_size,
               ffi.Pointer<ffi.Uint32> digits_data,
               int digits_len,
-            )>('ICU4XDataStruct_create_decimal_symbols_v1'),
+            )>(
+          'ICU4XDataStruct_create_decimal_symbols_v1',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XDataStruct> self,
             ),
             void Function(
               ffi.Pointer<ICU4XDataStruct> self,
-            )>('ICU4XDataStruct_destroy');
+            )>(
+          'ICU4XDataStruct_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final ResultICU4XDataStructOrICU4XError Function(
     ffi.Pointer<ffi.Uint8> plus_sign_prefix_data,

@@ -1,4 +1,4 @@
-part of icu4d_ffi_bindings;
+part of icu4d_ffi;
 
 extension StringUtf8Pointer on String {
   ({ffi.Pointer<ffi.Uint8> bytes, int length}) toUtf8() {
@@ -23,7 +23,7 @@ extension StringUtf8Pointer on String {
         bufferLength += 4;
       }
     }
-    final pointer = bindings.allocator.allocate(bufferLength, 1);
+    final pointer = icu4XAllocator.allocate(bufferLength, 1);
     final buffer = pointer.asTypedList(bufferLength);
     // remove CheckWritable
     buffer[0] = 0;

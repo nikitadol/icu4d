@@ -3,7 +3,7 @@
 part of '../bindings.dart';
 
 final class _ZonedDateTimeFormatter {
-  _ZonedDateTimeFormatter(ffi.DynamicLibrary dynamicLibrary)
+  _ZonedDateTimeFormatter(this.dynamicLibrary)
       : createWithLengths = dynamicLibrary.lookupFunction<
             ResultICU4XZonedDateTimeFormatterOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
@@ -16,59 +16,74 @@ final class _ZonedDateTimeFormatter {
               ffi.Pointer<ICU4XLocale> locale,
               int date_length,
               int time_length,
-            )>('ICU4XZonedDateTimeFormatter_create_with_lengths'),
+            )>(
+          'ICU4XZonedDateTimeFormatter_create_with_lengths',
+          isLeaf: true,
+        ),
         createWithLengthsAndIso8601TimeZoneFallback =
             dynamicLibrary.lookupFunction<
-                    ResultICU4XZonedDateTimeFormatterOrICU4XError Function(
-                      ffi.Pointer<ICU4XDataProvider> provider,
-                      ffi.Pointer<ICU4XLocale> locale,
-                      ffi.Int32 date_length,
-                      ffi.Int32 time_length,
-                      ICU4XIsoTimeZoneOptions zone_options,
-                    ),
-                    ResultICU4XZonedDateTimeFormatterOrICU4XError Function(
-                      ffi.Pointer<ICU4XDataProvider> provider,
-                      ffi.Pointer<ICU4XLocale> locale,
-                      int date_length,
-                      int time_length,
-                      ICU4XIsoTimeZoneOptions zone_options,
-                    )>(
-                'ICU4XZonedDateTimeFormatter_create_with_lengths_and_iso_8601_time_zone_fallback'),
+                ResultICU4XZonedDateTimeFormatterOrICU4XError Function(
+                  ffi.Pointer<ICU4XDataProvider> provider,
+                  ffi.Pointer<ICU4XLocale> locale,
+                  ffi.Int32 date_length,
+                  ffi.Int32 time_length,
+                  ICU4XIsoTimeZoneOptions zone_options,
+                ),
+                ResultICU4XZonedDateTimeFormatterOrICU4XError Function(
+                  ffi.Pointer<ICU4XDataProvider> provider,
+                  ffi.Pointer<ICU4XLocale> locale,
+                  int date_length,
+                  int time_length,
+                  ICU4XIsoTimeZoneOptions zone_options,
+                )>(
+          'ICU4XZonedDateTimeFormatter_create_with_lengths_and_iso_8601_time_zone_fallback',
+          isLeaf: true,
+        ),
         formatDatetimeWithCustomTimeZone = dynamicLibrary.lookupFunction<
-                ResultVoidOrICU4XError Function(
-                  ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
-                  ffi.Pointer<ICU4XDateTime> datetime,
-                  ffi.Pointer<ICU4XCustomTimeZone> time_zone,
-                  ffi.Pointer<DiplomatWriteable> write,
-                ),
-                ResultVoidOrICU4XError Function(
-                  ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
-                  ffi.Pointer<ICU4XDateTime> datetime,
-                  ffi.Pointer<ICU4XCustomTimeZone> time_zone,
-                  ffi.Pointer<DiplomatWriteable> write,
-                )>(
-            'ICU4XZonedDateTimeFormatter_format_datetime_with_custom_time_zone'),
+            ResultVoidOrICU4XError Function(
+              ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
+              ffi.Pointer<ICU4XDateTime> datetime,
+              ffi.Pointer<ICU4XCustomTimeZone> time_zone,
+              ffi.Pointer<DiplomatWriteable> write,
+            ),
+            ResultVoidOrICU4XError Function(
+              ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
+              ffi.Pointer<ICU4XDateTime> datetime,
+              ffi.Pointer<ICU4XCustomTimeZone> time_zone,
+              ffi.Pointer<DiplomatWriteable> write,
+            )>(
+          'ICU4XZonedDateTimeFormatter_format_datetime_with_custom_time_zone',
+          isLeaf: true,
+        ),
         formatIsoDatetimeWithCustomTimeZone = dynamicLibrary.lookupFunction<
-                ResultVoidOrICU4XError Function(
-                  ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
-                  ffi.Pointer<ICU4XIsoDateTime> datetime,
-                  ffi.Pointer<ICU4XCustomTimeZone> time_zone,
-                  ffi.Pointer<DiplomatWriteable> write,
-                ),
-                ResultVoidOrICU4XError Function(
-                  ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
-                  ffi.Pointer<ICU4XIsoDateTime> datetime,
-                  ffi.Pointer<ICU4XCustomTimeZone> time_zone,
-                  ffi.Pointer<DiplomatWriteable> write,
-                )>(
-            'ICU4XZonedDateTimeFormatter_format_iso_datetime_with_custom_time_zone'),
+            ResultVoidOrICU4XError Function(
+              ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
+              ffi.Pointer<ICU4XIsoDateTime> datetime,
+              ffi.Pointer<ICU4XCustomTimeZone> time_zone,
+              ffi.Pointer<DiplomatWriteable> write,
+            ),
+            ResultVoidOrICU4XError Function(
+              ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
+              ffi.Pointer<ICU4XIsoDateTime> datetime,
+              ffi.Pointer<ICU4XCustomTimeZone> time_zone,
+              ffi.Pointer<DiplomatWriteable> write,
+            )>(
+          'ICU4XZonedDateTimeFormatter_format_iso_datetime_with_custom_time_zone',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
             ),
             void Function(
               ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
-            )>('ICU4XZonedDateTimeFormatter_destroy');
+            )>(
+          'ICU4XZonedDateTimeFormatter_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final ResultICU4XZonedDateTimeFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
@@ -85,6 +100,10 @@ final class _ZonedDateTimeFormatter {
     ICU4XIsoTimeZoneOptions zone_options,
   ) createWithLengthsAndIso8601TimeZoneFallback;
 
+  final void Function(
+    ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
+  ) destroy;
+
   final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
     ffi.Pointer<ICU4XDateTime> datetime,
@@ -98,8 +117,4 @@ final class _ZonedDateTimeFormatter {
     ffi.Pointer<ICU4XCustomTimeZone> time_zone,
     ffi.Pointer<DiplomatWriteable> write,
   ) formatIsoDatetimeWithCustomTimeZone;
-
-  final void Function(
-    ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
-  ) destroy;
 }

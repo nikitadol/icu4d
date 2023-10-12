@@ -3,7 +3,7 @@
 part of '../bindings.dart';
 
 final class _Locale {
-  _Locale(ffi.DynamicLibrary dynamicLibrary)
+  _Locale(this.dynamicLibrary)
       : createFromString = dynamicLibrary.lookupFunction<
             ResultICU4XLocaleOrICU4XError Function(
               ffi.Pointer<ffi.Uint8> name_data,
@@ -12,17 +12,26 @@ final class _Locale {
             ResultICU4XLocaleOrICU4XError Function(
               ffi.Pointer<ffi.Uint8> name_data,
               int name_len,
-            )>('ICU4XLocale_create_from_string'),
+            )>(
+          'ICU4XLocale_create_from_string',
+          isLeaf: true,
+        ),
         createUnd = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XLocale> Function(),
-            ffi.Pointer<ICU4XLocale> Function()>('ICU4XLocale_create_und'),
+            ffi.Pointer<ICU4XLocale> Function()>(
+          'ICU4XLocale_create_und',
+          isLeaf: true,
+        ),
         clone = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XLocale> Function(
               ffi.Pointer<ICU4XLocale> self,
             ),
             ffi.Pointer<ICU4XLocale> Function(
               ffi.Pointer<ICU4XLocale> self,
-            )>('ICU4XLocale_clone'),
+            )>(
+          'ICU4XLocale_clone',
+          isLeaf: true,
+        ),
         basename = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
@@ -31,7 +40,10 @@ final class _Locale {
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XLocale_basename'),
+            )>(
+          'ICU4XLocale_basename',
+          isLeaf: true,
+        ),
         getUnicodeExtension = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
@@ -44,7 +56,10 @@ final class _Locale {
               ffi.Pointer<ffi.Uint8> bytes_data,
               int bytes_len,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XLocale_get_unicode_extension'),
+            )>(
+          'ICU4XLocale_get_unicode_extension',
+          isLeaf: true,
+        ),
         language = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
@@ -53,7 +68,10 @@ final class _Locale {
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XLocale_language'),
+            )>(
+          'ICU4XLocale_language',
+          isLeaf: true,
+        ),
         setLanguage = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
@@ -64,7 +82,10 @@ final class _Locale {
               ffi.Pointer<ICU4XLocale> self,
               ffi.Pointer<ffi.Uint8> bytes_data,
               int bytes_len,
-            )>('ICU4XLocale_set_language'),
+            )>(
+          'ICU4XLocale_set_language',
+          isLeaf: true,
+        ),
         region = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
@@ -73,7 +94,10 @@ final class _Locale {
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XLocale_region'),
+            )>(
+          'ICU4XLocale_region',
+          isLeaf: true,
+        ),
         setRegion = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
@@ -84,7 +108,10 @@ final class _Locale {
               ffi.Pointer<ICU4XLocale> self,
               ffi.Pointer<ffi.Uint8> bytes_data,
               int bytes_len,
-            )>('ICU4XLocale_set_region'),
+            )>(
+          'ICU4XLocale_set_region',
+          isLeaf: true,
+        ),
         script = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
@@ -93,7 +120,10 @@ final class _Locale {
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XLocale_script'),
+            )>(
+          'ICU4XLocale_script',
+          isLeaf: true,
+        ),
         setScript = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
@@ -104,7 +134,10 @@ final class _Locale {
               ffi.Pointer<ICU4XLocale> self,
               ffi.Pointer<ffi.Uint8> bytes_data,
               int bytes_len,
-            )>('ICU4XLocale_set_script'),
+            )>(
+          'ICU4XLocale_set_script',
+          isLeaf: true,
+        ),
         canonicalize = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ffi.Uint8> bytes_data,
@@ -115,7 +148,10 @@ final class _Locale {
               ffi.Pointer<ffi.Uint8> bytes_data,
               int bytes_len,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XLocale_canonicalize'),
+            )>(
+          'ICU4XLocale_canonicalize',
+          isLeaf: true,
+        ),
         toString_ = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
@@ -124,7 +160,10 @@ final class _Locale {
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XLocale> self,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XLocale_to_string'),
+            )>(
+          'ICU4XLocale_to_string',
+          isLeaf: true,
+        ),
         normalizingEq = dynamicLibrary.lookupFunction<
             ffi.Bool Function(
               ffi.Pointer<ICU4XLocale> self,
@@ -135,7 +174,10 @@ final class _Locale {
               ffi.Pointer<ICU4XLocale> self,
               ffi.Pointer<ffi.Uint8> other_data,
               int other_len,
-            )>('ICU4XLocale_normalizing_eq'),
+            )>(
+          'ICU4XLocale_normalizing_eq',
+          isLeaf: true,
+        ),
         strictCmp = dynamicLibrary.lookupFunction<
             ffi.Int32 Function(
               ffi.Pointer<ICU4XLocale> self,
@@ -146,20 +188,52 @@ final class _Locale {
               ffi.Pointer<ICU4XLocale> self,
               ffi.Pointer<ffi.Uint8> other_data,
               int other_len,
-            )>('ICU4XLocale_strict_cmp'),
-        createEn = dynamicLibrary.lookupFunction<
-            ffi.Pointer<ICU4XLocale> Function(),
-            ffi.Pointer<ICU4XLocale> Function()>('ICU4XLocale_create_en'),
-        createBn = dynamicLibrary.lookupFunction<
-            ffi.Pointer<ICU4XLocale> Function(),
-            ffi.Pointer<ICU4XLocale> Function()>('ICU4XLocale_create_bn'),
+            )>(
+          'ICU4XLocale_strict_cmp',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XLocale> self,
             ),
             void Function(
               ffi.Pointer<ICU4XLocale> self,
-            )>('ICU4XLocale_destroy');
+            )>(
+          'ICU4XLocale_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
+
+  final ResultVoidOrICU4XError Function(
+    ffi.Pointer<ICU4XLocale> self,
+    ffi.Pointer<DiplomatWriteable> write,
+  ) basename;
+
+  final ResultVoidOrICU4XError Function(
+    ffi.Pointer<ffi.Uint8> bytes_data,
+    int bytes_len,
+    ffi.Pointer<DiplomatWriteable> write,
+  ) canonicalize;
+
+  final ffi.Pointer<ICU4XLocale> Function(
+    ffi.Pointer<ICU4XLocale> self,
+  ) clone;
+
+  late final ffi.Pointer<ICU4XLocale> Function() createBn =
+      dynamicLibrary.lookupFunction<ffi.Pointer<ICU4XLocale> Function(),
+          ffi.Pointer<ICU4XLocale> Function()>(
+    'ICU4XLocale_create_bn',
+    isLeaf: true,
+  );
+
+  late final ffi.Pointer<ICU4XLocale> Function() createEn =
+      dynamicLibrary.lookupFunction<ffi.Pointer<ICU4XLocale> Function(),
+          ffi.Pointer<ICU4XLocale> Function()>(
+    'ICU4XLocale_create_en',
+    isLeaf: true,
+  );
 
   final ResultICU4XLocaleOrICU4XError Function(
     ffi.Pointer<ffi.Uint8> name_data,
@@ -168,14 +242,9 @@ final class _Locale {
 
   final ffi.Pointer<ICU4XLocale> Function() createUnd;
 
-  final ffi.Pointer<ICU4XLocale> Function(
+  final void Function(
     ffi.Pointer<ICU4XLocale> self,
-  ) clone;
-
-  final ResultVoidOrICU4XError Function(
-    ffi.Pointer<ICU4XLocale> self,
-    ffi.Pointer<DiplomatWriteable> write,
-  ) basename;
+  ) destroy;
 
   final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XLocale> self,
@@ -189,22 +258,16 @@ final class _Locale {
     ffi.Pointer<DiplomatWriteable> write,
   ) language;
 
-  final ResultVoidOrICU4XError Function(
+  final bool Function(
     ffi.Pointer<ICU4XLocale> self,
-    ffi.Pointer<ffi.Uint8> bytes_data,
-    int bytes_len,
-  ) setLanguage;
+    ffi.Pointer<ffi.Uint8> other_data,
+    int other_len,
+  ) normalizingEq;
 
   final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XLocale> self,
     ffi.Pointer<DiplomatWriteable> write,
   ) region;
-
-  final ResultVoidOrICU4XError Function(
-    ffi.Pointer<ICU4XLocale> self,
-    ffi.Pointer<ffi.Uint8> bytes_data,
-    int bytes_len,
-  ) setRegion;
 
   final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XLocale> self,
@@ -215,24 +278,19 @@ final class _Locale {
     ffi.Pointer<ICU4XLocale> self,
     ffi.Pointer<ffi.Uint8> bytes_data,
     int bytes_len,
-  ) setScript;
+  ) setLanguage;
 
   final ResultVoidOrICU4XError Function(
+    ffi.Pointer<ICU4XLocale> self,
     ffi.Pointer<ffi.Uint8> bytes_data,
     int bytes_len,
-    ffi.Pointer<DiplomatWriteable> write,
-  ) canonicalize;
+  ) setRegion;
 
   final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XLocale> self,
-    ffi.Pointer<DiplomatWriteable> write,
-  ) toString_;
-
-  final bool Function(
-    ffi.Pointer<ICU4XLocale> self,
-    ffi.Pointer<ffi.Uint8> other_data,
-    int other_len,
-  ) normalizingEq;
+    ffi.Pointer<ffi.Uint8> bytes_data,
+    int bytes_len,
+  ) setScript;
 
   final int Function(
     ffi.Pointer<ICU4XLocale> self,
@@ -240,11 +298,8 @@ final class _Locale {
     int other_len,
   ) strictCmp;
 
-  final ffi.Pointer<ICU4XLocale> Function() createEn;
-
-  final ffi.Pointer<ICU4XLocale> Function() createBn;
-
-  final void Function(
+  final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XLocale> self,
-  ) destroy;
+    ffi.Pointer<DiplomatWriteable> write,
+  ) toString_;
 }

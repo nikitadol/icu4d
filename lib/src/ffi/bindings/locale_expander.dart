@@ -3,21 +3,27 @@
 part of '../bindings.dart';
 
 final class _LocaleExpander {
-  _LocaleExpander(ffi.DynamicLibrary dynamicLibrary)
+  _LocaleExpander(this.dynamicLibrary)
       : create = dynamicLibrary.lookupFunction<
             ResultICU4XLocaleExpanderOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
             ),
             ResultICU4XLocaleExpanderOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
-            )>('ICU4XLocaleExpander_create'),
+            )>(
+          'ICU4XLocaleExpander_create',
+          isLeaf: true,
+        ),
         createExtended = dynamicLibrary.lookupFunction<
             ResultICU4XLocaleExpanderOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
             ),
             ResultICU4XLocaleExpanderOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
-            )>('ICU4XLocaleExpander_create_extended'),
+            )>(
+          'ICU4XLocaleExpander_create_extended',
+          isLeaf: true,
+        ),
         maximize = dynamicLibrary.lookupFunction<
             ffi.Int32 Function(
               ffi.Pointer<ICU4XLocaleExpander> self,
@@ -26,7 +32,10 @@ final class _LocaleExpander {
             int Function(
               ffi.Pointer<ICU4XLocaleExpander> self,
               ffi.Pointer<ICU4XLocale> locale,
-            )>('ICU4XLocaleExpander_maximize'),
+            )>(
+          'ICU4XLocaleExpander_maximize',
+          isLeaf: true,
+        ),
         minimize = dynamicLibrary.lookupFunction<
             ffi.Int32 Function(
               ffi.Pointer<ICU4XLocaleExpander> self,
@@ -35,14 +44,23 @@ final class _LocaleExpander {
             int Function(
               ffi.Pointer<ICU4XLocaleExpander> self,
               ffi.Pointer<ICU4XLocale> locale,
-            )>('ICU4XLocaleExpander_minimize'),
+            )>(
+          'ICU4XLocaleExpander_minimize',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XLocaleExpander> self,
             ),
             void Function(
               ffi.Pointer<ICU4XLocaleExpander> self,
-            )>('ICU4XLocaleExpander_destroy');
+            )>(
+          'ICU4XLocaleExpander_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final ResultICU4XLocaleExpanderOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
@@ -51,6 +69,10 @@ final class _LocaleExpander {
   final ResultICU4XLocaleExpanderOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
   ) createExtended;
+
+  final void Function(
+    ffi.Pointer<ICU4XLocaleExpander> self,
+  ) destroy;
 
   final int Function(
     ffi.Pointer<ICU4XLocaleExpander> self,
@@ -61,8 +83,4 @@ final class _LocaleExpander {
     ffi.Pointer<ICU4XLocaleExpander> self,
     ffi.Pointer<ICU4XLocale> locale,
   ) minimize;
-
-  final void Function(
-    ffi.Pointer<ICU4XLocaleExpander> self,
-  ) destroy;
 }

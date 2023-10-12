@@ -1,4 +1,4 @@
-part of icu4d_ffi_bindings;
+part of icu4d_ffi;
 
 final LibraryLoader libraryLoader = LibraryLoader._();
 

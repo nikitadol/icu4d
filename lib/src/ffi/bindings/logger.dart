@@ -3,21 +3,27 @@
 part of '../bindings.dart';
 
 final class _Logger {
-  _Logger(ffi.DynamicLibrary dynamicLibrary)
-      : initSimpleLogger =
-            dynamicLibrary.lookupFunction<ffi.Bool Function(), bool Function()>(
-                'ICU4XLogger_init_simple_logger'),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XLogger> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XLogger> self,
-            )>('ICU4XLogger_destroy');
+  _Logger(this.dynamicLibrary);
 
-  final bool Function() initSimpleLogger;
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XLogger> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XLogger> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XLogger> self,
+      )>(
+    'ICU4XLogger_destroy',
+    isLeaf: true,
+  );
+
+  late final bool Function() initSimpleLogger =
+      dynamicLibrary.lookupFunction<ffi.Bool Function(), bool Function()>(
+    'ICU4XLogger_init_simple_logger',
+    isLeaf: true,
+  );
 }

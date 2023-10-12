@@ -3,7 +3,7 @@
 part of '../bindings.dart';
 
 final class _UnicodeSetData {
-  _UnicodeSetData(ffi.DynamicLibrary dynamicLibrary)
+  _UnicodeSetData(this.dynamicLibrary)
       : contains = dynamicLibrary.lookupFunction<
             ffi.Bool Function(
               ffi.Pointer<ICU4XUnicodeSetData> self,
@@ -14,7 +14,10 @@ final class _UnicodeSetData {
               ffi.Pointer<ICU4XUnicodeSetData> self,
               ffi.Pointer<ffi.Uint8> s_data,
               int s_len,
-            )>('ICU4XUnicodeSetData_contains'),
+            )>(
+          'ICU4XUnicodeSetData_contains',
+          isLeaf: true,
+        ),
         containsChar = dynamicLibrary.lookupFunction<
             ffi.Bool Function(
               ffi.Pointer<ICU4XUnicodeSetData> self,
@@ -23,7 +26,10 @@ final class _UnicodeSetData {
             bool Function(
               ffi.Pointer<ICU4XUnicodeSetData> self,
               int cp,
-            )>('ICU4XUnicodeSetData_contains_char'),
+            )>(
+          'ICU4XUnicodeSetData_contains_char',
+          isLeaf: true,
+        ),
         contains32 = dynamicLibrary.lookupFunction<
             ffi.Bool Function(
               ffi.Pointer<ICU4XUnicodeSetData> self,
@@ -32,14 +38,20 @@ final class _UnicodeSetData {
             bool Function(
               ffi.Pointer<ICU4XUnicodeSetData> self,
               int cp,
-            )>('ICU4XUnicodeSetData_contains32'),
+            )>(
+          'ICU4XUnicodeSetData_contains32',
+          isLeaf: true,
+        ),
         loadBasicEmoji = dynamicLibrary.lookupFunction<
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
             ),
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
-            )>('ICU4XUnicodeSetData_load_basic_emoji'),
+            )>(
+          'ICU4XUnicodeSetData_load_basic_emoji',
+          isLeaf: true,
+        ),
         loadExemplarsMain = dynamicLibrary.lookupFunction<
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
@@ -48,7 +60,10 @@ final class _UnicodeSetData {
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
               ffi.Pointer<ICU4XLocale> locale,
-            )>('ICU4XUnicodeSetData_load_exemplars_main'),
+            )>(
+          'ICU4XUnicodeSetData_load_exemplars_main',
+          isLeaf: true,
+        ),
         loadExemplarsAuxiliary = dynamicLibrary.lookupFunction<
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
@@ -57,7 +72,10 @@ final class _UnicodeSetData {
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
               ffi.Pointer<ICU4XLocale> locale,
-            )>('ICU4XUnicodeSetData_load_exemplars_auxiliary'),
+            )>(
+          'ICU4XUnicodeSetData_load_exemplars_auxiliary',
+          isLeaf: true,
+        ),
         loadExemplarsPunctuation = dynamicLibrary.lookupFunction<
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
@@ -66,7 +84,10 @@ final class _UnicodeSetData {
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
               ffi.Pointer<ICU4XLocale> locale,
-            )>('ICU4XUnicodeSetData_load_exemplars_punctuation'),
+            )>(
+          'ICU4XUnicodeSetData_load_exemplars_punctuation',
+          isLeaf: true,
+        ),
         loadExemplarsNumbers = dynamicLibrary.lookupFunction<
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
@@ -75,7 +96,10 @@ final class _UnicodeSetData {
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
               ffi.Pointer<ICU4XLocale> locale,
-            )>('ICU4XUnicodeSetData_load_exemplars_numbers'),
+            )>(
+          'ICU4XUnicodeSetData_load_exemplars_numbers',
+          isLeaf: true,
+        ),
         loadExemplarsIndex = dynamicLibrary.lookupFunction<
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
@@ -84,14 +108,23 @@ final class _UnicodeSetData {
             ResultICU4XUnicodeSetDataOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
               ffi.Pointer<ICU4XLocale> locale,
-            )>('ICU4XUnicodeSetData_load_exemplars_index'),
+            )>(
+          'ICU4XUnicodeSetData_load_exemplars_index',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XUnicodeSetData> self,
             ),
             void Function(
               ffi.Pointer<ICU4XUnicodeSetData> self,
-            )>('ICU4XUnicodeSetData_destroy');
+            )>(
+          'ICU4XUnicodeSetData_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final bool Function(
     ffi.Pointer<ICU4XUnicodeSetData> self,
@@ -102,21 +135,20 @@ final class _UnicodeSetData {
   final bool Function(
     ffi.Pointer<ICU4XUnicodeSetData> self,
     int cp,
-  ) containsChar;
+  ) contains32;
 
   final bool Function(
     ffi.Pointer<ICU4XUnicodeSetData> self,
     int cp,
-  ) contains32;
+  ) containsChar;
+
+  final void Function(
+    ffi.Pointer<ICU4XUnicodeSetData> self,
+  ) destroy;
 
   final ResultICU4XUnicodeSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
   ) loadBasicEmoji;
-
-  final ResultICU4XUnicodeSetDataOrICU4XError Function(
-    ffi.Pointer<ICU4XDataProvider> provider,
-    ffi.Pointer<ICU4XLocale> locale,
-  ) loadExemplarsMain;
 
   final ResultICU4XUnicodeSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
@@ -126,7 +158,12 @@ final class _UnicodeSetData {
   final ResultICU4XUnicodeSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,
-  ) loadExemplarsPunctuation;
+  ) loadExemplarsIndex;
+
+  final ResultICU4XUnicodeSetDataOrICU4XError Function(
+    ffi.Pointer<ICU4XDataProvider> provider,
+    ffi.Pointer<ICU4XLocale> locale,
+  ) loadExemplarsMain;
 
   final ResultICU4XUnicodeSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
@@ -136,9 +173,5 @@ final class _UnicodeSetData {
   final ResultICU4XUnicodeSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,
-  ) loadExemplarsIndex;
-
-  final void Function(
-    ffi.Pointer<ICU4XUnicodeSetData> self,
-  ) destroy;
+  ) loadExemplarsPunctuation;
 }

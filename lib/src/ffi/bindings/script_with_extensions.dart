@@ -3,14 +3,17 @@
 part of '../bindings.dart';
 
 final class _ScriptWithExtensions {
-  _ScriptWithExtensions(ffi.DynamicLibrary dynamicLibrary)
+  _ScriptWithExtensions(this.dynamicLibrary)
       : create = dynamicLibrary.lookupFunction<
             ResultICU4XScriptWithExtensionsOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
             ),
             ResultICU4XScriptWithExtensionsOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
-            )>('ICU4XScriptWithExtensions_create'),
+            )>(
+          'ICU4XScriptWithExtensions_create',
+          isLeaf: true,
+        ),
         getScriptVal = dynamicLibrary.lookupFunction<
             ffi.Uint16 Function(
               ffi.Pointer<ICU4XScriptWithExtensions> self,
@@ -19,7 +22,10 @@ final class _ScriptWithExtensions {
             int Function(
               ffi.Pointer<ICU4XScriptWithExtensions> self,
               int code_point,
-            )>('ICU4XScriptWithExtensions_get_script_val'),
+            )>(
+          'ICU4XScriptWithExtensions_get_script_val',
+          isLeaf: true,
+        ),
         hasScript = dynamicLibrary.lookupFunction<
             ffi.Bool Function(
               ffi.Pointer<ICU4XScriptWithExtensions> self,
@@ -30,14 +36,20 @@ final class _ScriptWithExtensions {
               ffi.Pointer<ICU4XScriptWithExtensions> self,
               int code_point,
               int script,
-            )>('ICU4XScriptWithExtensions_has_script'),
+            )>(
+          'ICU4XScriptWithExtensions_has_script',
+          isLeaf: true,
+        ),
         asBorrowed = dynamicLibrary.lookupFunction<
             ffi.Pointer<ICU4XScriptWithExtensionsBorrowed> Function(
               ffi.Pointer<ICU4XScriptWithExtensions> self,
             ),
             ffi.Pointer<ICU4XScriptWithExtensionsBorrowed> Function(
               ffi.Pointer<ICU4XScriptWithExtensions> self,
-            )>('ICU4XScriptWithExtensions_as_borrowed'),
+            )>(
+          'ICU4XScriptWithExtensions_as_borrowed',
+          isLeaf: true,
+        ),
         iterRangesForScript = dynamicLibrary.lookupFunction<
             ffi.Pointer<CodePointRangeIterator> Function(
               ffi.Pointer<ICU4XScriptWithExtensions> self,
@@ -46,18 +58,35 @@ final class _ScriptWithExtensions {
             ffi.Pointer<CodePointRangeIterator> Function(
               ffi.Pointer<ICU4XScriptWithExtensions> self,
               int script,
-            )>('ICU4XScriptWithExtensions_iter_ranges_for_script'),
+            )>(
+          'ICU4XScriptWithExtensions_iter_ranges_for_script',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XScriptWithExtensions> self,
             ),
             void Function(
               ffi.Pointer<ICU4XScriptWithExtensions> self,
-            )>('ICU4XScriptWithExtensions_destroy');
+            )>(
+          'ICU4XScriptWithExtensions_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
+
+  final ffi.Pointer<ICU4XScriptWithExtensionsBorrowed> Function(
+    ffi.Pointer<ICU4XScriptWithExtensions> self,
+  ) asBorrowed;
 
   final ResultICU4XScriptWithExtensionsOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
   ) create;
+
+  final void Function(
+    ffi.Pointer<ICU4XScriptWithExtensions> self,
+  ) destroy;
 
   final int Function(
     ffi.Pointer<ICU4XScriptWithExtensions> self,
@@ -70,16 +99,8 @@ final class _ScriptWithExtensions {
     int script,
   ) hasScript;
 
-  final ffi.Pointer<ICU4XScriptWithExtensionsBorrowed> Function(
-    ffi.Pointer<ICU4XScriptWithExtensions> self,
-  ) asBorrowed;
-
   final ffi.Pointer<CodePointRangeIterator> Function(
     ffi.Pointer<ICU4XScriptWithExtensions> self,
     int script,
   ) iterRangesForScript;
-
-  final void Function(
-    ffi.Pointer<ICU4XScriptWithExtensions> self,
-  ) destroy;
 }

@@ -3,7 +3,7 @@
 part of '../bindings.dart';
 
 final class _ListFormatter {
-  _ListFormatter(ffi.DynamicLibrary dynamicLibrary)
+  _ListFormatter(this.dynamicLibrary)
       : createAndWithLength = dynamicLibrary.lookupFunction<
             ResultICU4XListFormatterOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
@@ -14,7 +14,10 @@ final class _ListFormatter {
               ffi.Pointer<ICU4XDataProvider> provider,
               ffi.Pointer<ICU4XLocale> locale,
               int length,
-            )>('ICU4XListFormatter_create_and_with_length'),
+            )>(
+          'ICU4XListFormatter_create_and_with_length',
+          isLeaf: true,
+        ),
         createOrWithLength = dynamicLibrary.lookupFunction<
             ResultICU4XListFormatterOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
@@ -25,7 +28,10 @@ final class _ListFormatter {
               ffi.Pointer<ICU4XDataProvider> provider,
               ffi.Pointer<ICU4XLocale> locale,
               int length,
-            )>('ICU4XListFormatter_create_or_with_length'),
+            )>(
+          'ICU4XListFormatter_create_or_with_length',
+          isLeaf: true,
+        ),
         createUnitWithLength = dynamicLibrary.lookupFunction<
             ResultICU4XListFormatterOrICU4XError Function(
               ffi.Pointer<ICU4XDataProvider> provider,
@@ -36,7 +42,10 @@ final class _ListFormatter {
               ffi.Pointer<ICU4XDataProvider> provider,
               ffi.Pointer<ICU4XLocale> locale,
               int length,
-            )>('ICU4XListFormatter_create_unit_with_length'),
+            )>(
+          'ICU4XListFormatter_create_unit_with_length',
+          isLeaf: true,
+        ),
         format = dynamicLibrary.lookupFunction<
             ResultVoidOrICU4XError Function(
               ffi.Pointer<ICU4XListFormatter> self,
@@ -47,14 +56,23 @@ final class _ListFormatter {
               ffi.Pointer<ICU4XListFormatter> self,
               ffi.Pointer<ICU4XList> list,
               ffi.Pointer<DiplomatWriteable> write,
-            )>('ICU4XListFormatter_format'),
+            )>(
+          'ICU4XListFormatter_format',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XListFormatter> self,
             ),
             void Function(
               ffi.Pointer<ICU4XListFormatter> self,
-            )>('ICU4XListFormatter_destroy');
+            )>(
+          'ICU4XListFormatter_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final ResultICU4XListFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
@@ -74,13 +92,13 @@ final class _ListFormatter {
     int length,
   ) createUnitWithLength;
 
+  final void Function(
+    ffi.Pointer<ICU4XListFormatter> self,
+  ) destroy;
+
   final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XListFormatter> self,
     ffi.Pointer<ICU4XList> list,
     ffi.Pointer<DiplomatWriteable> write,
   ) format;
-
-  final void Function(
-    ffi.Pointer<ICU4XListFormatter> self,
-  ) destroy;
 }

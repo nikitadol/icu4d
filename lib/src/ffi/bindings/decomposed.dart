@@ -3,14 +3,20 @@
 part of '../bindings.dart';
 
 final class _Decomposed {
-  _Decomposed(ffi.DynamicLibrary dynamicLibrary)
+  _Decomposed(this.dynamicLibrary)
       : destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XDecomposed> self,
             ),
             void Function(
               ffi.Pointer<ICU4XDecomposed> self,
-            )>('ICU4XDecomposed_destroy');
+            )>(
+          'ICU4XDecomposed_destroy',
+          isLeaf: true,
+        );
+
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final void Function(
     ffi.Pointer<ICU4XDecomposed> self,

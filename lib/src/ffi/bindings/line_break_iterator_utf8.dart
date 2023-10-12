@@ -3,27 +3,36 @@
 part of '../bindings.dart';
 
 final class _LineBreakIteratorUtf8 {
-  _LineBreakIteratorUtf8(ffi.DynamicLibrary dynamicLibrary)
+  _LineBreakIteratorUtf8(this.dynamicLibrary)
       : next = dynamicLibrary.lookupFunction<
             ffi.Int32 Function(
               ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
             ),
             int Function(
               ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
-            )>('ICU4XLineBreakIteratorUtf8_next'),
+            )>(
+          'ICU4XLineBreakIteratorUtf8_next',
+          isLeaf: true,
+        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
             ),
             void Function(
               ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
-            )>('ICU4XLineBreakIteratorUtf8_destroy');
+            )>(
+          'ICU4XLineBreakIteratorUtf8_destroy',
+          isLeaf: true,
+        );
 
-  final int Function(
-    ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
-  ) next;
+  @visibleForTesting
+  final ffi.DynamicLibrary dynamicLibrary;
 
   final void Function(
     ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
   ) destroy;
+
+  final int Function(
+    ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
+  ) next;
 }
