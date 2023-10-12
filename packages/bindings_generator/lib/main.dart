@@ -52,8 +52,8 @@ void main(List<String> args) {
         'output': 'generated_bindings.dart',
         'headers': {
           'entry-points': [
-            '../icu4x/ffi/diplomat/c/include/**',
-            'diplomat-runtime.h',
+            'icu4x/ffi/diplomat/c/include/**',
+            'packages/bindings_generator/diplomat-runtime.h',
           ],
         },
         'type-map': {

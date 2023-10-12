@@ -1,0 +1,21 @@
+name: _tools
+description: tools for repo
+version: 0.0.1
+publish_to: none
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  collection: any
+  meta: any
+  path: ^1.8.3
+
+  bindings_generator:
+    path: packages/bindings_generator
+
+dev_dependencies:
+  lints: ^2.1.1
+
+
+  test: ^1.24.7
