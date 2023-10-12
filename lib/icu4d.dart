@@ -1,1 +1,0 @@
-library icu4d;

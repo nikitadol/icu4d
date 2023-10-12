@@ -4,6 +4,7 @@
 
 # Conventional directory for build outputs.
 build/
+/gen/
 
 # Omit committing pubspec.lock for library packages; see
 # https://dart.dev/guides/libraries/private-files#pubspeclock.
@@ -51,3 +52,5 @@ Temporary Items
 *.icloud
 
 # End of https://www.toptal.com/developers/gitignore/api/macos
+/icu4x/
+/coverage/
