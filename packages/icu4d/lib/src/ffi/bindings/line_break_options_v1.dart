@@ -3,22 +3,21 @@
 part of '../bindings.dart';
 
 final class _LineBreakOptionsV1 {
-  _LineBreakOptionsV1(this.dynamicLibrary)
-      : destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XLineBreakOptionsV1> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XLineBreakOptionsV1> self,
-            )>(
-          'ICU4XLineBreakOptionsV1_destroy',
-          isLeaf: true,
-        );
+  _LineBreakOptionsV1(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XLineBreakOptionsV1> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XLineBreakOptionsV1> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XLineBreakOptionsV1> self,
+      )>(
+    'ICU4XLineBreakOptionsV1_destroy',
+    isLeaf: true,
+  );
 }

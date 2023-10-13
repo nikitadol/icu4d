@@ -2,35 +2,35 @@
 
 part of '../bindings.dart';
 
-final class _MetazoneCalculator {
-  _MetazoneCalculator(this.dynamicLibrary);
+final class _IanaToBcp47Mapper {
+  _IanaToBcp47Mapper(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  late final ResultICU4XMetazoneCalculatorOrICU4XError Function(
+  late final ResultICU4XIanaToBcp47MapperOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
   ) create = dynamicLibrary.lookupFunction<
-      ResultICU4XMetazoneCalculatorOrICU4XError Function(
+      ResultICU4XIanaToBcp47MapperOrICU4XError Function(
         ffi.Pointer<ICU4XDataProvider> provider,
       ),
-      ResultICU4XMetazoneCalculatorOrICU4XError Function(
+      ResultICU4XIanaToBcp47MapperOrICU4XError Function(
         ffi.Pointer<ICU4XDataProvider> provider,
       )>(
-    'ICU4XMetazoneCalculator_create',
+    'ICU4XIanaToBcp47Mapper_create',
     isLeaf: true,
   );
 
   late final void Function(
-    ffi.Pointer<ICU4XMetazoneCalculator> self,
+    ffi.Pointer<ICU4XIanaToBcp47Mapper> self,
   ) destroy = dynamicLibrary.lookupFunction<
       ffi.Void Function(
-        ffi.Pointer<ICU4XMetazoneCalculator> self,
+        ffi.Pointer<ICU4XIanaToBcp47Mapper> self,
       ),
       void Function(
-        ffi.Pointer<ICU4XMetazoneCalculator> self,
+        ffi.Pointer<ICU4XIanaToBcp47Mapper> self,
       )>(
-    'ICU4XMetazoneCalculator_destroy',
+    'ICU4XIanaToBcp47Mapper_destroy',
     isLeaf: true,
   );
 }

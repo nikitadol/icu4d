@@ -2,6 +2,148 @@
 
 part of '../bindings.dart';
 
+abstract class ICU4XAnyCalendarKind {
+  static int iso = 0;
+
+  static int gregorian = 1;
+
+  static int buddhist = 2;
+
+  static int japanese = 3;
+
+  static int japaneseExtended = 4;
+
+  static int ethiopian = 5;
+
+  static int ethiopianAmeteAlem = 6;
+
+  static int indian = 7;
+
+  static int coptic = 8;
+
+  static int dangi = 9;
+
+  static int chinese = 10;
+
+  static int hebrew = 11;
+
+  static int islamicCivil = 12;
+
+  static int islamicObservational = 13;
+
+  static int islamicTabular = 14;
+
+  static int islamicUmmAlQura = 15;
+
+  static int persian = 16;
+
+  static int roc = 17;
+}
+
+abstract class ICU4XBidiDirection {
+  static int ltr = 0;
+
+  static int rtl = 1;
+
+  static int mixed = 2;
+}
+
+abstract class ICU4XCollatorAlternateHandling {
+  static int auto = 0;
+
+  static int nonIgnorable = 1;
+
+  static int shifted = 2;
+}
+
+abstract class ICU4XCollatorBackwardSecondLevel {
+  static int auto = 0;
+
+  static int off = 1;
+
+  static int on = 2;
+}
+
+abstract class ICU4XCollatorCaseFirst {
+  static int auto = 0;
+
+  static int off = 1;
+
+  static int lowerFirst = 2;
+
+  static int upperFirst = 3;
+}
+
+abstract class ICU4XCollatorCaseLevel {
+  static int auto = 0;
+
+  static int off = 1;
+
+  static int on = 2;
+}
+
+abstract class ICU4XCollatorMaxVariable {
+  static int auto = 0;
+
+  static int space = 1;
+
+  static int punctuation = 2;
+
+  static int symbol = 3;
+
+  static int currency = 4;
+}
+
+abstract class ICU4XCollatorNumeric {
+  static int auto = 0;
+
+  static int off = 1;
+
+  static int on = 2;
+}
+
+abstract class ICU4XCollatorStrength {
+  static int auto = 0;
+
+  static int primary = 1;
+
+  static int secondary = 2;
+
+  static int tertiary = 3;
+
+  static int quaternary = 4;
+
+  static int identical = 5;
+}
+
+abstract class ICU4XDateLength {
+  static int full = 0;
+
+  static int long = 1;
+
+  static int medium = 2;
+
+  static int short = 3;
+}
+
+abstract class ICU4XDisplayNamesFallback {
+  static int code = 0;
+
+  static int none = 1;
+}
+
+abstract class ICU4XDisplayNamesStyle {
+  static int auto = 0;
+
+  static int narrow = 1;
+
+  static int short = 2;
+
+  static int long = 3;
+
+  static int menu = 4;
+}
+
 abstract class ICU4XError {
   static int unknownError = 0;
 
@@ -107,265 +249,11 @@ abstract class ICU4XError {
 
   static int timeZoneMissingInputError = 2562;
 
+  static int timeZoneInvalidIdError = 2563;
+
   static int normalizerFutureExtensionError = 2816;
 
   static int normalizerValidationError = 2817;
-}
-
-abstract class ICU4XLocaleFallbackPriority {
-  static int language = 0;
-
-  static int region = 1;
-
-  static int collation = 2;
-}
-
-abstract class ICU4XOrdering {
-  static int less = -1;
-
-  static int equal = 0;
-
-  static int greater = 1;
-}
-
-abstract class ICU4XTransformResult {
-  static int modified = 0;
-
-  static int unmodified = 1;
-}
-
-abstract class ICU4XPluralCategory {
-  static int zero = 0;
-
-  static int one = 1;
-
-  static int two = 2;
-
-  static int few = 3;
-
-  static int many = 4;
-
-  static int other = 5;
-}
-
-abstract class ICU4XWeekRelativeUnit {
-  static int previous = 0;
-
-  static int current = 1;
-
-  static int next = 2;
-}
-
-abstract class ICU4XTimeLength {
-  static int full = 0;
-
-  static int long = 1;
-
-  static int medium = 2;
-
-  static int short = 3;
-}
-
-abstract class ICU4XAnyCalendarKind {
-  static int iso = 0;
-
-  static int gregorian = 1;
-
-  static int buddhist = 2;
-
-  static int japanese = 3;
-
-  static int japaneseExtended = 4;
-
-  static int ethiopian = 5;
-
-  static int ethiopianAmeteAlem = 6;
-
-  static int indian = 7;
-
-  static int coptic = 8;
-}
-
-abstract class ICU4XIsoWeekday {
-  static int monday = 1;
-
-  static int tuesday = 2;
-
-  static int wednesday = 3;
-
-  static int thursday = 4;
-
-  static int friday = 5;
-
-  static int saturday = 6;
-
-  static int sunday = 7;
-}
-
-abstract class ICU4XDisplayNamesStyle {
-  static int auto = 0;
-
-  static int narrow = 1;
-
-  static int short = 2;
-
-  static int long = 3;
-
-  static int menu = 4;
-}
-
-abstract class ICU4XDisplayNamesFallback {
-  static int code = 0;
-
-  static int none = 1;
-}
-
-abstract class ICU4XLanguageDisplay {
-  static int dialect = 0;
-
-  static int standard = 1;
-}
-
-abstract class ICU4XDateLength {
-  static int full = 0;
-
-  static int long = 1;
-
-  static int medium = 2;
-
-  static int short = 3;
-}
-
-abstract class ICU4XCollatorStrength {
-  static int auto = 0;
-
-  static int primary = 1;
-
-  static int secondary = 2;
-
-  static int tertiary = 3;
-
-  static int quaternary = 4;
-
-  static int identical = 5;
-}
-
-abstract class ICU4XCollatorAlternateHandling {
-  static int auto = 0;
-
-  static int nonIgnorable = 1;
-
-  static int shifted = 2;
-}
-
-abstract class ICU4XCollatorCaseFirst {
-  static int auto = 0;
-
-  static int off = 1;
-
-  static int lowerFirst = 2;
-
-  static int upperFirst = 3;
-}
-
-abstract class ICU4XCollatorMaxVariable {
-  static int auto = 0;
-
-  static int space = 1;
-
-  static int punctuation = 2;
-
-  static int symbol = 3;
-
-  static int currency = 4;
-}
-
-abstract class ICU4XCollatorCaseLevel {
-  static int auto = 0;
-
-  static int off = 1;
-
-  static int on = 2;
-}
-
-abstract class ICU4XCollatorNumeric {
-  static int auto = 0;
-
-  static int off = 1;
-
-  static int on = 2;
-}
-
-abstract class ICU4XCollatorBackwardSecondLevel {
-  static int auto = 0;
-
-  static int off = 1;
-
-  static int on = 2;
-}
-
-abstract class ICU4XIsoTimeZoneFormat {
-  static int basic = 0;
-
-  static int extended = 1;
-
-  static int utcBasic = 2;
-
-  static int utcExtended = 3;
-}
-
-abstract class ICU4XIsoTimeZoneMinuteDisplay {
-  static int required = 0;
-
-  static int optional = 1;
-}
-
-abstract class ICU4XIsoTimeZoneSecondDisplay {
-  static int optional = 0;
-
-  static int never = 1;
-}
-
-abstract class ICU4XBidiDirection {
-  static int ltr = 0;
-
-  static int rtl = 1;
-
-  static int mixed = 2;
-}
-
-abstract class ICU4XListLength {
-  static int wide = 0;
-
-  static int short = 1;
-
-  static int narrow = 2;
-}
-
-abstract class ICU4XLineBreakStrictness {
-  static int loose = 0;
-
-  static int normal = 1;
-
-  static int strict = 2;
-
-  static int anywhere = 3;
-}
-
-abstract class ICU4XLineBreakWordOption {
-  static int normal = 0;
-
-  static int breakAll = 1;
-
-  static int keepAll = 2;
-}
-
-abstract class ICU4XSegmenterWordType {
-  static int none = 0;
-
-  static int number = 1;
-
-  static int letter = 2;
 }
 
 abstract class ICU4XFixedDecimalGroupingStrategy {
@@ -396,4 +284,164 @@ abstract class ICU4XFixedDecimalSignDisplay {
   static int exceptZero = 3;
 
   static int negative = 4;
+}
+
+abstract class ICU4XIsoTimeZoneFormat {
+  static int basic = 0;
+
+  static int extended = 1;
+
+  static int utcBasic = 2;
+
+  static int utcExtended = 3;
+}
+
+abstract class ICU4XIsoTimeZoneMinuteDisplay {
+  static int required = 0;
+
+  static int optional = 1;
+}
+
+abstract class ICU4XIsoTimeZoneSecondDisplay {
+  static int optional = 0;
+
+  static int never = 1;
+}
+
+abstract class ICU4XIsoWeekday {
+  static int monday = 1;
+
+  static int tuesday = 2;
+
+  static int wednesday = 3;
+
+  static int thursday = 4;
+
+  static int friday = 5;
+
+  static int saturday = 6;
+
+  static int sunday = 7;
+}
+
+abstract class ICU4XLanguageDisplay {
+  static int dialect = 0;
+
+  static int standard = 1;
+}
+
+abstract class ICU4XLeadingAdjustment {
+  static int auto = 0;
+
+  static int none = 1;
+
+  static int toCased = 2;
+}
+
+abstract class ICU4XLineBreakStrictness {
+  static int loose = 0;
+
+  static int normal = 1;
+
+  static int strict = 2;
+
+  static int anywhere = 3;
+}
+
+abstract class ICU4XLineBreakWordOption {
+  static int normal = 0;
+
+  static int breakAll = 1;
+
+  static int keepAll = 2;
+}
+
+abstract class ICU4XListLength {
+  static int wide = 0;
+
+  static int short = 1;
+
+  static int narrow = 2;
+}
+
+abstract class ICU4XLocaleDirection {
+  static int leftToRight = 0;
+
+  static int rightToLeft = 1;
+
+  static int unknown = 2;
+}
+
+abstract class ICU4XLocaleFallbackPriority {
+  static int language = 0;
+
+  static int region = 1;
+
+  static int collation = 2;
+}
+
+abstract class ICU4XLocaleFallbackSupplement {
+  static int none = 0;
+
+  static int collation = 1;
+}
+
+abstract class ICU4XOrdering {
+  static int less = -1;
+
+  static int equal = 0;
+
+  static int greater = 1;
+}
+
+abstract class ICU4XPluralCategory {
+  static int zero = 0;
+
+  static int one = 1;
+
+  static int two = 2;
+
+  static int few = 3;
+
+  static int many = 4;
+
+  static int other = 5;
+}
+
+abstract class ICU4XSegmenterWordType {
+  static int none = 0;
+
+  static int number = 1;
+
+  static int letter = 2;
+}
+
+abstract class ICU4XTimeLength {
+  static int full = 0;
+
+  static int long = 1;
+
+  static int medium = 2;
+
+  static int short = 3;
+}
+
+abstract class ICU4XTrailingCase {
+  static int lower = 0;
+
+  static int unchanged = 1;
+}
+
+abstract class ICU4XTransformResult {
+  static int modified = 0;
+
+  static int unmodified = 1;
+}
+
+abstract class ICU4XWeekRelativeUnit {
+  static int previous = 0;
+
+  static int current = 1;
+
+  static int next = 2;
 }

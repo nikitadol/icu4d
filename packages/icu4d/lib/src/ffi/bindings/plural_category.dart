@@ -3,25 +3,24 @@
 part of '../bindings.dart';
 
 final class _PluralCategory {
-  _PluralCategory(this.dynamicLibrary)
-      : getForCldrString = dynamicLibrary.lookupFunction<
-            ResultICU4XPluralCategoryOrVoid Function(
-              ffi.Pointer<ffi.Uint8> s_data,
-              ffi.Size s_len,
-            ),
-            ResultICU4XPluralCategoryOrVoid Function(
-              ffi.Pointer<ffi.Uint8> s_data,
-              int s_len,
-            )>(
-          'ICU4XPluralCategory_get_for_cldr_string',
-          isLeaf: true,
-        );
+  _PluralCategory(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final ResultICU4XPluralCategoryOrVoid Function(
+  late final ResultICU4XPluralCategoryOrVoid Function(
     ffi.Pointer<ffi.Uint8> s_data,
     int s_len,
-  ) getForCldrString;
+  ) getForCldrString = dynamicLibrary.lookupFunction<
+      ResultICU4XPluralCategoryOrVoid Function(
+        ffi.Pointer<ffi.Uint8> s_data,
+        ffi.Size s_len,
+      ),
+      ResultICU4XPluralCategoryOrVoid Function(
+        ffi.Pointer<ffi.Uint8> s_data,
+        int s_len,
+      )>(
+    'ICU4XPluralCategory_get_for_cldr_string',
+    isLeaf: true,
+  );
 }

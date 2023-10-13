@@ -3,22 +3,21 @@
 part of '../bindings.dart';
 
 final class _IsoTimeZoneOptions {
-  _IsoTimeZoneOptions(this.dynamicLibrary)
-      : destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XIsoTimeZoneOptions> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XIsoTimeZoneOptions> self,
-            )>(
-          'ICU4XIsoTimeZoneOptions_destroy',
-          isLeaf: true,
-        );
+  _IsoTimeZoneOptions(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XIsoTimeZoneOptions> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XIsoTimeZoneOptions> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XIsoTimeZoneOptions> self,
+      )>(
+    'ICU4XIsoTimeZoneOptions_destroy',
+    isLeaf: true,
+  );
 }

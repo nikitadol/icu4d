@@ -3,575 +3,539 @@
 part of '../bindings.dart';
 
 final class _FixedDecimal {
-  _FixedDecimal(this.dynamicLibrary)
-      : createFromI32 = dynamicLibrary.lookupFunction<
-            ffi.Pointer<ICU4XFixedDecimal> Function(
-              ffi.Int32 v,
-            ),
-            ffi.Pointer<ICU4XFixedDecimal> Function(
-              int v,
-            )>(
-          'ICU4XFixedDecimal_create_from_i32',
-          isLeaf: true,
-        ),
-        createFromU32 = dynamicLibrary.lookupFunction<
-            ffi.Pointer<ICU4XFixedDecimal> Function(
-              ffi.Uint32 v,
-            ),
-            ffi.Pointer<ICU4XFixedDecimal> Function(
-              int v,
-            )>(
-          'ICU4XFixedDecimal_create_from_u32',
-          isLeaf: true,
-        ),
-        createFromI64 = dynamicLibrary.lookupFunction<
-            ffi.Pointer<ICU4XFixedDecimal> Function(
-              ffi.Int64 v,
-            ),
-            ffi.Pointer<ICU4XFixedDecimal> Function(
-              int v,
-            )>(
-          'ICU4XFixedDecimal_create_from_i64',
-          isLeaf: true,
-        ),
-        createFromU64 = dynamicLibrary.lookupFunction<
-            ffi.Pointer<ICU4XFixedDecimal> Function(
-              ffi.Uint64 v,
-            ),
-            ffi.Pointer<ICU4XFixedDecimal> Function(
-              int v,
-            )>(
-          'ICU4XFixedDecimal_create_from_u64',
-          isLeaf: true,
-        ),
-        createFromF64WithIntegerPrecision = dynamicLibrary.lookupFunction<
-            ResultICU4XFixedDecimalOrICU4XError Function(
-              ffi.Double f,
-            ),
-            ResultICU4XFixedDecimalOrICU4XError Function(
-              double f,
-            )>(
-          'ICU4XFixedDecimal_create_from_f64_with_integer_precision',
-          isLeaf: true,
-        ),
-        createFromF64WithLowerMagnitude = dynamicLibrary.lookupFunction<
-            ResultICU4XFixedDecimalOrICU4XError Function(
-              ffi.Double f,
-              ffi.Int16 magnitude,
-            ),
-            ResultICU4XFixedDecimalOrICU4XError Function(
-              double f,
-              int magnitude,
-            )>(
-          'ICU4XFixedDecimal_create_from_f64_with_lower_magnitude',
-          isLeaf: true,
-        ),
-        createFromF64WithSignificantDigits = dynamicLibrary.lookupFunction<
-            ResultICU4XFixedDecimalOrICU4XError Function(
-              ffi.Double f,
-              ffi.Uint8 digits,
-            ),
-            ResultICU4XFixedDecimalOrICU4XError Function(
-              double f,
-              int digits,
-            )>(
-          'ICU4XFixedDecimal_create_from_f64_with_significant_digits',
-          isLeaf: true,
-        ),
-        createFromF64WithFloatingPrecision = dynamicLibrary.lookupFunction<
-            ResultICU4XFixedDecimalOrICU4XError Function(
-              ffi.Double f,
-            ),
-            ResultICU4XFixedDecimalOrICU4XError Function(
-              double f,
-            )>(
-          'ICU4XFixedDecimal_create_from_f64_with_floating_precision',
-          isLeaf: true,
-        ),
-        createFromString = dynamicLibrary.lookupFunction<
-            ResultICU4XFixedDecimalOrICU4XError Function(
-              ffi.Pointer<ffi.Uint8> v_data,
-              ffi.Size v_len,
-            ),
-            ResultICU4XFixedDecimalOrICU4XError Function(
-              ffi.Pointer<ffi.Uint8> v_data,
-              int v_len,
-            )>(
-          'ICU4XFixedDecimal_create_from_string',
-          isLeaf: true,
-        ),
-        digitAt = dynamicLibrary.lookupFunction<
-            ffi.Uint8 Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 magnitude,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int magnitude,
-            )>(
-          'ICU4XFixedDecimal_digit_at',
-          isLeaf: true,
-        ),
-        magnitudeStart = dynamicLibrary.lookupFunction<
-            ffi.Int16 Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            )>(
-          'ICU4XFixedDecimal_magnitude_start',
-          isLeaf: true,
-        ),
-        magnitudeEnd = dynamicLibrary.lookupFunction<
-            ffi.Int16 Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            )>(
-          'ICU4XFixedDecimal_magnitude_end',
-          isLeaf: true,
-        ),
-        nonzeroMagnitudeStart = dynamicLibrary.lookupFunction<
-            ffi.Int16 Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            )>(
-          'ICU4XFixedDecimal_nonzero_magnitude_start',
-          isLeaf: true,
-        ),
-        nonzeroMagnitudeEnd = dynamicLibrary.lookupFunction<
-            ffi.Int16 Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            )>(
-          'ICU4XFixedDecimal_nonzero_magnitude_end',
-          isLeaf: true,
-        ),
-        isZero = dynamicLibrary.lookupFunction<
-            ffi.Bool Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            ),
-            bool Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            )>(
-          'ICU4XFixedDecimal_is_zero',
-          isLeaf: true,
-        ),
-        multiplyPow10 = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 power,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int power,
-            )>(
-          'ICU4XFixedDecimal_multiply_pow10',
-          isLeaf: true,
-        ),
-        sign = dynamicLibrary.lookupFunction<
-            ffi.Int32 Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            )>(
-          'ICU4XFixedDecimal_sign',
-          isLeaf: true,
-        ),
-        setSign = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int32 sign,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int sign,
-            )>(
-          'ICU4XFixedDecimal_set_sign',
-          isLeaf: true,
-        ),
-        applySignDisplay = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int32 sign_display,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int sign_display,
-            )>(
-          'ICU4XFixedDecimal_apply_sign_display',
-          isLeaf: true,
-        ),
-        trimStart = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            )>(
-          'ICU4XFixedDecimal_trim_start',
-          isLeaf: true,
-        ),
-        trimEnd = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            )>(
-          'ICU4XFixedDecimal_trim_end',
-          isLeaf: true,
-        ),
-        padStart = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_pad_start',
-          isLeaf: true,
-        ),
-        padEnd = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_pad_end',
-          isLeaf: true,
-        ),
-        setMaxPosition = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_set_max_position',
-          isLeaf: true,
-        ),
-        trunc = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_trunc',
-          isLeaf: true,
-        ),
-        halfTrunc = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_half_trunc',
-          isLeaf: true,
-        ),
-        expand = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_expand',
-          isLeaf: true,
-        ),
-        halfExpand = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_half_expand',
-          isLeaf: true,
-        ),
-        ceil = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_ceil',
-          isLeaf: true,
-        ),
-        halfCeil = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_half_ceil',
-          isLeaf: true,
-        ),
-        floor = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_floor',
-          isLeaf: true,
-        ),
-        halfFloor = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_half_floor',
-          isLeaf: true,
-        ),
-        halfEven = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Int16 position,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              int position,
-            )>(
-          'ICU4XFixedDecimal_half_even',
-          isLeaf: true,
-        ),
-        concatenateEnd = dynamicLibrary.lookupFunction<
-            ResultVoidOrVoid Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Pointer<ICU4XFixedDecimal> other,
-            ),
-            ResultVoidOrVoid Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Pointer<ICU4XFixedDecimal> other,
-            )>(
-          'ICU4XFixedDecimal_concatenate_end',
-          isLeaf: true,
-        ),
-        toString_ = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Pointer<DiplomatWriteable> to,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-              ffi.Pointer<DiplomatWriteable> to,
-            )>(
-          'ICU4XFixedDecimal_to_string',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XFixedDecimal> self,
-            )>(
-          'ICU4XFixedDecimal_destroy',
-          isLeaf: true,
-        );
+  _FixedDecimal(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int sign_display,
-  ) applySignDisplay;
+  ) applySignDisplay = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int32 sign_display,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int sign_display,
+      )>(
+    'ICU4XFixedDecimal_apply_sign_display',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) ceil;
+  ) ceil = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_ceil',
+    isLeaf: true,
+  );
 
-  final ResultVoidOrVoid Function(
+  late final ResultVoidOrVoid Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     ffi.Pointer<ICU4XFixedDecimal> other,
-  ) concatenateEnd;
+  ) concatenateEnd = dynamicLibrary.lookupFunction<
+      ResultVoidOrVoid Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Pointer<ICU4XFixedDecimal> other,
+      ),
+      ResultVoidOrVoid Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Pointer<ICU4XFixedDecimal> other,
+      )>(
+    'ICU4XFixedDecimal_concatenate_end',
+    isLeaf: true,
+  );
 
-  final ResultICU4XFixedDecimalOrICU4XError Function(
+  late final ResultICU4XFixedDecimalOrICU4XError Function(
     double f,
-  ) createFromF64WithFloatingPrecision;
+  ) createFromF64WithFloatingPrecision = dynamicLibrary.lookupFunction<
+      ResultICU4XFixedDecimalOrICU4XError Function(
+        ffi.Double f,
+      ),
+      ResultICU4XFixedDecimalOrICU4XError Function(
+        double f,
+      )>(
+    'ICU4XFixedDecimal_create_from_f64_with_floating_precision',
+    isLeaf: true,
+  );
 
-  final ResultICU4XFixedDecimalOrICU4XError Function(
+  late final ResultICU4XFixedDecimalOrICU4XError Function(
     double f,
-  ) createFromF64WithIntegerPrecision;
+  ) createFromF64WithIntegerPrecision = dynamicLibrary.lookupFunction<
+      ResultICU4XFixedDecimalOrICU4XError Function(
+        ffi.Double f,
+      ),
+      ResultICU4XFixedDecimalOrICU4XError Function(
+        double f,
+      )>(
+    'ICU4XFixedDecimal_create_from_f64_with_integer_precision',
+    isLeaf: true,
+  );
 
-  final ResultICU4XFixedDecimalOrICU4XError Function(
+  late final ResultICU4XFixedDecimalOrICU4XError Function(
     double f,
     int magnitude,
-  ) createFromF64WithLowerMagnitude;
+  ) createFromF64WithLowerMagnitude = dynamicLibrary.lookupFunction<
+      ResultICU4XFixedDecimalOrICU4XError Function(
+        ffi.Double f,
+        ffi.Int16 magnitude,
+      ),
+      ResultICU4XFixedDecimalOrICU4XError Function(
+        double f,
+        int magnitude,
+      )>(
+    'ICU4XFixedDecimal_create_from_f64_with_lower_magnitude',
+    isLeaf: true,
+  );
 
-  final ResultICU4XFixedDecimalOrICU4XError Function(
+  late final ResultICU4XFixedDecimalOrICU4XError Function(
     double f,
     int digits,
-  ) createFromF64WithSignificantDigits;
+  ) createFromF64WithSignificantDigits = dynamicLibrary.lookupFunction<
+      ResultICU4XFixedDecimalOrICU4XError Function(
+        ffi.Double f,
+        ffi.Uint8 digits,
+      ),
+      ResultICU4XFixedDecimalOrICU4XError Function(
+        double f,
+        int digits,
+      )>(
+    'ICU4XFixedDecimal_create_from_f64_with_significant_digits',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<ICU4XFixedDecimal> Function(
+  late final ffi.Pointer<ICU4XFixedDecimal> Function(
     int v,
-  ) createFromI32;
+  ) createFromI32 = dynamicLibrary.lookupFunction<
+      ffi.Pointer<ICU4XFixedDecimal> Function(
+        ffi.Int32 v,
+      ),
+      ffi.Pointer<ICU4XFixedDecimal> Function(
+        int v,
+      )>(
+    'ICU4XFixedDecimal_create_from_i32',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<ICU4XFixedDecimal> Function(
+  late final ffi.Pointer<ICU4XFixedDecimal> Function(
     int v,
-  ) createFromI64;
+  ) createFromI64 = dynamicLibrary.lookupFunction<
+      ffi.Pointer<ICU4XFixedDecimal> Function(
+        ffi.Int64 v,
+      ),
+      ffi.Pointer<ICU4XFixedDecimal> Function(
+        int v,
+      )>(
+    'ICU4XFixedDecimal_create_from_i64',
+    isLeaf: true,
+  );
 
-  final ResultICU4XFixedDecimalOrICU4XError Function(
+  late final ResultICU4XFixedDecimalOrICU4XError Function(
     ffi.Pointer<ffi.Uint8> v_data,
     int v_len,
-  ) createFromString;
+  ) createFromString = dynamicLibrary.lookupFunction<
+      ResultICU4XFixedDecimalOrICU4XError Function(
+        ffi.Pointer<ffi.Uint8> v_data,
+        ffi.Size v_len,
+      ),
+      ResultICU4XFixedDecimalOrICU4XError Function(
+        ffi.Pointer<ffi.Uint8> v_data,
+        int v_len,
+      )>(
+    'ICU4XFixedDecimal_create_from_string',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<ICU4XFixedDecimal> Function(
+  late final ffi.Pointer<ICU4XFixedDecimal> Function(
     int v,
-  ) createFromU32;
+  ) createFromU32 = dynamicLibrary.lookupFunction<
+      ffi.Pointer<ICU4XFixedDecimal> Function(
+        ffi.Uint32 v,
+      ),
+      ffi.Pointer<ICU4XFixedDecimal> Function(
+        int v,
+      )>(
+    'ICU4XFixedDecimal_create_from_u32',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<ICU4XFixedDecimal> Function(
+  late final ffi.Pointer<ICU4XFixedDecimal> Function(
     int v,
-  ) createFromU64;
+  ) createFromU64 = dynamicLibrary.lookupFunction<
+      ffi.Pointer<ICU4XFixedDecimal> Function(
+        ffi.Uint64 v,
+      ),
+      ffi.Pointer<ICU4XFixedDecimal> Function(
+        int v,
+      )>(
+    'ICU4XFixedDecimal_create_from_u64',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      )>(
+    'ICU4XFixedDecimal_destroy',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int magnitude,
-  ) digitAt;
+  ) digitAt = dynamicLibrary.lookupFunction<
+      ffi.Uint8 Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 magnitude,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int magnitude,
+      )>(
+    'ICU4XFixedDecimal_digit_at',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) expand;
+  ) expand = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_expand',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) floor;
+  ) floor = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_floor',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) halfCeil;
+  ) halfCeil = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_half_ceil',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) halfEven;
+  ) halfEven = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_half_even',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) halfExpand;
+  ) halfExpand = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_half_expand',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) halfFloor;
+  ) halfFloor = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_half_floor',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) halfTrunc;
+  ) halfTrunc = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_half_trunc',
+    isLeaf: true,
+  );
 
-  final bool Function(
+  late final bool Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
-  ) isZero;
+  ) isZero = dynamicLibrary.lookupFunction<
+      ffi.Bool Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      ),
+      bool Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      )>(
+    'ICU4XFixedDecimal_is_zero',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
-  ) magnitudeEnd;
+  ) magnitudeEnd = dynamicLibrary.lookupFunction<
+      ffi.Int16 Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      )>(
+    'ICU4XFixedDecimal_magnitude_end',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
-  ) magnitudeStart;
+  ) magnitudeStart = dynamicLibrary.lookupFunction<
+      ffi.Int16 Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      )>(
+    'ICU4XFixedDecimal_magnitude_start',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int power,
-  ) multiplyPow10;
+  ) multiplyPow10 = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 power,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int power,
+      )>(
+    'ICU4XFixedDecimal_multiply_pow10',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
-  ) nonzeroMagnitudeEnd;
+  ) nonzeroMagnitudeEnd = dynamicLibrary.lookupFunction<
+      ffi.Int16 Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      )>(
+    'ICU4XFixedDecimal_nonzero_magnitude_end',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
-  ) nonzeroMagnitudeStart;
+  ) nonzeroMagnitudeStart = dynamicLibrary.lookupFunction<
+      ffi.Int16 Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      )>(
+    'ICU4XFixedDecimal_nonzero_magnitude_start',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) padEnd;
+  ) padEnd = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_pad_end',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) padStart;
+  ) padStart = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_pad_start',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) setMaxPosition;
+  ) setMaxPosition = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_set_max_position',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int sign,
-  ) setSign;
+  ) setSign = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int32 sign,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int sign,
+      )>(
+    'ICU4XFixedDecimal_set_sign',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
-  ) sign;
+  ) sign = dynamicLibrary.lookupFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      )>(
+    'ICU4XFixedDecimal_sign',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     ffi.Pointer<DiplomatWriteable> to,
-  ) toString_;
+  ) toString_ = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Pointer<DiplomatWriteable> to,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Pointer<DiplomatWriteable> to,
+      )>(
+    'ICU4XFixedDecimal_to_string',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
-  ) trimEnd;
+  ) trimEnd = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      )>(
+    'ICU4XFixedDecimal_trim_end',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
-  ) trimStart;
+  ) trimStart = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+      )>(
+    'ICU4XFixedDecimal_trim_start',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int position,
-  ) trunc;
+  ) trunc = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        ffi.Int16 position,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XFixedDecimal> self,
+        int position,
+      )>(
+    'ICU4XFixedDecimal_trunc',
+    isLeaf: true,
+  );
 }

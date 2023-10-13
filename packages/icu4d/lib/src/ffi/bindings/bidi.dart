@@ -3,121 +3,113 @@
 part of '../bindings.dart';
 
 final class _Bidi {
-  _Bidi(this.dynamicLibrary)
-      : create = dynamicLibrary.lookupFunction<
-            ResultICU4XBidiOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XBidiOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XBidi_create',
-          isLeaf: true,
-        ),
-        forText = dynamicLibrary.lookupFunction<
-            ffi.Pointer<ICU4XBidiInfo> Function(
-              ffi.Pointer<ICU4XBidi> self,
-              ffi.Pointer<ffi.Uint8> text_data,
-              ffi.Size text_len,
-              ffi.Uint8 default_level,
-            ),
-            ffi.Pointer<ICU4XBidiInfo> Function(
-              ffi.Pointer<ICU4XBidi> self,
-              ffi.Pointer<ffi.Uint8> text_data,
-              int text_len,
-              int default_level,
-            )>(
-          'ICU4XBidi_for_text',
-          isLeaf: true,
-        ),
-        reorderVisual = dynamicLibrary.lookupFunction<
-            ffi.Pointer<ICU4XReorderedIndexMap> Function(
-              ffi.Pointer<ICU4XBidi> self,
-              ffi.Pointer<ffi.Uint8> levels_data,
-              ffi.Size levels_len,
-            ),
-            ffi.Pointer<ICU4XReorderedIndexMap> Function(
-              ffi.Pointer<ICU4XBidi> self,
-              ffi.Pointer<ffi.Uint8> levels_data,
-              int levels_len,
-            )>(
-          'ICU4XBidi_reorder_visual',
-          isLeaf: true,
-        ),
-        levelIsRtl = dynamicLibrary.lookupFunction<
-            ffi.Bool Function(
-              ffi.Uint8 level,
-            ),
-            bool Function(
-              int level,
-            )>(
-          'ICU4XBidi_level_is_rtl',
-          isLeaf: true,
-        ),
-        levelIsLtr = dynamicLibrary.lookupFunction<
-            ffi.Bool Function(
-              ffi.Uint8 level,
-            ),
-            bool Function(
-              int level,
-            )>(
-          'ICU4XBidi_level_is_ltr',
-          isLeaf: true,
-        ),
-        levelRtl =
-            dynamicLibrary.lookupFunction<ffi.Uint8 Function(), int Function()>(
-          'ICU4XBidi_level_rtl',
-          isLeaf: true,
-        ),
-        levelLtr =
-            dynamicLibrary.lookupFunction<ffi.Uint8 Function(), int Function()>(
-          'ICU4XBidi_level_ltr',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XBidi> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XBidi> self,
-            )>(
-          'ICU4XBidi_destroy',
-          isLeaf: true,
-        );
+  _Bidi(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final ResultICU4XBidiOrICU4XError Function(
+  late final ResultICU4XBidiOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) create;
+  ) create = dynamicLibrary.lookupFunction<
+      ResultICU4XBidiOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XBidiOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XBidi_create',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XBidi> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XBidi> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XBidi> self,
+      )>(
+    'ICU4XBidi_destroy',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<ICU4XBidiInfo> Function(
+  late final ffi.Pointer<ICU4XBidiInfo> Function(
     ffi.Pointer<ICU4XBidi> self,
     ffi.Pointer<ffi.Uint8> text_data,
     int text_len,
     int default_level,
-  ) forText;
+  ) forText = dynamicLibrary.lookupFunction<
+      ffi.Pointer<ICU4XBidiInfo> Function(
+        ffi.Pointer<ICU4XBidi> self,
+        ffi.Pointer<ffi.Uint8> text_data,
+        ffi.Size text_len,
+        ffi.Uint8 default_level,
+      ),
+      ffi.Pointer<ICU4XBidiInfo> Function(
+        ffi.Pointer<ICU4XBidi> self,
+        ffi.Pointer<ffi.Uint8> text_data,
+        int text_len,
+        int default_level,
+      )>(
+    'ICU4XBidi_for_text',
+    isLeaf: true,
+  );
 
-  final bool Function(
+  late final bool Function(
     int level,
-  ) levelIsLtr;
+  ) levelIsLtr = dynamicLibrary.lookupFunction<
+      ffi.Bool Function(
+        ffi.Uint8 level,
+      ),
+      bool Function(
+        int level,
+      )>(
+    'ICU4XBidi_level_is_ltr',
+    isLeaf: true,
+  );
 
-  final bool Function(
+  late final bool Function(
     int level,
-  ) levelIsRtl;
+  ) levelIsRtl = dynamicLibrary.lookupFunction<
+      ffi.Bool Function(
+        ffi.Uint8 level,
+      ),
+      bool Function(
+        int level,
+      )>(
+    'ICU4XBidi_level_is_rtl',
+    isLeaf: true,
+  );
 
-  final int Function() levelLtr;
+  late final int Function() levelLtr =
+      dynamicLibrary.lookupFunction<ffi.Uint8 Function(), int Function()>(
+    'ICU4XBidi_level_ltr',
+    isLeaf: true,
+  );
 
-  final int Function() levelRtl;
+  late final int Function() levelRtl =
+      dynamicLibrary.lookupFunction<ffi.Uint8 Function(), int Function()>(
+    'ICU4XBidi_level_rtl',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<ICU4XReorderedIndexMap> Function(
+  late final ffi.Pointer<ICU4XReorderedIndexMap> Function(
     ffi.Pointer<ICU4XBidi> self,
     ffi.Pointer<ffi.Uint8> levels_data,
     int levels_len,
-  ) reorderVisual;
+  ) reorderVisual = dynamicLibrary.lookupFunction<
+      ffi.Pointer<ICU4XReorderedIndexMap> Function(
+        ffi.Pointer<ICU4XBidi> self,
+        ffi.Pointer<ffi.Uint8> levels_data,
+        ffi.Size levels_len,
+      ),
+      ffi.Pointer<ICU4XReorderedIndexMap> Function(
+        ffi.Pointer<ICU4XBidi> self,
+        ffi.Pointer<ffi.Uint8> levels_data,
+        int levels_len,
+      )>(
+    'ICU4XBidi_reorder_visual',
+    isLeaf: true,
+  );
 }

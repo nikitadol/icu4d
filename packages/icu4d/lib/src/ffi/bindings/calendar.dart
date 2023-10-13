@@ -3,70 +3,66 @@
 part of '../bindings.dart';
 
 final class _Calendar {
-  _Calendar(this.dynamicLibrary)
-      : createForLocale = dynamicLibrary.lookupFunction<
-            ResultICU4XCalendarOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Pointer<ICU4XLocale> locale,
-            ),
-            ResultICU4XCalendarOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Pointer<ICU4XLocale> locale,
-            )>(
-          'ICU4XCalendar_create_for_locale',
-          isLeaf: true,
-        ),
-        createForKind = dynamicLibrary.lookupFunction<
-            ResultICU4XCalendarOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Int32 kind,
-            ),
-            ResultICU4XCalendarOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              int kind,
-            )>(
-          'ICU4XCalendar_create_for_kind',
-          isLeaf: true,
-        ),
-        kind = dynamicLibrary.lookupFunction<
-            ffi.Int32 Function(
-              ffi.Pointer<ICU4XCalendar> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XCalendar> self,
-            )>(
-          'ICU4XCalendar_kind',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XCalendar> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XCalendar> self,
-            )>(
-          'ICU4XCalendar_destroy',
-          isLeaf: true,
-        );
+  _Calendar(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final ResultICU4XCalendarOrICU4XError Function(
+  late final ResultICU4XCalendarOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     int kind,
-  ) createForKind;
+  ) createForKind = dynamicLibrary.lookupFunction<
+      ResultICU4XCalendarOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Int32 kind,
+      ),
+      ResultICU4XCalendarOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        int kind,
+      )>(
+    'ICU4XCalendar_create_for_kind',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCalendarOrICU4XError Function(
+  late final ResultICU4XCalendarOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,
-  ) createForLocale;
+  ) createForLocale = dynamicLibrary.lookupFunction<
+      ResultICU4XCalendarOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Pointer<ICU4XLocale> locale,
+      ),
+      ResultICU4XCalendarOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Pointer<ICU4XLocale> locale,
+      )>(
+    'ICU4XCalendar_create_for_locale',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XCalendar> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XCalendar> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XCalendar> self,
+      )>(
+    'ICU4XCalendar_destroy',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XCalendar> self,
-  ) kind;
+  ) kind = dynamicLibrary.lookupFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<ICU4XCalendar> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XCalendar> self,
+      )>(
+    'ICU4XCalendar_kind',
+    isLeaf: true,
+  );
 }

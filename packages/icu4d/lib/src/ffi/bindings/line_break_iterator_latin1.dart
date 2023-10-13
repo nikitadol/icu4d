@@ -3,36 +3,34 @@
 part of '../bindings.dart';
 
 final class _LineBreakIteratorLatin1 {
-  _LineBreakIteratorLatin1(this.dynamicLibrary)
-      : next = dynamicLibrary.lookupFunction<
-            ffi.Int32 Function(
-              ffi.Pointer<ICU4XLineBreakIteratorLatin1> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XLineBreakIteratorLatin1> self,
-            )>(
-          'ICU4XLineBreakIteratorLatin1_next',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XLineBreakIteratorLatin1> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XLineBreakIteratorLatin1> self,
-            )>(
-          'ICU4XLineBreakIteratorLatin1_destroy',
-          isLeaf: true,
-        );
+  _LineBreakIteratorLatin1(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XLineBreakIteratorLatin1> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XLineBreakIteratorLatin1> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XLineBreakIteratorLatin1> self,
+      )>(
+    'ICU4XLineBreakIteratorLatin1_destroy',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XLineBreakIteratorLatin1> self,
-  ) next;
+  ) next = dynamicLibrary.lookupFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<ICU4XLineBreakIteratorLatin1> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XLineBreakIteratorLatin1> self,
+      )>(
+    'ICU4XLineBreakIteratorLatin1_next',
+    isLeaf: true,
+  );
 }

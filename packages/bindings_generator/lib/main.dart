@@ -19,14 +19,38 @@ const _dynamicLibraryFieldName = 'dynamicLibrary';
 const _subBindingsDir = 'bindings';
 const _ignoreForBindings = 'ignore_for_file: require_trailing_commas';
 
-const _optionalFunctions = {
-  'ICU4XLogger_init_simple_logger',
-  'ICU4XLogger_destroy',
-  'ICU4XDataProvider_create_fs',
-  'ICU4XDataProvider_create_test',
-  'ICU4XDataProvider_create_from_byte_slice',
-  'ICU4XLocale_create_en',
-  'ICU4XLocale_create_bn',
+const _nonOptionalFunctions = {
+  'ICU4XDataProvider_create_empty',
+  'ICU4XDataProvider_destroy',
+  'ICU4XDataProvider_enable_locale_fallback',
+  'ICU4XDataProvider_fork_by_key',
+  'ICU4XDataProvider_fork_by_locale',
+  'ICU4XDataStruct_destroy',
+  'ICU4XError_destroy',
+  'ICU4XLocale_basename',
+  'ICU4XLocale_canonicalize',
+  'ICU4XLocale_clone',
+  'ICU4XLocale_create_from_string',
+  'ICU4XLocale_create_und',
+  'ICU4XLocale_destroy',
+  'ICU4XLocale_get_unicode_extension',
+  'ICU4XLocale_language',
+  'ICU4XLocale_normalizing_eq',
+  'ICU4XLocale_region',
+  'ICU4XLocale_script',
+  'ICU4XLocale_set_language',
+  'ICU4XLocale_set_region',
+  'ICU4XLocale_set_script',
+  'ICU4XLocale_strict_cmp',
+  'ICU4XLocale_to_string',
+  'ICU4XOrdering_destroy',
+  'diplomat_alloc',
+  'diplomat_buffer_writeable_create',
+  'diplomat_buffer_writeable_destroy',
+  'diplomat_buffer_writeable_get_bytes',
+  'diplomat_buffer_writeable_len',
+  'diplomat_free',
+  'diplomat_simple_writeable',
 };
 
 const _needReplaceFieldName = {'toString'};
@@ -236,14 +260,14 @@ void main(List<String> args) {
         ..modifier = code_builder.FieldModifier.final$
         ..type = code_builder.refer(dartType);
 
-      if (_optionalFunctions.contains(function.name)) {
-        field
-          ..late = true
-          ..assignment = lookupFunction.code;
-      } else {
+      if (_nonOptionalFunctions.contains(function.name)) {
         bindingConstructorBuilder.initializers.add(
           code_builder.refer(funcName).assign(lookupFunction).code,
         );
+      } else {
+        field
+          ..late = true
+          ..assignment = lookupFunction.code;
       }
 
       bindingBuilder.fields.add(field.build());
@@ -344,6 +368,8 @@ void main(List<String> args) {
       libBuilder.body.add(enumBuilder.build());
     }
 
+    libBuilder.body.sort(_specCompare);
+
     final fileName = join(_subBindingsDir, 'enums.dart');
     File(join(saveDir, fileName)).writeSpec(libBuilder.build());
     mainFileBuilder.directives.add(code_builder.Directive.part(fileName));
@@ -399,6 +425,8 @@ void main(List<String> args) {
       libBuilder.body.add(builder.build());
     }
 
+    libBuilder.body.sort(_specCompare);
+
     final fileName = join(_subBindingsDir, 'structures.dart');
     File(join(saveDir, fileName)).writeSpec(libBuilder.build());
     mainFileBuilder.directives.add(code_builder.Directive.part(fileName));
@@ -438,6 +466,8 @@ void main(List<String> args) {
       libBuilder.body.add(builder.build());
     }
 
+    libBuilder.body.sort(_specCompare);
+
     final fileName = join(_subBindingsDir, 'unions.dart');
     File(join(saveDir, fileName)).writeSpec(libBuilder.build());
     mainFileBuilder.directives.add(code_builder.Directive.part(fileName));
@@ -464,6 +494,13 @@ int _fieldCompare(code_builder.Field a, code_builder.Field b) {
   }
 
   return result;
+}
+
+int _specCompare(a, b) {
+  final String aName = a.name;
+  final String bName = b.name;
+
+  return aName.compareTo(bName);
 }
 
 extension on File {

@@ -3,1031 +3,959 @@
 part of '../bindings.dart';
 
 final class _CodePointSetData {
-  _CodePointSetData(this.dynamicLibrary)
-      : contains = dynamicLibrary.lookupFunction<
-            ffi.Bool Function(
-              ffi.Pointer<ICU4XCodePointSetData> self,
-              ffi.Uint32 cp,
-            ),
-            bool Function(
-              ffi.Pointer<ICU4XCodePointSetData> self,
-              int cp,
-            )>(
-          'ICU4XCodePointSetData_contains',
-          isLeaf: true,
-        ),
-        contains32 = dynamicLibrary.lookupFunction<
-            ffi.Bool Function(
-              ffi.Pointer<ICU4XCodePointSetData> self,
-              ffi.Uint32 cp,
-            ),
-            bool Function(
-              ffi.Pointer<ICU4XCodePointSetData> self,
-              int cp,
-            )>(
-          'ICU4XCodePointSetData_contains32',
-          isLeaf: true,
-        ),
-        iterRanges = dynamicLibrary.lookupFunction<
-            ffi.Pointer<CodePointRangeIterator> Function(
-              ffi.Pointer<ICU4XCodePointSetData> self,
-            ),
-            ffi.Pointer<CodePointRangeIterator> Function(
-              ffi.Pointer<ICU4XCodePointSetData> self,
-            )>(
-          'ICU4XCodePointSetData_iter_ranges',
-          isLeaf: true,
-        ),
-        iterRangesComplemented = dynamicLibrary.lookupFunction<
-            ffi.Pointer<CodePointRangeIterator> Function(
-              ffi.Pointer<ICU4XCodePointSetData> self,
-            ),
-            ffi.Pointer<CodePointRangeIterator> Function(
-              ffi.Pointer<ICU4XCodePointSetData> self,
-            )>(
-          'ICU4XCodePointSetData_iter_ranges_complemented',
-          isLeaf: true,
-        ),
-        loadForGeneralCategoryGroup = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Uint32 group,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              int group,
-            )>(
-          'ICU4XCodePointSetData_load_for_general_category_group',
-          isLeaf: true,
-        ),
-        loadAsciiHexDigit = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_ascii_hex_digit',
-          isLeaf: true,
-        ),
-        loadAlnum = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_alnum',
-          isLeaf: true,
-        ),
-        loadAlphabetic = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_alphabetic',
-          isLeaf: true,
-        ),
-        loadBidiControl = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_bidi_control',
-          isLeaf: true,
-        ),
-        loadBidiMirrored = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_bidi_mirrored',
-          isLeaf: true,
-        ),
-        loadBlank = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_blank',
-          isLeaf: true,
-        ),
-        loadCased = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_cased',
-          isLeaf: true,
-        ),
-        loadCaseIgnorable = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_case_ignorable',
-          isLeaf: true,
-        ),
-        loadFullCompositionExclusion = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_full_composition_exclusion',
-          isLeaf: true,
-        ),
-        loadChangesWhenCasefolded = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_changes_when_casefolded',
-          isLeaf: true,
-        ),
-        loadChangesWhenCasemapped = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_changes_when_casemapped',
-          isLeaf: true,
-        ),
-        loadChangesWhenNfkcCasefolded = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_changes_when_nfkc_casefolded',
-          isLeaf: true,
-        ),
-        loadChangesWhenLowercased = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_changes_when_lowercased',
-          isLeaf: true,
-        ),
-        loadChangesWhenTitlecased = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_changes_when_titlecased',
-          isLeaf: true,
-        ),
-        loadChangesWhenUppercased = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_changes_when_uppercased',
-          isLeaf: true,
-        ),
-        loadDash = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_dash',
-          isLeaf: true,
-        ),
-        loadDeprecated = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_deprecated',
-          isLeaf: true,
-        ),
-        loadDefaultIgnorableCodePoint = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_default_ignorable_code_point',
-          isLeaf: true,
-        ),
-        loadDiacritic = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_diacritic',
-          isLeaf: true,
-        ),
-        loadEmojiModifierBase = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_emoji_modifier_base',
-          isLeaf: true,
-        ),
-        loadEmojiComponent = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_emoji_component',
-          isLeaf: true,
-        ),
-        loadEmojiModifier = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_emoji_modifier',
-          isLeaf: true,
-        ),
-        loadEmoji = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_emoji',
-          isLeaf: true,
-        ),
-        loadEmojiPresentation = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_emoji_presentation',
-          isLeaf: true,
-        ),
-        loadExtender = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_extender',
-          isLeaf: true,
-        ),
-        loadExtendedPictographic = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_extended_pictographic',
-          isLeaf: true,
-        ),
-        loadGraph = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_graph',
-          isLeaf: true,
-        ),
-        loadGraphemeBase = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_grapheme_base',
-          isLeaf: true,
-        ),
-        loadGraphemeExtend = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_grapheme_extend',
-          isLeaf: true,
-        ),
-        loadGraphemeLink = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_grapheme_link',
-          isLeaf: true,
-        ),
-        loadHexDigit = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_hex_digit',
-          isLeaf: true,
-        ),
-        loadHyphen = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_hyphen',
-          isLeaf: true,
-        ),
-        loadIdContinue = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_id_continue',
-          isLeaf: true,
-        ),
-        loadIdeographic = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_ideographic',
-          isLeaf: true,
-        ),
-        loadIdStart = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_id_start',
-          isLeaf: true,
-        ),
-        loadIdsBinaryOperator = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_ids_binary_operator',
-          isLeaf: true,
-        ),
-        loadIdsTrinaryOperator = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_ids_trinary_operator',
-          isLeaf: true,
-        ),
-        loadJoinControl = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_join_control',
-          isLeaf: true,
-        ),
-        loadLogicalOrderException = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_logical_order_exception',
-          isLeaf: true,
-        ),
-        loadLowercase = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_lowercase',
-          isLeaf: true,
-        ),
-        loadMath = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_math',
-          isLeaf: true,
-        ),
-        loadNoncharacterCodePoint = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_noncharacter_code_point',
-          isLeaf: true,
-        ),
-        loadNfcInert = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_nfc_inert',
-          isLeaf: true,
-        ),
-        loadNfdInert = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_nfd_inert',
-          isLeaf: true,
-        ),
-        loadNfkcInert = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_nfkc_inert',
-          isLeaf: true,
-        ),
-        loadNfkdInert = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_nfkd_inert',
-          isLeaf: true,
-        ),
-        loadPatternSyntax = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_pattern_syntax',
-          isLeaf: true,
-        ),
-        loadPatternWhiteSpace = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_pattern_white_space',
-          isLeaf: true,
-        ),
-        loadPrependedConcatenationMark = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_prepended_concatenation_mark',
-          isLeaf: true,
-        ),
-        loadPrint = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_print',
-          isLeaf: true,
-        ),
-        loadQuotationMark = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_quotation_mark',
-          isLeaf: true,
-        ),
-        loadRadical = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_radical',
-          isLeaf: true,
-        ),
-        loadRegionalIndicator = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_regional_indicator',
-          isLeaf: true,
-        ),
-        loadSoftDotted = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_soft_dotted',
-          isLeaf: true,
-        ),
-        loadSegmentStarter = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_segment_starter',
-          isLeaf: true,
-        ),
-        loadCaseSensitive = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_case_sensitive',
-          isLeaf: true,
-        ),
-        loadSentenceTerminal = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_sentence_terminal',
-          isLeaf: true,
-        ),
-        loadTerminalPunctuation = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_terminal_punctuation',
-          isLeaf: true,
-        ),
-        loadUnifiedIdeograph = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_unified_ideograph',
-          isLeaf: true,
-        ),
-        loadUppercase = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_uppercase',
-          isLeaf: true,
-        ),
-        loadVariationSelector = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_variation_selector',
-          isLeaf: true,
-        ),
-        loadWhiteSpace = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_white_space',
-          isLeaf: true,
-        ),
-        loadXdigit = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_xdigit',
-          isLeaf: true,
-        ),
-        loadXidContinue = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_xid_continue',
-          isLeaf: true,
-        ),
-        loadXidStart = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointSetData_load_xid_start',
-          isLeaf: true,
-        ),
-        loadForEcma262 = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Pointer<ffi.Uint8> property_name_data,
-              ffi.Size property_name_len,
-            ),
-            ResultICU4XCodePointSetDataOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Pointer<ffi.Uint8> property_name_data,
-              int property_name_len,
-            )>(
-          'ICU4XCodePointSetData_load_for_ecma262',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XCodePointSetData> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XCodePointSetData> self,
-            )>(
-          'ICU4XCodePointSetData_destroy',
-          isLeaf: true,
-        );
+  _CodePointSetData(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final bool Function(
+  late final bool Function(
     ffi.Pointer<ICU4XCodePointSetData> self,
     int cp,
-  ) contains;
+  ) contains = dynamicLibrary.lookupFunction<
+      ffi.Bool Function(
+        ffi.Pointer<ICU4XCodePointSetData> self,
+        ffi.Uint32 cp,
+      ),
+      bool Function(
+        ffi.Pointer<ICU4XCodePointSetData> self,
+        int cp,
+      )>(
+    'ICU4XCodePointSetData_contains',
+    isLeaf: true,
+  );
 
-  final bool Function(
+  late final bool Function(
     ffi.Pointer<ICU4XCodePointSetData> self,
     int cp,
-  ) contains32;
+  ) contains32 = dynamicLibrary.lookupFunction<
+      ffi.Bool Function(
+        ffi.Pointer<ICU4XCodePointSetData> self,
+        ffi.Uint32 cp,
+      ),
+      bool Function(
+        ffi.Pointer<ICU4XCodePointSetData> self,
+        int cp,
+      )>(
+    'ICU4XCodePointSetData_contains32',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XCodePointSetData> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XCodePointSetData> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XCodePointSetData> self,
+      )>(
+    'ICU4XCodePointSetData_destroy',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<CodePointRangeIterator> Function(
+  late final ffi.Pointer<CodePointRangeIterator> Function(
     ffi.Pointer<ICU4XCodePointSetData> self,
-  ) iterRanges;
+  ) iterRanges = dynamicLibrary.lookupFunction<
+      ffi.Pointer<CodePointRangeIterator> Function(
+        ffi.Pointer<ICU4XCodePointSetData> self,
+      ),
+      ffi.Pointer<CodePointRangeIterator> Function(
+        ffi.Pointer<ICU4XCodePointSetData> self,
+      )>(
+    'ICU4XCodePointSetData_iter_ranges',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<CodePointRangeIterator> Function(
+  late final ffi.Pointer<CodePointRangeIterator> Function(
     ffi.Pointer<ICU4XCodePointSetData> self,
-  ) iterRangesComplemented;
+  ) iterRangesComplemented = dynamicLibrary.lookupFunction<
+      ffi.Pointer<CodePointRangeIterator> Function(
+        ffi.Pointer<ICU4XCodePointSetData> self,
+      ),
+      ffi.Pointer<CodePointRangeIterator> Function(
+        ffi.Pointer<ICU4XCodePointSetData> self,
+      )>(
+    'ICU4XCodePointSetData_iter_ranges_complemented',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadAlnum;
+  ) loadAlnum = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_alnum',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadAlphabetic;
+  ) loadAlphabetic = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_alphabetic',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadAsciiHexDigit;
+  ) loadAsciiHexDigit = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_ascii_hex_digit',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadBidiControl;
+  ) loadBidiControl = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_bidi_control',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadBidiMirrored;
+  ) loadBidiMirrored = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_bidi_mirrored',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadBlank;
+  ) loadBlank = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_blank',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadCaseIgnorable;
+  ) loadCaseIgnorable = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_case_ignorable',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadCaseSensitive;
+  ) loadCaseSensitive = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_case_sensitive',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadCased;
+  ) loadCased = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_cased',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadChangesWhenCasefolded;
+  ) loadChangesWhenCasefolded = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_changes_when_casefolded',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadChangesWhenCasemapped;
+  ) loadChangesWhenCasemapped = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_changes_when_casemapped',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadChangesWhenLowercased;
+  ) loadChangesWhenLowercased = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_changes_when_lowercased',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadChangesWhenNfkcCasefolded;
+  ) loadChangesWhenNfkcCasefolded = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_changes_when_nfkc_casefolded',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadChangesWhenTitlecased;
+  ) loadChangesWhenTitlecased = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_changes_when_titlecased',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadChangesWhenUppercased;
+  ) loadChangesWhenUppercased = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_changes_when_uppercased',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadDash;
+  ) loadDash = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_dash',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadDefaultIgnorableCodePoint;
+  ) loadDefaultIgnorableCodePoint = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_default_ignorable_code_point',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadDeprecated;
+  ) loadDeprecated = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_deprecated',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadDiacritic;
+  ) loadDiacritic = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_diacritic',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadEmoji;
+  ) loadEmoji = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_emoji',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadEmojiComponent;
+  ) loadEmojiComponent = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_emoji_component',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadEmojiModifier;
+  ) loadEmojiModifier = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_emoji_modifier',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadEmojiModifierBase;
+  ) loadEmojiModifierBase = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_emoji_modifier_base',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadEmojiPresentation;
+  ) loadEmojiPresentation = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_emoji_presentation',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadExtendedPictographic;
+  ) loadExtendedPictographic = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_extended_pictographic',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadExtender;
+  ) loadExtender = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_extender',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ffi.Uint8> property_name_data,
     int property_name_len,
-  ) loadForEcma262;
+  ) loadForEcma262 = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Pointer<ffi.Uint8> property_name_data,
+        ffi.Size property_name_len,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Pointer<ffi.Uint8> property_name_data,
+        int property_name_len,
+      )>(
+    'ICU4XCodePointSetData_load_for_ecma262',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     int group,
-  ) loadForGeneralCategoryGroup;
+  ) loadForGeneralCategoryGroup = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Uint32 group,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        int group,
+      )>(
+    'ICU4XCodePointSetData_load_for_general_category_group',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadFullCompositionExclusion;
+  ) loadFullCompositionExclusion = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_full_composition_exclusion',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadGraph;
+  ) loadGraph = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_graph',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadGraphemeBase;
+  ) loadGraphemeBase = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_grapheme_base',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadGraphemeExtend;
+  ) loadGraphemeExtend = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_grapheme_extend',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadGraphemeLink;
+  ) loadGraphemeLink = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_grapheme_link',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadHexDigit;
+  ) loadHexDigit = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_hex_digit',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadHyphen;
+  ) loadHyphen = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_hyphen',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadIdContinue;
+  ) loadIdContinue = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_id_continue',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadIdStart;
+  ) loadIdStart = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_id_start',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadIdeographic;
+  ) loadIdeographic = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_ideographic',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadIdsBinaryOperator;
+  ) loadIdsBinaryOperator = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_ids_binary_operator',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadIdsTrinaryOperator;
+  ) loadIdsTrinaryOperator = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_ids_trinary_operator',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadJoinControl;
+  ) loadJoinControl = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_join_control',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadLogicalOrderException;
+  ) loadLogicalOrderException = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_logical_order_exception',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadLowercase;
+  ) loadLowercase = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_lowercase',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadMath;
+  ) loadMath = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_math',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadNfcInert;
+  ) loadNfcInert = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_nfc_inert',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadNfdInert;
+  ) loadNfdInert = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_nfd_inert',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadNfkcInert;
+  ) loadNfkcInert = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_nfkc_inert',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadNfkdInert;
+  ) loadNfkdInert = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_nfkd_inert',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadNoncharacterCodePoint;
+  ) loadNoncharacterCodePoint = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_noncharacter_code_point',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadPatternSyntax;
+  ) loadPatternSyntax = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_pattern_syntax',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadPatternWhiteSpace;
+  ) loadPatternWhiteSpace = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_pattern_white_space',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadPrependedConcatenationMark;
+  ) loadPrependedConcatenationMark = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_prepended_concatenation_mark',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadPrint;
+  ) loadPrint = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_print',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadQuotationMark;
+  ) loadQuotationMark = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_quotation_mark',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadRadical;
+  ) loadRadical = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_radical',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadRegionalIndicator;
+  ) loadRegionalIndicator = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_regional_indicator',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadSegmentStarter;
+  ) loadSegmentStarter = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_segment_starter',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadSentenceTerminal;
+  ) loadSentenceTerminal = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_sentence_terminal',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadSoftDotted;
+  ) loadSoftDotted = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_soft_dotted',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadTerminalPunctuation;
+  ) loadTerminalPunctuation = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_terminal_punctuation',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadUnifiedIdeograph;
+  ) loadUnifiedIdeograph = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_unified_ideograph',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadUppercase;
+  ) loadUppercase = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_uppercase',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadVariationSelector;
+  ) loadVariationSelector = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_variation_selector',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadWhiteSpace;
+  ) loadWhiteSpace = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_white_space',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadXdigit;
+  ) loadXdigit = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_xdigit',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadXidContinue;
+  ) loadXidContinue = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_xid_continue',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointSetDataOrICU4XError Function(
+  late final ResultICU4XCodePointSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadXidStart;
+  ) loadXidStart = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointSetDataOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointSetData_load_xid_start',
+    isLeaf: true,
+  );
 }

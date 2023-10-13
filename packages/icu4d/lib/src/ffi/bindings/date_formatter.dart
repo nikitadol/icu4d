@@ -3,122 +3,116 @@
 part of '../bindings.dart';
 
 final class _DateFormatter {
-  _DateFormatter(this.dynamicLibrary)
-      : createWithLength = dynamicLibrary.lookupFunction<
-            ResultICU4XDateFormatterOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Pointer<ICU4XLocale> locale,
-              ffi.Int32 date_length,
-            ),
-            ResultICU4XDateFormatterOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Pointer<ICU4XLocale> locale,
-              int date_length,
-            )>(
-          'ICU4XDateFormatter_create_with_length',
-          isLeaf: true,
-        ),
-        formatDate = dynamicLibrary.lookupFunction<
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XDateFormatter> self,
-              ffi.Pointer<ICU4XDate> value,
-              ffi.Pointer<DiplomatWriteable> write,
-            ),
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XDateFormatter> self,
-              ffi.Pointer<ICU4XDate> value,
-              ffi.Pointer<DiplomatWriteable> write,
-            )>(
-          'ICU4XDateFormatter_format_date',
-          isLeaf: true,
-        ),
-        formatIsoDate = dynamicLibrary.lookupFunction<
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XDateFormatter> self,
-              ffi.Pointer<ICU4XIsoDate> value,
-              ffi.Pointer<DiplomatWriteable> write,
-            ),
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XDateFormatter> self,
-              ffi.Pointer<ICU4XIsoDate> value,
-              ffi.Pointer<DiplomatWriteable> write,
-            )>(
-          'ICU4XDateFormatter_format_iso_date',
-          isLeaf: true,
-        ),
-        formatDatetime = dynamicLibrary.lookupFunction<
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XDateFormatter> self,
-              ffi.Pointer<ICU4XDateTime> value,
-              ffi.Pointer<DiplomatWriteable> write,
-            ),
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XDateFormatter> self,
-              ffi.Pointer<ICU4XDateTime> value,
-              ffi.Pointer<DiplomatWriteable> write,
-            )>(
-          'ICU4XDateFormatter_format_datetime',
-          isLeaf: true,
-        ),
-        formatIsoDatetime = dynamicLibrary.lookupFunction<
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XDateFormatter> self,
-              ffi.Pointer<ICU4XIsoDateTime> value,
-              ffi.Pointer<DiplomatWriteable> write,
-            ),
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XDateFormatter> self,
-              ffi.Pointer<ICU4XIsoDateTime> value,
-              ffi.Pointer<DiplomatWriteable> write,
-            )>(
-          'ICU4XDateFormatter_format_iso_datetime',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XDateFormatter> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XDateFormatter> self,
-            )>(
-          'ICU4XDateFormatter_destroy',
-          isLeaf: true,
-        );
+  _DateFormatter(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final ResultICU4XDateFormatterOrICU4XError Function(
+  late final ResultICU4XDateFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,
     int date_length,
-  ) createWithLength;
+  ) createWithLength = dynamicLibrary.lookupFunction<
+      ResultICU4XDateFormatterOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Pointer<ICU4XLocale> locale,
+        ffi.Int32 date_length,
+      ),
+      ResultICU4XDateFormatterOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Pointer<ICU4XLocale> locale,
+        int date_length,
+      )>(
+    'ICU4XDateFormatter_create_with_length',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XDateFormatter> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XDateFormatter> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XDateFormatter> self,
+      )>(
+    'ICU4XDateFormatter_destroy',
+    isLeaf: true,
+  );
 
-  final ResultVoidOrICU4XError Function(
+  late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XDateFormatter> self,
     ffi.Pointer<ICU4XDate> value,
     ffi.Pointer<DiplomatWriteable> write,
-  ) formatDate;
+  ) formatDate = dynamicLibrary.lookupFunction<
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XDateFormatter> self,
+        ffi.Pointer<ICU4XDate> value,
+        ffi.Pointer<DiplomatWriteable> write,
+      ),
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XDateFormatter> self,
+        ffi.Pointer<ICU4XDate> value,
+        ffi.Pointer<DiplomatWriteable> write,
+      )>(
+    'ICU4XDateFormatter_format_date',
+    isLeaf: true,
+  );
 
-  final ResultVoidOrICU4XError Function(
+  late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XDateFormatter> self,
     ffi.Pointer<ICU4XDateTime> value,
     ffi.Pointer<DiplomatWriteable> write,
-  ) formatDatetime;
+  ) formatDatetime = dynamicLibrary.lookupFunction<
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XDateFormatter> self,
+        ffi.Pointer<ICU4XDateTime> value,
+        ffi.Pointer<DiplomatWriteable> write,
+      ),
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XDateFormatter> self,
+        ffi.Pointer<ICU4XDateTime> value,
+        ffi.Pointer<DiplomatWriteable> write,
+      )>(
+    'ICU4XDateFormatter_format_datetime',
+    isLeaf: true,
+  );
 
-  final ResultVoidOrICU4XError Function(
+  late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XDateFormatter> self,
     ffi.Pointer<ICU4XIsoDate> value,
     ffi.Pointer<DiplomatWriteable> write,
-  ) formatIsoDate;
+  ) formatIsoDate = dynamicLibrary.lookupFunction<
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XDateFormatter> self,
+        ffi.Pointer<ICU4XIsoDate> value,
+        ffi.Pointer<DiplomatWriteable> write,
+      ),
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XDateFormatter> self,
+        ffi.Pointer<ICU4XIsoDate> value,
+        ffi.Pointer<DiplomatWriteable> write,
+      )>(
+    'ICU4XDateFormatter_format_iso_date',
+    isLeaf: true,
+  );
 
-  final ResultVoidOrICU4XError Function(
+  late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XDateFormatter> self,
     ffi.Pointer<ICU4XIsoDateTime> value,
     ffi.Pointer<DiplomatWriteable> write,
-  ) formatIsoDatetime;
+  ) formatIsoDatetime = dynamicLibrary.lookupFunction<
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XDateFormatter> self,
+        ffi.Pointer<ICU4XIsoDateTime> value,
+        ffi.Pointer<DiplomatWriteable> write,
+      ),
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XDateFormatter> self,
+        ffi.Pointer<ICU4XIsoDateTime> value,
+        ffi.Pointer<DiplomatWriteable> write,
+      )>(
+    'ICU4XDateFormatter_format_iso_datetime',
+    isLeaf: true,
+  );
 }

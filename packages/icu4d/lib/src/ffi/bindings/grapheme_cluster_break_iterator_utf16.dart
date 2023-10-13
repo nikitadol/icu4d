@@ -3,36 +3,34 @@
 part of '../bindings.dart';
 
 final class _GraphemeClusterBreakIteratorUtf16 {
-  _GraphemeClusterBreakIteratorUtf16(this.dynamicLibrary)
-      : next = dynamicLibrary.lookupFunction<
-            ffi.Int32 Function(
-              ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf16> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf16> self,
-            )>(
-          'ICU4XGraphemeClusterBreakIteratorUtf16_next',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf16> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf16> self,
-            )>(
-          'ICU4XGraphemeClusterBreakIteratorUtf16_destroy',
-          isLeaf: true,
-        );
+  _GraphemeClusterBreakIteratorUtf16(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf16> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf16> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf16> self,
+      )>(
+    'ICU4XGraphemeClusterBreakIteratorUtf16_destroy',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf16> self,
-  ) next;
+  ) next = dynamicLibrary.lookupFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf16> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf16> self,
+      )>(
+    'ICU4XGraphemeClusterBreakIteratorUtf16_next',
+    isLeaf: true,
+  );
 }

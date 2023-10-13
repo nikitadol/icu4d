@@ -3,76 +3,72 @@
 part of '../bindings.dart';
 
 final class _GeneralCategoryNameToMaskMapper {
-  _GeneralCategoryNameToMaskMapper(this.dynamicLibrary)
-      : getStrict = dynamicLibrary.lookupFunction<
-            ffi.Uint32 Function(
-              ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-              ffi.Pointer<ffi.Uint8> name_data,
-              ffi.Size name_len,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-              ffi.Pointer<ffi.Uint8> name_data,
-              int name_len,
-            )>(
-          'ICU4XGeneralCategoryNameToMaskMapper_get_strict',
-          isLeaf: true,
-        ),
-        getLoose = dynamicLibrary.lookupFunction<
-            ffi.Uint32 Function(
-              ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-              ffi.Pointer<ffi.Uint8> name_data,
-              ffi.Size name_len,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-              ffi.Pointer<ffi.Uint8> name_data,
-              int name_len,
-            )>(
-          'ICU4XGeneralCategoryNameToMaskMapper_get_loose',
-          isLeaf: true,
-        ),
-        load = dynamicLibrary.lookupFunction<
-            ResultICU4XGeneralCategoryNameToMaskMapperOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XGeneralCategoryNameToMaskMapperOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XGeneralCategoryNameToMaskMapper_load',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-            )>(
-          'ICU4XGeneralCategoryNameToMaskMapper_destroy',
-          isLeaf: true,
-        );
+  _GeneralCategoryNameToMaskMapper(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
+      )>(
+    'ICU4XGeneralCategoryNameToMaskMapper_destroy',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
     ffi.Pointer<ffi.Uint8> name_data,
     int name_len,
-  ) getLoose;
+  ) getLoose = dynamicLibrary.lookupFunction<
+      ffi.Uint32 Function(
+        ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
+        ffi.Pointer<ffi.Uint8> name_data,
+        ffi.Size name_len,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
+        ffi.Pointer<ffi.Uint8> name_data,
+        int name_len,
+      )>(
+    'ICU4XGeneralCategoryNameToMaskMapper_get_loose',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
     ffi.Pointer<ffi.Uint8> name_data,
     int name_len,
-  ) getStrict;
+  ) getStrict = dynamicLibrary.lookupFunction<
+      ffi.Uint32 Function(
+        ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
+        ffi.Pointer<ffi.Uint8> name_data,
+        ffi.Size name_len,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
+        ffi.Pointer<ffi.Uint8> name_data,
+        int name_len,
+      )>(
+    'ICU4XGeneralCategoryNameToMaskMapper_get_strict',
+    isLeaf: true,
+  );
 
-  final ResultICU4XGeneralCategoryNameToMaskMapperOrICU4XError Function(
+  late final ResultICU4XGeneralCategoryNameToMaskMapperOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) load;
+  ) load = dynamicLibrary.lookupFunction<
+      ResultICU4XGeneralCategoryNameToMaskMapperOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XGeneralCategoryNameToMaskMapperOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XGeneralCategoryNameToMaskMapper_load',
+    isLeaf: true,
+  );
 }

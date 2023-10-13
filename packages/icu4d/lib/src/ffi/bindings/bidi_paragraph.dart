@@ -3,135 +3,127 @@
 part of '../bindings.dart';
 
 final class _BidiParagraph {
-  _BidiParagraph(this.dynamicLibrary)
-      : setParagraphInText = dynamicLibrary.lookupFunction<
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-              ffi.Size n,
-            ),
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-              int n,
-            )>(
-          'ICU4XBidiParagraph_set_paragraph_in_text',
-          isLeaf: true,
-        ),
-        direction = dynamicLibrary.lookupFunction<
-            ffi.Int32 Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-            )>(
-          'ICU4XBidiParagraph_direction',
-          isLeaf: true,
-        ),
-        size = dynamicLibrary.lookupFunction<
-            ffi.Size Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-            )>(
-          'ICU4XBidiParagraph_size',
-          isLeaf: true,
-        ),
-        rangeStart = dynamicLibrary.lookupFunction<
-            ffi.Size Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-            )>(
-          'ICU4XBidiParagraph_range_start',
-          isLeaf: true,
-        ),
-        rangeEnd = dynamicLibrary.lookupFunction<
-            ffi.Size Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-            )>(
-          'ICU4XBidiParagraph_range_end',
-          isLeaf: true,
-        ),
-        reorderLine = dynamicLibrary.lookupFunction<
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-              ffi.Size range_start,
-              ffi.Size range_end,
-              ffi.Pointer<DiplomatWriteable> out,
-            ),
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-              int range_start,
-              int range_end,
-              ffi.Pointer<DiplomatWriteable> out,
-            )>(
-          'ICU4XBidiParagraph_reorder_line',
-          isLeaf: true,
-        ),
-        levelAt = dynamicLibrary.lookupFunction<
-            ffi.Uint8 Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-              ffi.Size pos,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-              int pos,
-            )>(
-          'ICU4XBidiParagraph_level_at',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XBidiParagraph> self,
-            )>(
-          'ICU4XBidiParagraph_destroy',
-          isLeaf: true,
-        );
+  _BidiParagraph(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XBidiParagraph> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+      )>(
+    'ICU4XBidiParagraph_destroy',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XBidiParagraph> self,
-  ) direction;
+  ) direction = dynamicLibrary.lookupFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+      )>(
+    'ICU4XBidiParagraph_direction',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XBidiParagraph> self,
     int pos,
-  ) levelAt;
+  ) levelAt = dynamicLibrary.lookupFunction<
+      ffi.Uint8 Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+        ffi.Size pos,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+        int pos,
+      )>(
+    'ICU4XBidiParagraph_level_at',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XBidiParagraph> self,
-  ) rangeEnd;
+  ) rangeEnd = dynamicLibrary.lookupFunction<
+      ffi.Size Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+      )>(
+    'ICU4XBidiParagraph_range_end',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XBidiParagraph> self,
-  ) rangeStart;
+  ) rangeStart = dynamicLibrary.lookupFunction<
+      ffi.Size Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+      )>(
+    'ICU4XBidiParagraph_range_start',
+    isLeaf: true,
+  );
 
-  final ResultVoidOrICU4XError Function(
+  late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XBidiParagraph> self,
     int range_start,
     int range_end,
     ffi.Pointer<DiplomatWriteable> out,
-  ) reorderLine;
+  ) reorderLine = dynamicLibrary.lookupFunction<
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+        ffi.Size range_start,
+        ffi.Size range_end,
+        ffi.Pointer<DiplomatWriteable> out,
+      ),
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+        int range_start,
+        int range_end,
+        ffi.Pointer<DiplomatWriteable> out,
+      )>(
+    'ICU4XBidiParagraph_reorder_line',
+    isLeaf: true,
+  );
 
-  final ResultVoidOrICU4XError Function(
+  late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XBidiParagraph> self,
     int n,
-  ) setParagraphInText;
+  ) setParagraphInText = dynamicLibrary.lookupFunction<
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+        ffi.Size n,
+      ),
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+        int n,
+      )>(
+    'ICU4XBidiParagraph_set_paragraph_in_text',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XBidiParagraph> self,
-  ) size;
+  ) size = dynamicLibrary.lookupFunction<
+      ffi.Size Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XBidiParagraph> self,
+      )>(
+    'ICU4XBidiParagraph_size',
+    isLeaf: true,
+  );
 }

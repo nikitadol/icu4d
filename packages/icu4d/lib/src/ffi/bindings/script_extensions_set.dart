@@ -3,70 +3,66 @@
 part of '../bindings.dart';
 
 final class _ScriptExtensionsSet {
-  _ScriptExtensionsSet(this.dynamicLibrary)
-      : contains = dynamicLibrary.lookupFunction<
-            ffi.Bool Function(
-              ffi.Pointer<ICU4XScriptExtensionsSet> self,
-              ffi.Uint16 script,
-            ),
-            bool Function(
-              ffi.Pointer<ICU4XScriptExtensionsSet> self,
-              int script,
-            )>(
-          'ICU4XScriptExtensionsSet_contains',
-          isLeaf: true,
-        ),
-        count = dynamicLibrary.lookupFunction<
-            ffi.Size Function(
-              ffi.Pointer<ICU4XScriptExtensionsSet> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XScriptExtensionsSet> self,
-            )>(
-          'ICU4XScriptExtensionsSet_count',
-          isLeaf: true,
-        ),
-        scriptAt = dynamicLibrary.lookupFunction<
-            ResultUint16OrTOrVoid Function(
-              ffi.Pointer<ICU4XScriptExtensionsSet> self,
-              ffi.Size index,
-            ),
-            ResultUint16OrTOrVoid Function(
-              ffi.Pointer<ICU4XScriptExtensionsSet> self,
-              int index,
-            )>(
-          'ICU4XScriptExtensionsSet_script_at',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XScriptExtensionsSet> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XScriptExtensionsSet> self,
-            )>(
-          'ICU4XScriptExtensionsSet_destroy',
-          isLeaf: true,
-        );
+  _ScriptExtensionsSet(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final bool Function(
+  late final bool Function(
     ffi.Pointer<ICU4XScriptExtensionsSet> self,
     int script,
-  ) contains;
+  ) contains = dynamicLibrary.lookupFunction<
+      ffi.Bool Function(
+        ffi.Pointer<ICU4XScriptExtensionsSet> self,
+        ffi.Uint16 script,
+      ),
+      bool Function(
+        ffi.Pointer<ICU4XScriptExtensionsSet> self,
+        int script,
+      )>(
+    'ICU4XScriptExtensionsSet_contains',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XScriptExtensionsSet> self,
-  ) count;
+  ) count = dynamicLibrary.lookupFunction<
+      ffi.Size Function(
+        ffi.Pointer<ICU4XScriptExtensionsSet> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XScriptExtensionsSet> self,
+      )>(
+    'ICU4XScriptExtensionsSet_count',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XScriptExtensionsSet> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XScriptExtensionsSet> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XScriptExtensionsSet> self,
+      )>(
+    'ICU4XScriptExtensionsSet_destroy',
+    isLeaf: true,
+  );
 
-  final ResultUint16OrTOrVoid Function(
+  late final ResultUint16OrTOrVoid Function(
     ffi.Pointer<ICU4XScriptExtensionsSet> self,
     int index,
-  ) scriptAt;
+  ) scriptAt = dynamicLibrary.lookupFunction<
+      ResultUint16OrTOrVoid Function(
+        ffi.Pointer<ICU4XScriptExtensionsSet> self,
+        ffi.Size index,
+      ),
+      ResultUint16OrTOrVoid Function(
+        ffi.Pointer<ICU4XScriptExtensionsSet> self,
+        int index,
+      )>(
+    'ICU4XScriptExtensionsSet_script_at',
+    isLeaf: true,
+  );
 }

@@ -3,67 +3,63 @@
 part of '../bindings.dart';
 
 final class _LocaleCanonicalizer {
-  _LocaleCanonicalizer(this.dynamicLibrary)
-      : create = dynamicLibrary.lookupFunction<
-            ResultICU4XLocaleCanonicalizerOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XLocaleCanonicalizerOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XLocaleCanonicalizer_create',
-          isLeaf: true,
-        ),
-        createExtended = dynamicLibrary.lookupFunction<
-            ResultICU4XLocaleCanonicalizerOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XLocaleCanonicalizerOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XLocaleCanonicalizer_create_extended',
-          isLeaf: true,
-        ),
-        canonicalize = dynamicLibrary.lookupFunction<
-            ffi.Int32 Function(
-              ffi.Pointer<ICU4XLocaleCanonicalizer> self,
-              ffi.Pointer<ICU4XLocale> locale,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XLocaleCanonicalizer> self,
-              ffi.Pointer<ICU4XLocale> locale,
-            )>(
-          'ICU4XLocaleCanonicalizer_canonicalize',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XLocaleCanonicalizer> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XLocaleCanonicalizer> self,
-            )>(
-          'ICU4XLocaleCanonicalizer_destroy',
-          isLeaf: true,
-        );
+  _LocaleCanonicalizer(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XLocaleCanonicalizer> self,
     ffi.Pointer<ICU4XLocale> locale,
-  ) canonicalize;
+  ) canonicalize = dynamicLibrary.lookupFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<ICU4XLocaleCanonicalizer> self,
+        ffi.Pointer<ICU4XLocale> locale,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XLocaleCanonicalizer> self,
+        ffi.Pointer<ICU4XLocale> locale,
+      )>(
+    'ICU4XLocaleCanonicalizer_canonicalize',
+    isLeaf: true,
+  );
 
-  final ResultICU4XLocaleCanonicalizerOrICU4XError Function(
+  late final ResultICU4XLocaleCanonicalizerOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) create;
+  ) create = dynamicLibrary.lookupFunction<
+      ResultICU4XLocaleCanonicalizerOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XLocaleCanonicalizerOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XLocaleCanonicalizer_create',
+    isLeaf: true,
+  );
 
-  final ResultICU4XLocaleCanonicalizerOrICU4XError Function(
+  late final ResultICU4XLocaleCanonicalizerOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) createExtended;
+  ) createExtended = dynamicLibrary.lookupFunction<
+      ResultICU4XLocaleCanonicalizerOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XLocaleCanonicalizerOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XLocaleCanonicalizer_create_extended',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XLocaleCanonicalizer> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XLocaleCanonicalizer> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XLocaleCanonicalizer> self,
+      )>(
+    'ICU4XLocaleCanonicalizer_destroy',
+    isLeaf: true,
+  );
 }

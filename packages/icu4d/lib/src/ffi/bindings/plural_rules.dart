@@ -3,87 +3,82 @@
 part of '../bindings.dart';
 
 final class _PluralRules {
-  _PluralRules(this.dynamicLibrary)
-      : createCardinal = dynamicLibrary.lookupFunction<
-            ResultICU4XPluralRulesOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Pointer<ICU4XLocale> locale,
-            ),
-            ResultICU4XPluralRulesOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Pointer<ICU4XLocale> locale,
-            )>(
-          'ICU4XPluralRules_create_cardinal',
-          isLeaf: true,
-        ),
-        createOrdinal = dynamicLibrary.lookupFunction<
-            ResultICU4XPluralRulesOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Pointer<ICU4XLocale> locale,
-            ),
-            ResultICU4XPluralRulesOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-              ffi.Pointer<ICU4XLocale> locale,
-            )>(
-          'ICU4XPluralRules_create_ordinal',
-          isLeaf: true,
-        ),
-        categoryFor = dynamicLibrary.lookupFunction<
-            ffi.Int32 Function(
-              ffi.Pointer<ICU4XPluralRules> self,
-              ffi.Pointer<ICU4XPluralOperands> op,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XPluralRules> self,
-              ffi.Pointer<ICU4XPluralOperands> op,
-            )>(
-          'ICU4XPluralRules_category_for',
-          isLeaf: true,
-        ),
-        categories = dynamicLibrary.lookupFunction<
-            ICU4XPluralCategories Function(
-              ffi.Pointer<ICU4XPluralRules> self,
-            ),
-            ICU4XPluralCategories Function(
-              ffi.Pointer<ICU4XPluralRules> self,
-            )>(
-          'ICU4XPluralRules_categories',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XPluralRules> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XPluralRules> self,
-            )>(
-          'ICU4XPluralRules_destroy',
-          isLeaf: true,
-        );
+  _PluralRules(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final ICU4XPluralCategories Function(
+  late final ICU4XPluralCategories Function(
     ffi.Pointer<ICU4XPluralRules> self,
-  ) categories;
+  ) categories = dynamicLibrary.lookupFunction<
+      ICU4XPluralCategories Function(
+        ffi.Pointer<ICU4XPluralRules> self,
+      ),
+      ICU4XPluralCategories Function(
+        ffi.Pointer<ICU4XPluralRules> self,
+      )>(
+    'ICU4XPluralRules_categories',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XPluralRules> self,
     ffi.Pointer<ICU4XPluralOperands> op,
-  ) categoryFor;
+  ) categoryFor = dynamicLibrary.lookupFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<ICU4XPluralRules> self,
+        ffi.Pointer<ICU4XPluralOperands> op,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XPluralRules> self,
+        ffi.Pointer<ICU4XPluralOperands> op,
+      )>(
+    'ICU4XPluralRules_category_for',
+    isLeaf: true,
+  );
 
-  final ResultICU4XPluralRulesOrICU4XError Function(
+  late final ResultICU4XPluralRulesOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,
-  ) createCardinal;
+  ) createCardinal = dynamicLibrary.lookupFunction<
+      ResultICU4XPluralRulesOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Pointer<ICU4XLocale> locale,
+      ),
+      ResultICU4XPluralRulesOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Pointer<ICU4XLocale> locale,
+      )>(
+    'ICU4XPluralRules_create_cardinal',
+    isLeaf: true,
+  );
 
-  final ResultICU4XPluralRulesOrICU4XError Function(
+  late final ResultICU4XPluralRulesOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,
-  ) createOrdinal;
+  ) createOrdinal = dynamicLibrary.lookupFunction<
+      ResultICU4XPluralRulesOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Pointer<ICU4XLocale> locale,
+      ),
+      ResultICU4XPluralRulesOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+        ffi.Pointer<ICU4XLocale> locale,
+      )>(
+    'ICU4XPluralRules_create_ordinal',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XPluralRules> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XPluralRules> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XPluralRules> self,
+      )>(
+    'ICU4XPluralRules_destroy',
+    isLeaf: true,
+  );
 }

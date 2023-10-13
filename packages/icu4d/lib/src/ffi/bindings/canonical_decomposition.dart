@@ -3,53 +3,50 @@
 part of '../bindings.dart';
 
 final class _CanonicalDecomposition {
-  _CanonicalDecomposition(this.dynamicLibrary)
-      : create = dynamicLibrary.lookupFunction<
-            ResultICU4XCanonicalDecompositionOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCanonicalDecompositionOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCanonicalDecomposition_create',
-          isLeaf: true,
-        ),
-        decompose = dynamicLibrary.lookupFunction<
-            ICU4XDecomposed Function(
-              ffi.Pointer<ICU4XCanonicalDecomposition> self,
-              ffi.Uint32 c,
-            ),
-            ICU4XDecomposed Function(
-              ffi.Pointer<ICU4XCanonicalDecomposition> self,
-              int c,
-            )>(
-          'ICU4XCanonicalDecomposition_decompose',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XCanonicalDecomposition> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XCanonicalDecomposition> self,
-            )>(
-          'ICU4XCanonicalDecomposition_destroy',
-          isLeaf: true,
-        );
+  _CanonicalDecomposition(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final ResultICU4XCanonicalDecompositionOrICU4XError Function(
+  late final ResultICU4XCanonicalDecompositionOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) create;
+  ) create = dynamicLibrary.lookupFunction<
+      ResultICU4XCanonicalDecompositionOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCanonicalDecompositionOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCanonicalDecomposition_create',
+    isLeaf: true,
+  );
 
-  final ICU4XDecomposed Function(
+  late final ICU4XDecomposed Function(
     ffi.Pointer<ICU4XCanonicalDecomposition> self,
     int c,
-  ) decompose;
+  ) decompose = dynamicLibrary.lookupFunction<
+      ICU4XDecomposed Function(
+        ffi.Pointer<ICU4XCanonicalDecomposition> self,
+        ffi.Uint32 c,
+      ),
+      ICU4XDecomposed Function(
+        ffi.Pointer<ICU4XCanonicalDecomposition> self,
+        int c,
+      )>(
+    'ICU4XCanonicalDecomposition_decompose',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XCanonicalDecomposition> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XCanonicalDecomposition> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XCanonicalDecomposition> self,
+      )>(
+    'ICU4XCanonicalDecomposition_destroy',
+    isLeaf: true,
+  );
 }

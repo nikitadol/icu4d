@@ -6,6 +6,7 @@
 import 'dart:ffi' as ffi;
 import 'package:meta/meta.dart';
 part 'bindings/any_calendar_kind.dart';
+part 'bindings/bcp47_to_iana_mapper.dart';
 part 'bindings/bidi.dart';
 part 'bindings/bidi_info.dart';
 part 'bindings/bidi_paragraph.dart';
@@ -13,8 +14,11 @@ part 'bindings/calendar.dart';
 part 'bindings/canonical_combining_class_map.dart';
 part 'bindings/canonical_composition.dart';
 part 'bindings/canonical_decomposition.dart';
+part 'bindings/case_map_closer.dart';
+part 'bindings/case_mapper.dart';
 part 'bindings/code_point_map_data16.dart';
 part 'bindings/code_point_map_data8.dart';
+part 'bindings/code_point_set_builder.dart';
 part 'bindings/code_point_set_data.dart';
 part 'bindings/collator.dart';
 part 'bindings/collator_options_v1.dart';
@@ -41,6 +45,7 @@ part 'bindings/grapheme_cluster_segmenter.dart';
 part 'bindings/gregorian_date_formatter.dart';
 part 'bindings/gregorian_date_time_formatter.dart';
 part 'bindings/gregorian_zoned_date_time_formatter.dart';
+part 'bindings/iana_to_bcp47_mapper.dart';
 part 'bindings/iso_date.dart';
 part 'bindings/iso_date_time.dart';
 part 'bindings/iso_time_zone_options.dart';
@@ -53,6 +58,7 @@ part 'bindings/list.dart';
 part 'bindings/list_formatter.dart';
 part 'bindings/locale.dart';
 part 'bindings/locale_canonicalizer.dart';
+part 'bindings/locale_directionality.dart';
 part 'bindings/locale_display_names_formatter.dart';
 part 'bindings/locale_expander.dart';
 part 'bindings/locale_fallback_config.dart';
@@ -79,6 +85,8 @@ part 'bindings/structures.dart';
 part 'bindings/time.dart';
 part 'bindings/time_formatter.dart';
 part 'bindings/time_zone_formatter.dart';
+part 'bindings/titlecase_mapper.dart';
+part 'bindings/titlecase_options_v1.dart';
 part 'bindings/unicode_set_data.dart';
 part 'bindings/unions.dart';
 part 'bindings/week_calculator.dart';
@@ -92,6 +100,7 @@ part 'bindings/zoned_date_time_formatter.dart';
 final class Icu4XBindings {
   Icu4XBindings(this.dynamicLibrary)
       : anyCalendarKind = _AnyCalendarKind(dynamicLibrary),
+        bcp47ToIanaMapper = _Bcp47ToIanaMapper(dynamicLibrary),
         bidi = _Bidi(dynamicLibrary),
         bidiInfo = _BidiInfo(dynamicLibrary),
         bidiParagraph = _BidiParagraph(dynamicLibrary),
@@ -100,8 +109,11 @@ final class Icu4XBindings {
             _CanonicalCombiningClassMap(dynamicLibrary),
         canonicalComposition = _CanonicalComposition(dynamicLibrary),
         canonicalDecomposition = _CanonicalDecomposition(dynamicLibrary),
+        caseMapCloser = _CaseMapCloser(dynamicLibrary),
+        caseMapper = _CaseMapper(dynamicLibrary),
         codePointMapData16 = _CodePointMapData16(dynamicLibrary),
         codePointMapData8 = _CodePointMapData8(dynamicLibrary),
+        codePointSetBuilder = _CodePointSetBuilder(dynamicLibrary),
         codePointSetData = _CodePointSetData(dynamicLibrary),
         collator = _Collator(dynamicLibrary),
         collatorOptionsV1 = _CollatorOptionsV1(dynamicLibrary),
@@ -133,6 +145,7 @@ final class Icu4XBindings {
             _GregorianDateTimeFormatter(dynamicLibrary),
         gregorianZonedDateTimeFormatter =
             _GregorianZonedDateTimeFormatter(dynamicLibrary),
+        ianaToBcp47Mapper = _IanaToBcp47Mapper(dynamicLibrary),
         isoDate = _IsoDate(dynamicLibrary),
         isoDateTime = _IsoDateTime(dynamicLibrary),
         isoTimeZoneOptions = _IsoTimeZoneOptions(dynamicLibrary),
@@ -145,6 +158,7 @@ final class Icu4XBindings {
         listFormatter = _ListFormatter(dynamicLibrary),
         locale = _Locale(dynamicLibrary),
         localeCanonicalizer = _LocaleCanonicalizer(dynamicLibrary),
+        localeDirectionality = _LocaleDirectionality(dynamicLibrary),
         localeDisplayNamesFormatter =
             _LocaleDisplayNamesFormatter(dynamicLibrary),
         localeExpander = _LocaleExpander(dynamicLibrary),
@@ -176,6 +190,8 @@ final class Icu4XBindings {
         time = _Time(dynamicLibrary),
         timeFormatter = _TimeFormatter(dynamicLibrary),
         timeZoneFormatter = _TimeZoneFormatter(dynamicLibrary),
+        titlecaseMapper = _TitlecaseMapper(dynamicLibrary),
+        titlecaseOptionsV1 = _TitlecaseOptionsV1(dynamicLibrary),
         unicodeSetData = _UnicodeSetData(dynamicLibrary),
         weekCalculator = _WeekCalculator(dynamicLibrary),
         weekOf = _WeekOf(dynamicLibrary),
@@ -189,6 +205,8 @@ final class Icu4XBindings {
   final ffi.DynamicLibrary dynamicLibrary;
 
   final _AnyCalendarKind anyCalendarKind;
+
+  final _Bcp47ToIanaMapper bcp47ToIanaMapper;
 
   final _Bidi bidi;
 
@@ -204,9 +222,15 @@ final class Icu4XBindings {
 
   final _CanonicalDecomposition canonicalDecomposition;
 
+  final _CaseMapCloser caseMapCloser;
+
+  final _CaseMapper caseMapper;
+
   final _CodePointMapData16 codePointMapData16;
 
   final _CodePointMapData8 codePointMapData8;
+
+  final _CodePointSetBuilder codePointSetBuilder;
 
   final _CodePointSetData codePointSetData;
 
@@ -258,6 +282,8 @@ final class Icu4XBindings {
 
   final _GregorianZonedDateTimeFormatter gregorianZonedDateTimeFormatter;
 
+  final _IanaToBcp47Mapper ianaToBcp47Mapper;
+
   final _IsoDate isoDate;
 
   final _IsoDateTime isoDateTime;
@@ -281,6 +307,8 @@ final class Icu4XBindings {
   final _Locale locale;
 
   final _LocaleCanonicalizer localeCanonicalizer;
+
+  final _LocaleDirectionality localeDirectionality;
 
   final _LocaleDisplayNamesFormatter localeDisplayNamesFormatter;
 
@@ -331,6 +359,10 @@ final class Icu4XBindings {
   final _TimeFormatter timeFormatter;
 
   final _TimeZoneFormatter timeZoneFormatter;
+
+  final _TitlecaseMapper titlecaseMapper;
+
+  final _TitlecaseOptionsV1 titlecaseOptionsV1;
 
   final _UnicodeSetData unicodeSetData;
 

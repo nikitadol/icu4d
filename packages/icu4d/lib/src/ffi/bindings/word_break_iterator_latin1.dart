@@ -3,64 +3,60 @@
 part of '../bindings.dart';
 
 final class _WordBreakIteratorLatin1 {
-  _WordBreakIteratorLatin1(this.dynamicLibrary)
-      : next = dynamicLibrary.lookupFunction<
-            ffi.Int32 Function(
-              ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-            )>(
-          'ICU4XWordBreakIteratorLatin1_next',
-          isLeaf: true,
-        ),
-        wordType = dynamicLibrary.lookupFunction<
-            ffi.Int32 Function(
-              ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-            )>(
-          'ICU4XWordBreakIteratorLatin1_word_type',
-          isLeaf: true,
-        ),
-        isWordLike = dynamicLibrary.lookupFunction<
-            ffi.Bool Function(
-              ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-            ),
-            bool Function(
-              ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-            )>(
-          'ICU4XWordBreakIteratorLatin1_is_word_like',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-            )>(
-          'ICU4XWordBreakIteratorLatin1_destroy',
-          isLeaf: true,
-        );
+  _WordBreakIteratorLatin1(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
+      )>(
+    'ICU4XWordBreakIteratorLatin1_destroy',
+    isLeaf: true,
+  );
 
-  final bool Function(
+  late final bool Function(
     ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-  ) isWordLike;
+  ) isWordLike = dynamicLibrary.lookupFunction<
+      ffi.Bool Function(
+        ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
+      ),
+      bool Function(
+        ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
+      )>(
+    'ICU4XWordBreakIteratorLatin1_is_word_like',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-  ) next;
+  ) next = dynamicLibrary.lookupFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
+      )>(
+    'ICU4XWordBreakIteratorLatin1_next',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-  ) wordType;
+  ) wordType = dynamicLibrary.lookupFunction<
+      ffi.Int32 Function(
+        ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
+      )>(
+    'ICU4XWordBreakIteratorLatin1_word_type',
+    isLeaf: true,
+  );
 }

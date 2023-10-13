@@ -3,22 +3,21 @@
 part of '../bindings.dart';
 
 final class _LocaleFallbackConfig {
-  _LocaleFallbackConfig(this.dynamicLibrary)
-      : destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XLocaleFallbackConfig> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XLocaleFallbackConfig> self,
-            )>(
-          'ICU4XLocaleFallbackConfig_destroy',
-          isLeaf: true,
-        );
+  _LocaleFallbackConfig(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XLocaleFallbackConfig> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XLocaleFallbackConfig> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XLocaleFallbackConfig> self,
+      )>(
+    'ICU4XLocaleFallbackConfig_destroy',
+    isLeaf: true,
+  );
 }

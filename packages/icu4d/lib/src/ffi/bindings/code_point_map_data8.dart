@@ -3,236 +3,221 @@
 part of '../bindings.dart';
 
 final class _CodePointMapData8 {
-  _CodePointMapData8(this.dynamicLibrary)
-      : get = dynamicLibrary.lookupFunction<
-            ffi.Uint8 Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              ffi.Uint32 cp,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              int cp,
-            )>(
-          'ICU4XCodePointMapData8_get',
-          isLeaf: true,
-        ),
-        get32 = dynamicLibrary.lookupFunction<
-            ffi.Uint8 Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              ffi.Uint32 cp,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              int cp,
-            )>(
-          'ICU4XCodePointMapData8_get32',
-          isLeaf: true,
-        ),
-        generalCategoryToMask = dynamicLibrary.lookupFunction<
-            ffi.Uint32 Function(
-              ffi.Uint8 gc,
-            ),
-            int Function(
-              int gc,
-            )>(
-          'ICU4XCodePointMapData8_general_category_to_mask',
-          isLeaf: true,
-        ),
-        iterRangesForValue = dynamicLibrary.lookupFunction<
-            ffi.Pointer<CodePointRangeIterator> Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              ffi.Uint8 value,
-            ),
-            ffi.Pointer<CodePointRangeIterator> Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              int value,
-            )>(
-          'ICU4XCodePointMapData8_iter_ranges_for_value',
-          isLeaf: true,
-        ),
-        iterRangesForValueComplemented = dynamicLibrary.lookupFunction<
-            ffi.Pointer<CodePointRangeIterator> Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              ffi.Uint8 value,
-            ),
-            ffi.Pointer<CodePointRangeIterator> Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              int value,
-            )>(
-          'ICU4XCodePointMapData8_iter_ranges_for_value_complemented',
-          isLeaf: true,
-        ),
-        iterRangesForMask = dynamicLibrary.lookupFunction<
-            ffi.Pointer<CodePointRangeIterator> Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              ffi.Uint32 mask,
-            ),
-            ffi.Pointer<CodePointRangeIterator> Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              int mask,
-            )>(
-          'ICU4XCodePointMapData8_iter_ranges_for_mask',
-          isLeaf: true,
-        ),
-        getSetForValue = dynamicLibrary.lookupFunction<
-            ffi.Pointer<ICU4XCodePointSetData> Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              ffi.Uint8 value,
-            ),
-            ffi.Pointer<ICU4XCodePointSetData> Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-              int value,
-            )>(
-          'ICU4XCodePointMapData8_get_set_for_value',
-          isLeaf: true,
-        ),
-        loadGeneralCategory = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointMapData8_load_general_category',
-          isLeaf: true,
-        ),
-        loadBidiClass = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointMapData8_load_bidi_class',
-          isLeaf: true,
-        ),
-        loadEastAsianWidth = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointMapData8_load_east_asian_width',
-          isLeaf: true,
-        ),
-        loadLineBreak = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointMapData8_load_line_break',
-          isLeaf: true,
-        ),
-        tryGraphemeClusterBreak = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointMapData8_try_grapheme_cluster_break',
-          isLeaf: true,
-        ),
-        loadWordBreak = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointMapData8_load_word_break',
-          isLeaf: true,
-        ),
-        loadSentenceBreak = dynamicLibrary.lookupFunction<
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCodePointMapData8OrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCodePointMapData8_load_sentence_break',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XCodePointMapData8> self,
-            )>(
-          'ICU4XCodePointMapData8_destroy',
-          isLeaf: true,
-        );
+  _CodePointMapData8(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XCodePointMapData8> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+      )>(
+    'ICU4XCodePointMapData8_destroy',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     int gc,
-  ) generalCategoryToMask;
+  ) generalCategoryToMask = dynamicLibrary.lookupFunction<
+      ffi.Uint32 Function(
+        ffi.Uint8 gc,
+      ),
+      int Function(
+        int gc,
+      )>(
+    'ICU4XCodePointMapData8_general_category_to_mask',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XCodePointMapData8> self,
     int cp,
-  ) get;
+  ) get = dynamicLibrary.lookupFunction<
+      ffi.Uint8 Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        ffi.Uint32 cp,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        int cp,
+      )>(
+    'ICU4XCodePointMapData8_get',
+    isLeaf: true,
+  );
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XCodePointMapData8> self,
     int cp,
-  ) get32;
+  ) get32 = dynamicLibrary.lookupFunction<
+      ffi.Uint8 Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        ffi.Uint32 cp,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        int cp,
+      )>(
+    'ICU4XCodePointMapData8_get32',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<ICU4XCodePointSetData> Function(
+  late final ffi.Pointer<ICU4XCodePointSetData> Function(
     ffi.Pointer<ICU4XCodePointMapData8> self,
     int value,
-  ) getSetForValue;
+  ) getSetForValue = dynamicLibrary.lookupFunction<
+      ffi.Pointer<ICU4XCodePointSetData> Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        ffi.Uint8 value,
+      ),
+      ffi.Pointer<ICU4XCodePointSetData> Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        int value,
+      )>(
+    'ICU4XCodePointMapData8_get_set_for_value',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<CodePointRangeIterator> Function(
+  late final ffi.Pointer<CodePointRangeIterator> Function(
     ffi.Pointer<ICU4XCodePointMapData8> self,
     int mask,
-  ) iterRangesForMask;
+  ) iterRangesForMask = dynamicLibrary.lookupFunction<
+      ffi.Pointer<CodePointRangeIterator> Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        ffi.Uint32 mask,
+      ),
+      ffi.Pointer<CodePointRangeIterator> Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        int mask,
+      )>(
+    'ICU4XCodePointMapData8_iter_ranges_for_mask',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<CodePointRangeIterator> Function(
+  late final ffi.Pointer<CodePointRangeIterator> Function(
     ffi.Pointer<ICU4XCodePointMapData8> self,
     int value,
-  ) iterRangesForValue;
+  ) iterRangesForValue = dynamicLibrary.lookupFunction<
+      ffi.Pointer<CodePointRangeIterator> Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        ffi.Uint8 value,
+      ),
+      ffi.Pointer<CodePointRangeIterator> Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        int value,
+      )>(
+    'ICU4XCodePointMapData8_iter_ranges_for_value',
+    isLeaf: true,
+  );
 
-  final ffi.Pointer<CodePointRangeIterator> Function(
+  late final ffi.Pointer<CodePointRangeIterator> Function(
     ffi.Pointer<ICU4XCodePointMapData8> self,
     int value,
-  ) iterRangesForValueComplemented;
+  ) iterRangesForValueComplemented = dynamicLibrary.lookupFunction<
+      ffi.Pointer<CodePointRangeIterator> Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        ffi.Uint8 value,
+      ),
+      ffi.Pointer<CodePointRangeIterator> Function(
+        ffi.Pointer<ICU4XCodePointMapData8> self,
+        int value,
+      )>(
+    'ICU4XCodePointMapData8_iter_ranges_for_value_complemented',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointMapData8OrICU4XError Function(
+  late final ResultICU4XCodePointMapData8OrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadBidiClass;
+  ) loadBidiClass = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointMapData8_load_bidi_class',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointMapData8OrICU4XError Function(
+  late final ResultICU4XCodePointMapData8OrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadEastAsianWidth;
+  ) loadEastAsianWidth = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointMapData8_load_east_asian_width',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointMapData8OrICU4XError Function(
+  late final ResultICU4XCodePointMapData8OrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadGeneralCategory;
+  ) loadGeneralCategory = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointMapData8_load_general_category',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointMapData8OrICU4XError Function(
+  late final ResultICU4XCodePointMapData8OrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadLineBreak;
+  ) loadLineBreak = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointMapData8_load_line_break',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointMapData8OrICU4XError Function(
+  late final ResultICU4XCodePointMapData8OrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadSentenceBreak;
+  ) loadSentenceBreak = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointMapData8_load_sentence_break',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointMapData8OrICU4XError Function(
+  late final ResultICU4XCodePointMapData8OrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) loadWordBreak;
+  ) loadWordBreak = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointMapData8_load_word_break',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCodePointMapData8OrICU4XError Function(
+  late final ResultICU4XCodePointMapData8OrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) tryGraphemeClusterBreak;
+  ) tryGraphemeClusterBreak = dynamicLibrary.lookupFunction<
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCodePointMapData8OrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCodePointMapData8_try_grapheme_cluster_break',
+    isLeaf: true,
+  );
 }

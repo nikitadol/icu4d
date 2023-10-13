@@ -21,6 +21,12 @@ final class _Logger {
     isLeaf: true,
   );
 
+  late final bool Function() initConsoleLogger =
+      dynamicLibrary.lookupFunction<ffi.Bool Function(), bool Function()>(
+    'ICU4XLogger_init_console_logger',
+    isLeaf: true,
+  );
+
   late final bool Function() initSimpleLogger =
       dynamicLibrary.lookupFunction<ffi.Bool Function(), bool Function()>(
     'ICU4XLogger_init_simple_logger',

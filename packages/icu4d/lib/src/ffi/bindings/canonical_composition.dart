@@ -3,56 +3,53 @@
 part of '../bindings.dart';
 
 final class _CanonicalComposition {
-  _CanonicalComposition(this.dynamicLibrary)
-      : create = dynamicLibrary.lookupFunction<
-            ResultICU4XCanonicalCompositionOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            ),
-            ResultICU4XCanonicalCompositionOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> provider,
-            )>(
-          'ICU4XCanonicalComposition_create',
-          isLeaf: true,
-        ),
-        compose = dynamicLibrary.lookupFunction<
-            ffi.Uint32 Function(
-              ffi.Pointer<ICU4XCanonicalComposition> self,
-              ffi.Uint32 starter,
-              ffi.Uint32 second,
-            ),
-            int Function(
-              ffi.Pointer<ICU4XCanonicalComposition> self,
-              int starter,
-              int second,
-            )>(
-          'ICU4XCanonicalComposition_compose',
-          isLeaf: true,
-        ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XCanonicalComposition> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XCanonicalComposition> self,
-            )>(
-          'ICU4XCanonicalComposition_destroy',
-          isLeaf: true,
-        );
+  _CanonicalComposition(this.dynamicLibrary);
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-  final int Function(
+  late final int Function(
     ffi.Pointer<ICU4XCanonicalComposition> self,
     int starter,
     int second,
-  ) compose;
+  ) compose = dynamicLibrary.lookupFunction<
+      ffi.Uint32 Function(
+        ffi.Pointer<ICU4XCanonicalComposition> self,
+        ffi.Uint32 starter,
+        ffi.Uint32 second,
+      ),
+      int Function(
+        ffi.Pointer<ICU4XCanonicalComposition> self,
+        int starter,
+        int second,
+      )>(
+    'ICU4XCanonicalComposition_compose',
+    isLeaf: true,
+  );
 
-  final ResultICU4XCanonicalCompositionOrICU4XError Function(
+  late final ResultICU4XCanonicalCompositionOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
-  ) create;
+  ) create = dynamicLibrary.lookupFunction<
+      ResultICU4XCanonicalCompositionOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      ),
+      ResultICU4XCanonicalCompositionOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> provider,
+      )>(
+    'ICU4XCanonicalComposition_create',
+    isLeaf: true,
+  );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XCanonicalComposition> self,
-  ) destroy;
+  ) destroy = dynamicLibrary.lookupFunction<
+      ffi.Void Function(
+        ffi.Pointer<ICU4XCanonicalComposition> self,
+      ),
+      void Function(
+        ffi.Pointer<ICU4XCanonicalComposition> self,
+      )>(
+    'ICU4XCanonicalComposition_destroy',
+    isLeaf: true,
+  );
 }

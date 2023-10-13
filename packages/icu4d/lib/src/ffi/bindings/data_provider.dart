@@ -44,18 +44,6 @@ final class _DataProvider {
           'ICU4XDataProvider_enable_locale_fallback',
           isLeaf: true,
         ),
-        enableLocaleFallbackWith = dynamicLibrary.lookupFunction<
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> self,
-              ffi.Pointer<ICU4XLocaleFallbacker> fallbacker,
-            ),
-            ResultVoidOrICU4XError Function(
-              ffi.Pointer<ICU4XDataProvider> self,
-              ffi.Pointer<ICU4XLocaleFallbacker> fallbacker,
-            )>(
-          'ICU4XDataProvider_enable_locale_fallback_with',
-          isLeaf: true,
-        ),
         destroy = dynamicLibrary.lookupFunction<
             ffi.Void Function(
               ffi.Pointer<ICU4XDataProvider> self,
@@ -69,6 +57,13 @@ final class _DataProvider {
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
+
+  late final ffi.Pointer<ICU4XDataProvider> Function() createCompiled =
+      dynamicLibrary.lookupFunction<ffi.Pointer<ICU4XDataProvider> Function(),
+          ffi.Pointer<ICU4XDataProvider> Function()>(
+    'ICU4XDataProvider_create_compiled',
+    isLeaf: true,
+  );
 
   final ffi.Pointer<ICU4XDataProvider> Function() createEmpty;
 
@@ -119,10 +114,21 @@ final class _DataProvider {
     ffi.Pointer<ICU4XDataProvider> self,
   ) enableLocaleFallback;
 
-  final ResultVoidOrICU4XError Function(
+  late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> self,
     ffi.Pointer<ICU4XLocaleFallbacker> fallbacker,
-  ) enableLocaleFallbackWith;
+  ) enableLocaleFallbackWith = dynamicLibrary.lookupFunction<
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> self,
+        ffi.Pointer<ICU4XLocaleFallbacker> fallbacker,
+      ),
+      ResultVoidOrICU4XError Function(
+        ffi.Pointer<ICU4XDataProvider> self,
+        ffi.Pointer<ICU4XLocaleFallbacker> fallbacker,
+      )>(
+    'ICU4XDataProvider_enable_locale_fallback_with',
+    isLeaf: true,
+  );
 
   final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> self,
