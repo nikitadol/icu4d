@@ -1,11 +1,12 @@
-import 'dart:io';
+import 'dart:io' as io;
 
 import 'package:http/http.dart' as http;
 import 'package:path/path.dart' as path;
 import 'package:tar/tar.dart' as tar;
 
 const _icu4xVersion = '1.3.2';
-const _tarRootDir = 'icu4x-icu-$_icu4xVersion';
+const _icu4x = 'icu4x';
+const _tarRootDir = '$_icu4x-icu-$_icu4xVersion';
 
 final _icu4XSourcesUrl = Uri.parse(
   'https://github.com/unicode-org/icu4x/archive/refs/tags/icu@$_icu4xVersion.tar.gz',
@@ -19,10 +20,11 @@ Future<void> main() async {
   final sourcesResponse =
       await httpClient.send(http.Request('get', _icu4XSourcesUrl));
 
-  final tarReader =
-      tar.TarReader(sourcesResponse.stream.transform(gzip.decoder));
+  final tarReader = tar.TarReader(
+    sourcesResponse.stream.transform(io.gzip.decoder),
+  );
 
-  final sourcesRoot = Directory('icu4x');
+  final sourcesRoot = io.Directory(_icu4x);
 
   if (sourcesRoot.existsSync()) {
     sourcesRoot.deleteSync(recursive: true);
@@ -45,9 +47,9 @@ Future<void> main() async {
 
     switch (entry.type) {
       case tar.TypeFlag.dir:
-        Directory(resultPath).createSync(recursive: true);
+        io.Directory(resultPath).createSync(recursive: true);
       case tar.TypeFlag.reg:
-        final file = File(resultPath);
+        final file = io.File(resultPath);
 
         if (!file.existsSync()) {
           file.createSync(recursive: true);
@@ -62,6 +64,25 @@ Future<void> main() async {
   await tarReader.cancel();
 
   httpClient.close();
+
+  print('Building $_icu4x for tests...');
+
+  final buildResult = io.Process.runSync(
+    'cargo',
+    const [
+      'build',
+      '-p',
+      'icu_capi_cdylib',
+      '--all-features',
+      '-q',
+    ],
+    runInShell: false,
+    workingDirectory: _icu4x,
+  );
+
+  if (buildResult.stderr.toString().isNotEmpty) {
+    throw Exception('$_icu4x error: ${buildResult.stderr}');
+  }
 
   print('Done!');
 }
