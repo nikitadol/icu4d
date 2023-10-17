@@ -42,7 +42,7 @@ Future<void> main() async {
 
     if (!(path.isWithin(sourcesRoot.path, resultPath) ||
         path.equals(sourcesRoot.path, resultPath))) {
-      throw Exception('Invalid path ${resultPath}');
+      throw Exception('Invalid path $resultPath');
     }
 
     switch (entry.type) {

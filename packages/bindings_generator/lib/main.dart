@@ -17,7 +17,7 @@ const _ffiPrefix = 'ffi';
 const _dynamicLibraryType = '$_ffiPrefix.DynamicLibrary';
 const _dynamicLibraryFieldName = 'dynamicLibrary';
 const _subBindingsDir = 'bindings';
-const _ignoreForBindings = 'ignore_for_file: require_trailing_commas';
+const _ignoreForBindings = 'ignore_for_file: require_trailing_commas, non_constant_identifier_names';
 
 const _nonOptionalFunctions = {
   'ICU4XDataProvider_create_empty',

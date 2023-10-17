@@ -7,7 +7,7 @@ import 'package:test/test.dart';
 
 import 'test_setup.dart';
 
-const _fixturesPath = 'icu4x/components/locid/tests/fixtures';
+const _fixturesPath = '../../icu4x/components/locid/tests/fixtures';
 
 Iterable<
     ({
@@ -230,7 +230,7 @@ void main() {
     () {
       final locale = Locale.createUnd();
 
-      expect(locale.toString(), Locale.undTag);
+      expect(locale.toString(), LocaleBase.undTag);
     },
   );
 

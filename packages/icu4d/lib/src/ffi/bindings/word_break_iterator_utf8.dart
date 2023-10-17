@@ -1,4 +1,4 @@
-// ignore_for_file: require_trailing_commas
+// ignore_for_file: require_trailing_commas, non_constant_identifier_names
 
 part of '../bindings.dart';
 
