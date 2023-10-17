@@ -192,16 +192,11 @@ final class _Locale {
           'ICU4XLocale_strict_cmp',
           isLeaf: true,
         ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XLocale> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XLocale> self,
-            )>(
-          'ICU4XLocale_destroy',
-          isLeaf: true,
-        );
+        destroyPointer = dynamicLibrary.lookup<
+            ffi.NativeFunction<
+                ffi.Void Function(
+                  ffi.Pointer<ICU4XLocale> self,
+                )>>('ICU4XLocale_destroy');
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
@@ -242,9 +237,15 @@ final class _Locale {
 
   final ffi.Pointer<ICU4XLocale> Function() createUnd;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XLocale> self,
-  ) destroy;
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XLocale> self,
+          )>> destroyPointer;
 
   final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XLocale> self,

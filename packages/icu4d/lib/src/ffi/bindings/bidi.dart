@@ -23,16 +23,17 @@ final class _Bidi {
 
   late final void Function(
     ffi.Pointer<ICU4XBidi> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XBidi> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XBidi> self,
-      )>(
-    'ICU4XBidi_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XBidi> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XBidi> self,
+          )>>('ICU4XBidi_destroy');
 
   late final ffi.Pointer<ICU4XBidiInfo> Function(
     ffi.Pointer<ICU4XBidi> self,

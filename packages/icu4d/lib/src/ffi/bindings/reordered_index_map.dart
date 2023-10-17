@@ -23,16 +23,17 @@ final class _ReorderedIndexMap {
 
   late final void Function(
     ffi.Pointer<ICU4XReorderedIndexMap> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XReorderedIndexMap> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XReorderedIndexMap> self,
-      )>(
-    'ICU4XReorderedIndexMap_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XReorderedIndexMap> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XReorderedIndexMap> self,
+          )>>('ICU4XReorderedIndexMap_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XReorderedIndexMap> self,

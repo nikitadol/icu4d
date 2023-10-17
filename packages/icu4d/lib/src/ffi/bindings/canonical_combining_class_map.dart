@@ -23,16 +23,17 @@ final class _CanonicalCombiningClassMap {
 
   late final void Function(
     ffi.Pointer<ICU4XCanonicalCombiningClassMap> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XCanonicalCombiningClassMap> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XCanonicalCombiningClassMap> self,
-      )>(
-    'ICU4XCanonicalCombiningClassMap_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCanonicalCombiningClassMap> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCanonicalCombiningClassMap> self,
+          )>>('ICU4XCanonicalCombiningClassMap_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XCanonicalCombiningClassMap> self,

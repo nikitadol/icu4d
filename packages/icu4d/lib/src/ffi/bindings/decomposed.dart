@@ -10,14 +10,15 @@ final class _Decomposed {
 
   late final void Function(
     ffi.Pointer<ICU4XDecomposed> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XDecomposed> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XDecomposed> self,
-      )>(
-    'ICU4XDecomposed_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XDecomposed> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XDecomposed> self,
+          )>>('ICU4XDecomposed_destroy');
 }

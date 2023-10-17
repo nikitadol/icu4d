@@ -57,16 +57,17 @@ final class _GregorianZonedDateTimeFormatter {
 
   late final void Function(
     ffi.Pointer<ICU4XGregorianZonedDateTimeFormatter> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XGregorianZonedDateTimeFormatter> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XGregorianZonedDateTimeFormatter> self,
-      )>(
-    'ICU4XGregorianZonedDateTimeFormatter_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XGregorianZonedDateTimeFormatter> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XGregorianZonedDateTimeFormatter> self,
+          )>>('ICU4XGregorianZonedDateTimeFormatter_destroy');
 
   late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XGregorianZonedDateTimeFormatter> self,

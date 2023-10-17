@@ -10,16 +10,17 @@ final class _WordBreakIteratorLatin1 {
 
   late final void Function(
     ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
-      )>(
-    'ICU4XWordBreakIteratorLatin1_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,
+          )>>('ICU4XWordBreakIteratorLatin1_destroy');
 
   late final bool Function(
     ffi.Pointer<ICU4XWordBreakIteratorLatin1> self,

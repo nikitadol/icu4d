@@ -39,16 +39,17 @@ final class _ScriptExtensionsSet {
 
   late final void Function(
     ffi.Pointer<ICU4XScriptExtensionsSet> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XScriptExtensionsSet> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XScriptExtensionsSet> self,
-      )>(
-    'ICU4XScriptExtensionsSet_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XScriptExtensionsSet> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XScriptExtensionsSet> self,
+          )>>('ICU4XScriptExtensionsSet_destroy');
 
   late final ResultUint16OrTOrVoid Function(
     ffi.Pointer<ICU4XScriptExtensionsSet> self,

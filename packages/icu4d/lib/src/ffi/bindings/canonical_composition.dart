@@ -42,14 +42,15 @@ final class _CanonicalComposition {
 
   late final void Function(
     ffi.Pointer<ICU4XCanonicalComposition> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XCanonicalComposition> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XCanonicalComposition> self,
-      )>(
-    'ICU4XCanonicalComposition_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCanonicalComposition> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCanonicalComposition> self,
+          )>>('ICU4XCanonicalComposition_destroy');
 }

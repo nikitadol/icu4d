@@ -10,14 +10,15 @@ final class _WeekOf {
 
   late final void Function(
     ffi.Pointer<ICU4XWeekOf> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XWeekOf> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XWeekOf> self,
-      )>(
-    'ICU4XWeekOf_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XWeekOf> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XWeekOf> self,
+          )>>('ICU4XWeekOf_destroy');
 }

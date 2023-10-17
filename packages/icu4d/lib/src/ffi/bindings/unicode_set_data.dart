@@ -61,16 +61,17 @@ final class _UnicodeSetData {
 
   late final void Function(
     ffi.Pointer<ICU4XUnicodeSetData> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XUnicodeSetData> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XUnicodeSetData> self,
-      )>(
-    'ICU4XUnicodeSetData_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XUnicodeSetData> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XUnicodeSetData> self,
+          )>>('ICU4XUnicodeSetData_destroy');
 
   late final ResultICU4XUnicodeSetDataOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,

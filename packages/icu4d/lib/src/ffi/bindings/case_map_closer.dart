@@ -64,14 +64,15 @@ final class _CaseMapCloser {
 
   late final void Function(
     ffi.Pointer<ICU4XCaseMapCloser> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XCaseMapCloser> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XCaseMapCloser> self,
-      )>(
-    'ICU4XCaseMapCloser_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCaseMapCloser> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCaseMapCloser> self,
+          )>>('ICU4XCaseMapCloser_destroy');
 }

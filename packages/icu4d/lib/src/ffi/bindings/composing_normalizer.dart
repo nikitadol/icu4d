@@ -36,16 +36,17 @@ final class _ComposingNormalizer {
 
   late final void Function(
     ffi.Pointer<ICU4XComposingNormalizer> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XComposingNormalizer> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XComposingNormalizer> self,
-      )>(
-    'ICU4XComposingNormalizer_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XComposingNormalizer> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XComposingNormalizer> self,
+          )>>('ICU4XComposingNormalizer_destroy');
 
   late final bool Function(
     ffi.Pointer<ICU4XComposingNormalizer> self,

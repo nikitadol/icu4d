@@ -10,16 +10,17 @@ final class _SentenceBreakIteratorLatin1 {
 
   late final void Function(
     ffi.Pointer<ICU4XSentenceBreakIteratorLatin1> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XSentenceBreakIteratorLatin1> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XSentenceBreakIteratorLatin1> self,
-      )>(
-    'ICU4XSentenceBreakIteratorLatin1_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XSentenceBreakIteratorLatin1> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XSentenceBreakIteratorLatin1> self,
+          )>>('ICU4XSentenceBreakIteratorLatin1_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XSentenceBreakIteratorLatin1> self,

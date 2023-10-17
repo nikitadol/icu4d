@@ -23,16 +23,17 @@ final class _SentenceSegmenter {
 
   late final void Function(
     ffi.Pointer<ICU4XSentenceSegmenter> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XSentenceSegmenter> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XSentenceSegmenter> self,
-      )>(
-    'ICU4XSentenceSegmenter_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XSentenceSegmenter> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XSentenceSegmenter> self,
+          )>>('ICU4XSentenceSegmenter_destroy');
 
   late final ffi.Pointer<ICU4XSentenceBreakIteratorLatin1> Function(
     ffi.Pointer<ICU4XSentenceSegmenter> self,

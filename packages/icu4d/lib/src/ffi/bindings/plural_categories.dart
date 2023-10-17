@@ -10,14 +10,15 @@ final class _PluralCategories {
 
   late final void Function(
     ffi.Pointer<ICU4XPluralCategories> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XPluralCategories> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XPluralCategories> self,
-      )>(
-    'ICU4XPluralCategories_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XPluralCategories> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XPluralCategories> self,
+          )>>('ICU4XPluralCategories_destroy');
 }

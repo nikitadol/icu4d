@@ -39,16 +39,17 @@ final class _Time {
 
   late final void Function(
     ffi.Pointer<ICU4XTime> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XTime> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XTime> self,
-      )>(
-    'ICU4XTime_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XTime> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XTime> self,
+          )>>('ICU4XTime_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XTime> self,

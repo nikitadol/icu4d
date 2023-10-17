@@ -10,16 +10,17 @@ final class _PropertyValueNameToEnumMapper {
 
   late final void Function(
     ffi.Pointer<ICU4XPropertyValueNameToEnumMapper> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XPropertyValueNameToEnumMapper> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XPropertyValueNameToEnumMapper> self,
-      )>(
-    'ICU4XPropertyValueNameToEnumMapper_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XPropertyValueNameToEnumMapper> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XPropertyValueNameToEnumMapper> self,
+          )>>('ICU4XPropertyValueNameToEnumMapper_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XPropertyValueNameToEnumMapper> self,

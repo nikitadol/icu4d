@@ -10,16 +10,17 @@ final class _LineBreakIteratorUtf8 {
 
   late final void Function(
     ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
-      )>(
-    'ICU4XLineBreakIteratorUtf8_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,
+          )>>('ICU4XLineBreakIteratorUtf8_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XLineBreakIteratorUtf8> self,

@@ -88,16 +88,17 @@ final class _IsoDate {
 
   late final void Function(
     ffi.Pointer<ICU4XIsoDate> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XIsoDate> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XIsoDate> self,
-      )>(
-    'ICU4XIsoDate_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XIsoDate> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XIsoDate> self,
+          )>>('ICU4XIsoDate_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XIsoDate> self,

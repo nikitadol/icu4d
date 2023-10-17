@@ -23,16 +23,17 @@ final class _TitlecaseMapper {
 
   late final void Function(
     ffi.Pointer<ICU4XTitlecaseMapper> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XTitlecaseMapper> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XTitlecaseMapper> self,
-      )>(
-    'ICU4XTitlecaseMapper_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XTitlecaseMapper> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XTitlecaseMapper> self,
+          )>>('ICU4XTitlecaseMapper_destroy');
 
   late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XTitlecaseMapper> self,

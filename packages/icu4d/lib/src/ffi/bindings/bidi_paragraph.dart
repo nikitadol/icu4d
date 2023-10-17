@@ -10,16 +10,17 @@ final class _BidiParagraph {
 
   late final void Function(
     ffi.Pointer<ICU4XBidiParagraph> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XBidiParagraph> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XBidiParagraph> self,
-      )>(
-    'ICU4XBidiParagraph_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XBidiParagraph> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XBidiParagraph> self,
+          )>>('ICU4XBidiParagraph_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XBidiParagraph> self,

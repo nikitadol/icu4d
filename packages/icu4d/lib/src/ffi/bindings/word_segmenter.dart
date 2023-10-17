@@ -49,16 +49,17 @@ final class _WordSegmenter {
 
   late final void Function(
     ffi.Pointer<ICU4XWordSegmenter> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XWordSegmenter> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XWordSegmenter> self,
-      )>(
-    'ICU4XWordSegmenter_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XWordSegmenter> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XWordSegmenter> self,
+          )>>('ICU4XWordSegmenter_destroy');
 
   late final ffi.Pointer<ICU4XWordBreakIteratorLatin1> Function(
     ffi.Pointer<ICU4XWordSegmenter> self,

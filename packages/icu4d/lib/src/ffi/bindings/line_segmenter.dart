@@ -97,16 +97,17 @@ final class _LineSegmenter {
 
   late final void Function(
     ffi.Pointer<ICU4XLineSegmenter> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XLineSegmenter> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XLineSegmenter> self,
-      )>(
-    'ICU4XLineSegmenter_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XLineSegmenter> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XLineSegmenter> self,
+          )>>('ICU4XLineSegmenter_destroy');
 
   late final ffi.Pointer<ICU4XLineBreakIteratorLatin1> Function(
     ffi.Pointer<ICU4XLineSegmenter> self,

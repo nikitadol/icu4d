@@ -23,14 +23,15 @@ final class _IanaToBcp47Mapper {
 
   late final void Function(
     ffi.Pointer<ICU4XIanaToBcp47Mapper> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XIanaToBcp47Mapper> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XIanaToBcp47Mapper> self,
-      )>(
-    'ICU4XIanaToBcp47Mapper_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XIanaToBcp47Mapper> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XIanaToBcp47Mapper> self,
+          )>>('ICU4XIanaToBcp47Mapper_destroy');
 }

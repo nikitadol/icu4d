@@ -92,16 +92,17 @@ final class _CustomTimeZone {
 
   late final void Function(
     ffi.Pointer<ICU4XCustomTimeZone> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XCustomTimeZone> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XCustomTimeZone> self,
-      )>(
-    'ICU4XCustomTimeZone_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCustomTimeZone> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCustomTimeZone> self,
+          )>>('ICU4XCustomTimeZone_destroy');
 
   late final ResultBoolOrICU4XError Function(
     ffi.Pointer<ICU4XCustomTimeZone> self,

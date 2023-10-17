@@ -23,16 +23,17 @@ final class _GraphemeClusterSegmenter {
 
   late final void Function(
     ffi.Pointer<ICU4XGraphemeClusterSegmenter> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XGraphemeClusterSegmenter> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XGraphemeClusterSegmenter> self,
-      )>(
-    'ICU4XGraphemeClusterSegmenter_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XGraphemeClusterSegmenter> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XGraphemeClusterSegmenter> self,
+          )>>('ICU4XGraphemeClusterSegmenter_destroy');
 
   late final ffi.Pointer<ICU4XGraphemeClusterBreakIteratorLatin1> Function(
     ffi.Pointer<ICU4XGraphemeClusterSegmenter> self,

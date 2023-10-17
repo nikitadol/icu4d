@@ -10,16 +10,17 @@ final class _RegionDisplayNames {
 
   late final void Function(
     ffi.Pointer<ICU4XRegionDisplayNames> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XRegionDisplayNames> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XRegionDisplayNames> self,
-      )>(
-    'ICU4XRegionDisplayNames_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XRegionDisplayNames> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XRegionDisplayNames> self,
+          )>>('ICU4XRegionDisplayNames_destroy');
 
   late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XRegionDisplayNames> self,

@@ -39,14 +39,15 @@ final class _CanonicalDecomposition {
 
   late final void Function(
     ffi.Pointer<ICU4XCanonicalDecomposition> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XCanonicalDecomposition> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XCanonicalDecomposition> self,
-      )>(
-    'ICU4XCanonicalDecomposition_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCanonicalDecomposition> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCanonicalDecomposition> self,
+          )>>('ICU4XCanonicalDecomposition_destroy');
 }

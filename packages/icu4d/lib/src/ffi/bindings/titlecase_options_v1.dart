@@ -17,14 +17,15 @@ final class _TitlecaseOptionsV1 {
 
   late final void Function(
     ffi.Pointer<ICU4XTitlecaseOptionsV1> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XTitlecaseOptionsV1> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XTitlecaseOptionsV1> self,
-      )>(
-    'ICU4XTitlecaseOptionsV1_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XTitlecaseOptionsV1> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XTitlecaseOptionsV1> self,
+          )>>('ICU4XTitlecaseOptionsV1_destroy');
 }

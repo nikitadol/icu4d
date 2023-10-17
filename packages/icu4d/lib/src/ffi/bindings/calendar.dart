@@ -42,16 +42,17 @@ final class _Calendar {
 
   late final void Function(
     ffi.Pointer<ICU4XCalendar> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XCalendar> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XCalendar> self,
-      )>(
-    'ICU4XCalendar_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCalendar> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCalendar> self,
+          )>>('ICU4XCalendar_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XCalendar> self,

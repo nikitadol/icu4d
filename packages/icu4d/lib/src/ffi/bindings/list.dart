@@ -30,16 +30,17 @@ final class _List {
 
   late final void Function(
     ffi.Pointer<ICU4XList> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XList> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XList> self,
-      )>(
-    'ICU4XList_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XList> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XList> self,
+          )>>('ICU4XList_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XList> self,

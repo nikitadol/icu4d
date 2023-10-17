@@ -32,16 +32,17 @@ final class _DateTimeFormatter {
 
   late final void Function(
     ffi.Pointer<ICU4XDateTimeFormatter> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XDateTimeFormatter> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XDateTimeFormatter> self,
-      )>(
-    'ICU4XDateTimeFormatter_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XDateTimeFormatter> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XDateTimeFormatter> self,
+          )>>('ICU4XDateTimeFormatter_destroy');
 
   late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XDateTimeFormatter> self,

@@ -42,16 +42,17 @@ final class _WeekCalculator {
 
   late final void Function(
     ffi.Pointer<ICU4XWeekCalculator> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XWeekCalculator> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XWeekCalculator> self,
-      )>(
-    'ICU4XWeekCalculator_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XWeekCalculator> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XWeekCalculator> self,
+          )>>('ICU4XWeekCalculator_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XWeekCalculator> self,

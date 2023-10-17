@@ -42,16 +42,17 @@ final class _CaseMapper {
 
   late final void Function(
     ffi.Pointer<ICU4XCaseMapper> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XCaseMapper> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XCaseMapper> self,
-      )>(
-    'ICU4XCaseMapper_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCaseMapper> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCaseMapper> self,
+          )>>('ICU4XCaseMapper_destroy');
 
   late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XCaseMapper> self,

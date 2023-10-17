@@ -10,16 +10,17 @@ final class _GeneralCategoryNameToMaskMapper {
 
   late final void Function(
     ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
-      )>(
-    'ICU4XGeneralCategoryNameToMaskMapper_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,
+          )>>('ICU4XGeneralCategoryNameToMaskMapper_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XGeneralCategoryNameToMaskMapper> self,

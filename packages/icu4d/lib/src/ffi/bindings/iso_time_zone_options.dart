@@ -10,14 +10,15 @@ final class _IsoTimeZoneOptions {
 
   late final void Function(
     ffi.Pointer<ICU4XIsoTimeZoneOptions> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XIsoTimeZoneOptions> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XIsoTimeZoneOptions> self,
-      )>(
-    'ICU4XIsoTimeZoneOptions_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XIsoTimeZoneOptions> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XIsoTimeZoneOptions> self,
+          )>>('ICU4XIsoTimeZoneOptions_destroy');
 }

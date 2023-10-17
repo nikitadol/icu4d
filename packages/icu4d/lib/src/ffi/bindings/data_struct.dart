@@ -4,16 +4,11 @@ part of '../bindings.dart';
 
 final class _DataStruct {
   _DataStruct(this.dynamicLibrary)
-      : destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XDataStruct> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XDataStruct> self,
-            )>(
-          'ICU4XDataStruct_destroy',
-          isLeaf: true,
-        );
+      : destroyPointer = dynamicLibrary.lookup<
+            ffi.NativeFunction<
+                ffi.Void Function(
+                  ffi.Pointer<ICU4XDataStruct> self,
+                )>>('ICU4XDataStruct_destroy');
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
@@ -79,7 +74,13 @@ final class _DataStruct {
     isLeaf: true,
   );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XDataStruct> self,
-  ) destroy;
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XDataStruct> self,
+          )>> destroyPointer;
 }

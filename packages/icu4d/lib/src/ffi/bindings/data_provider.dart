@@ -44,16 +44,11 @@ final class _DataProvider {
           'ICU4XDataProvider_enable_locale_fallback',
           isLeaf: true,
         ),
-        destroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<ICU4XDataProvider> self,
-            ),
-            void Function(
-              ffi.Pointer<ICU4XDataProvider> self,
-            )>(
-          'ICU4XDataProvider_destroy',
-          isLeaf: true,
-        );
+        destroyPointer = dynamicLibrary.lookup<
+            ffi.NativeFunction<
+                ffi.Void Function(
+                  ffi.Pointer<ICU4XDataProvider> self,
+                )>>('ICU4XDataProvider_destroy');
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
@@ -106,9 +101,15 @@ final class _DataProvider {
     isLeaf: true,
   );
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<ICU4XDataProvider> self,
-  ) destroy;
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XDataProvider> self,
+          )>> destroyPointer;
 
   final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> self,

@@ -181,16 +181,17 @@ final class _CodePointSetBuilder {
 
   late final void Function(
     ffi.Pointer<ICU4XCodePointSetBuilder> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XCodePointSetBuilder> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XCodePointSetBuilder> self,
-      )>(
-    'ICU4XCodePointSetBuilder_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCodePointSetBuilder> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCodePointSetBuilder> self,
+          )>>('ICU4XCodePointSetBuilder_destroy');
 
   late final bool Function(
     ffi.Pointer<ICU4XCodePointSetBuilder> self,

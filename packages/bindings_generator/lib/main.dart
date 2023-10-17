@@ -17,7 +17,8 @@ const _ffiPrefix = 'ffi';
 const _dynamicLibraryType = '$_ffiPrefix.DynamicLibrary';
 const _dynamicLibraryFieldName = 'dynamicLibrary';
 const _subBindingsDir = 'bindings';
-const _ignoreForBindings = 'ignore_for_file: require_trailing_commas, non_constant_identifier_names';
+const _ignoreForBindings =
+    'ignore_for_file: require_trailing_commas, non_constant_identifier_names';
 
 const _nonOptionalFunctions = {
   'ICU4XDataProvider_create_empty',
@@ -239,35 +240,84 @@ void main(List<String> args) {
       final dartType = functionToString(function.functionType, true);
       final cType = functionToString(function.functionType, false);
 
-      final lookupFunction = code_builder
-          .refer(_dynamicLibraryFieldName)
-          .property('lookupFunction')
-          .call(
-        [
-          code_builder.literalString(function.name),
-        ],
-        const {
-          'isLeaf': code_builder.literalTrue,
-        },
-        [
-          code_builder.refer(cType),
-          code_builder.refer(dartType),
-        ],
-      );
+      final arguments = const {
+        'isLeaf': code_builder.literalTrue,
+      };
+
+      final code_builder.Expression lookup;
+      final code_builder.Reference funcType;
+
+      if (function.name.endsWith('_destroy')) {
+        final oldFuncName = funcName;
+        funcName = '${funcName}Pointer';
+
+        final nativeFunction = code_builder.TypeReference(
+          (b) => b
+            ..symbol = 'ffi.NativeFunction'
+            ..types.add(code_builder.refer(cType)),
+        );
+
+        funcType = code_builder.TypeReference((b) => b
+          ..symbol = 'ffi.Pointer'
+          ..types.add(nativeFunction));
+
+        lookup = code_builder
+            .refer(_dynamicLibraryFieldName)
+            .property('lookup')
+            .call(
+          [
+            code_builder.literalString(function.name),
+          ],
+          const {},
+          [
+            nativeFunction,
+          ],
+        );
+
+        bindingBuilder.fields.add(
+          code_builder.Field(
+            (b) => b
+              ..name = oldFuncName
+              ..modifier = code_builder.FieldModifier.final$
+              ..type = code_builder.refer(dartType)
+              ..late = true
+              ..assignment = code_builder
+                  .refer(funcName)
+                  .property('asFunction')
+                  .call(const [], arguments).code,
+          ),
+        );
+      } else {
+        lookup = code_builder
+            .refer(_dynamicLibraryFieldName)
+            .property('lookupFunction')
+            .call(
+              [
+                code_builder.literalString(function.name),
+              ],
+              arguments,
+              [
+                code_builder.refer(cType),
+                code_builder.refer(dartType),
+              ],
+            );
+
+        funcType = code_builder.refer(dartType);
+      }
 
       final field = code_builder.FieldBuilder()
         ..name = funcName
         ..modifier = code_builder.FieldModifier.final$
-        ..type = code_builder.refer(dartType);
+        ..type = funcType;
 
       if (_nonOptionalFunctions.contains(function.name)) {
         bindingConstructorBuilder.initializers.add(
-          code_builder.refer(funcName).assign(lookupFunction).code,
+          code_builder.refer(funcName).assign(lookup).code,
         );
       } else {
         field
           ..late = true
-          ..assignment = lookupFunction.code;
+          ..assignment = lookup.code;
       }
 
       bindingBuilder.fields.add(field.build());

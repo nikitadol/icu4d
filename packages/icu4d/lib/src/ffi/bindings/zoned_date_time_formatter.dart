@@ -57,16 +57,17 @@ final class _ZonedDateTimeFormatter {
 
   late final void Function(
     ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
-      )>(
-    'ICU4XZonedDateTimeFormatter_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XZonedDateTimeFormatter> self,
+          )>>('ICU4XZonedDateTimeFormatter_destroy');
 
   late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XZonedDateTimeFormatter> self,

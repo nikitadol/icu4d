@@ -10,16 +10,17 @@ final class _GraphemeClusterBreakIteratorUtf8 {
 
   late final void Function(
     ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf8> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf8> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf8> self,
-      )>(
-    'ICU4XGraphemeClusterBreakIteratorUtf8_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf8> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf8> self,
+          )>>('ICU4XGraphemeClusterBreakIteratorUtf8_destroy');
 
   late final int Function(
     ffi.Pointer<ICU4XGraphemeClusterBreakIteratorUtf8> self,

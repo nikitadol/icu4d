@@ -52,16 +52,11 @@ final class _Diplomat {
           'diplomat_buffer_writeable_create',
           isLeaf: true,
         ),
-        bufferWriteableDestroy = dynamicLibrary.lookupFunction<
-            ffi.Void Function(
-              ffi.Pointer<DiplomatWriteable> this_,
-            ),
-            void Function(
-              ffi.Pointer<DiplomatWriteable> this_,
-            )>(
-          'diplomat_buffer_writeable_destroy',
-          isLeaf: true,
-        );
+        bufferWriteableDestroyPointer = dynamicLibrary.lookup<
+            ffi.NativeFunction<
+                ffi.Void Function(
+                  ffi.Pointer<DiplomatWriteable> this_,
+                )>>('diplomat_buffer_writeable_destroy');
 
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
@@ -75,9 +70,16 @@ final class _Diplomat {
     int cap,
   ) bufferWriteableCreate;
 
-  final void Function(
+  late final void Function(
     ffi.Pointer<DiplomatWriteable> this_,
-  ) bufferWriteableDestroy;
+  ) bufferWriteableDestroy =
+      bufferWriteableDestroyPointer.asFunction(isLeaf: true);
+
+  final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<DiplomatWriteable> this_,
+          )>> bufferWriteableDestroyPointer;
 
   final void Function(
     ffi.Pointer<ffi.Uint8> ptr,

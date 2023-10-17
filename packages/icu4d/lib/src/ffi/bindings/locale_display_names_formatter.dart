@@ -10,16 +10,17 @@ final class _LocaleDisplayNamesFormatter {
 
   late final void Function(
     ffi.Pointer<ICU4XLocaleDisplayNamesFormatter> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XLocaleDisplayNamesFormatter> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XLocaleDisplayNamesFormatter> self,
-      )>(
-    'ICU4XLocaleDisplayNamesFormatter_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XLocaleDisplayNamesFormatter> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XLocaleDisplayNamesFormatter> self,
+          )>>('ICU4XLocaleDisplayNamesFormatter_destroy');
 
   late final ResultVoidOrICU4XError Function(
     ffi.Pointer<ICU4XLocaleDisplayNamesFormatter> self,

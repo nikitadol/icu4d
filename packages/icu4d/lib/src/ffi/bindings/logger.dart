@@ -10,16 +10,17 @@ final class _Logger {
 
   late final void Function(
     ffi.Pointer<ICU4XLogger> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XLogger> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XLogger> self,
-      )>(
-    'ICU4XLogger_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XLogger> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XLogger> self,
+          )>>('ICU4XLogger_destroy');
 
   late final bool Function() initConsoleLogger =
       dynamicLibrary.lookupFunction<ffi.Bool Function(), bool Function()>(

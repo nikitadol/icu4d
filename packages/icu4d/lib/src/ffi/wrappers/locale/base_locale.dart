@@ -1,13 +1,17 @@
 part of icu4d_ffi;
 
 sealed class BaseLocale implements ffi.Finalizable {
-  // static final _finalizer = ffi.NativeFinalizer(icu4XBindings.locale.destroy);
+  static final _finalizer = ffi.NativeFinalizer(
+    icu4XBindings.locale.destroyPointer.cast(),
+  );
 
   static const String undTag = 'und';
 
   final ffi.Pointer<ICU4XLocale> _locale;
 
-  BaseLocale._(this._locale);
+  BaseLocale._(this._locale) {
+    _finalizer.attach(this, _locale.cast());
+  }
 
   String get basename {
     // language -  2...3

@@ -104,14 +104,15 @@ final class _Collator {
 
   late final void Function(
     ffi.Pointer<ICU4XCollator> self,
-  ) destroy = dynamicLibrary.lookupFunction<
-      ffi.Void Function(
-        ffi.Pointer<ICU4XCollator> self,
-      ),
-      void Function(
-        ffi.Pointer<ICU4XCollator> self,
-      )>(
-    'ICU4XCollator_destroy',
-    isLeaf: true,
-  );
+  ) destroy = destroyPointer.asFunction(isLeaf: true);
+
+  late final ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCollator> self,
+          )>> destroyPointer = dynamicLibrary.lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+            ffi.Pointer<ICU4XCollator> self,
+          )>>('ICU4XCollator_destroy');
 }
