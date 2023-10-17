@@ -230,7 +230,7 @@ void main() {
     () {
       final locale = Locale.createUnd();
 
-      expect(locale.toString(), LocaleBase.undTag);
+      expect(locale.toString(), BaseLocale.undTag);
     },
   );
 

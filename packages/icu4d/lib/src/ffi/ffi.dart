@@ -10,8 +10,9 @@ part 'allocator.dart';
 part 'ascii_extension.dart';
 part 'library_loader.dart';
 part 'utf8_extension.dart';
-part 'wrappers/locale_base.dart';
-part 'wrappers/locale.dart';
+part 'wrappers/locale/base_locale.dart';
+part 'wrappers/locale/locale.dart';
+part 'wrappers/locale/mutable_locale.dart';
 part 'writable_extension.dart';
 
 final icu4XBindings = Icu4XBindings(libraryLoader.openIcu4x());
