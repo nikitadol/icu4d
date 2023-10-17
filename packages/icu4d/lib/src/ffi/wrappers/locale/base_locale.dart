@@ -35,6 +35,7 @@ sealed class BaseLocale implements ffi.Finalizable {
     return _returnAsciiNullable(4, _locale, icu4XBindings.locale.script);
   }
 
+  /// empty string == 'true'
   String? getUnicodeExtensionBy(String key) {
     assert(key.length == 2);
 

@@ -31,6 +31,38 @@ Iterable<
 void main() {
   setupTest();
 
+  group(
+    'locale general',
+    () {
+      test(
+        'en-US-u-ca-buddhist',
+        () {
+          final locale = Locale.fromString('en-US-u-ca-buddhist');
+
+          expect(locale.basename, 'en-US');
+          expect(locale.language, 'en');
+          expect(locale.script, null);
+          expect(locale.region, 'US');
+          expect(locale.getUnicodeExtensionBy('ca'), 'buddhist');
+        },
+      );
+      test(
+        'und-u-hc-h23-kc-true',
+        () {
+          final locale = Locale.fromString('und-u-hc-h23-kc-true');
+
+          expect(locale.basename, 'und');
+          expect(locale.language, 'und');
+          expect(locale.script, null);
+          expect(locale.region, null);
+          expect(locale.getUnicodeExtensionBy('ca'), null);
+          expect(locale.getUnicodeExtensionBy('hc'), 'h23');
+          expect(locale.getUnicodeExtensionBy('kc'), '');
+        },
+      );
+    },
+  );
+
   test(
     'locale parsing',
     () {

@@ -1,6 +1,6 @@
 part of icu4d_shared;
 
-class FFIError extends Error {
+final class FFIError extends Error {
   final int code;
 
   FFIError(this.code);
@@ -79,6 +79,7 @@ const Map<int, List<String>> _codeToName = {
   515: [
     'LocaleParserExtensionError',
     'Invalid subtag',
+    'Invalid extension',
   ],
   768: [
     'DataStructValidityError',
