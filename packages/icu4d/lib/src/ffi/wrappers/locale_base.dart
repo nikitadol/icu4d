@@ -1,6 +1,8 @@
 part of icu4d_ffi;
 
 sealed class LocaleBase implements ffi.Finalizable {
+  // static final _finalizer = ffi.NativeFinalizer(icu4XBindings.locale.destroy);
+
   static const undTag = 'und';
 
   final ffi.Pointer<ICU4XLocale> _locale;
@@ -21,12 +23,12 @@ sealed class LocaleBase implements ffi.Finalizable {
     return _returnAscii(3, _locale, icu4XBindings.locale.language);
   }
 
-  String get region {
-    return _returnAscii(3, _locale, icu4XBindings.locale.region);
+  String? get region {
+    return _returnAsciiNullable(3, _locale, icu4XBindings.locale.region);
   }
 
-  String get script {
-    return _returnAscii(4, _locale, icu4XBindings.locale.script);
+  String? get script {
+    return _returnAsciiNullable(4, _locale, icu4XBindings.locale.script);
   }
 
   String? getUnicodeExtensionBy(String key) {
@@ -54,6 +56,10 @@ sealed class LocaleBase implements ffi.Finalizable {
     }
 
     icu4XBindings.diplomat.bufferWriteableDestroy(writable);
+
+    if (res.err == ICU4XError.localeUndefinedSubtagError) {
+      return null;
+    }
 
     throw FFIError(res.err);
   }
@@ -87,6 +93,38 @@ String _returnAscii<T>(
   }
 
   icu4XBindings.diplomat.bufferWriteableDestroy(writable);
+
+  throw FFIError(res.err);
+}
+
+@pragma('vm:prefer-inline')
+@pragma('vm:always-consider-inlining')
+@pragma('dart2js:prefer-inline')
+String? _returnAsciiNullable<T>(
+  int minCap,
+  T pointer,
+  ResultVoidOrICU4XError Function(
+    T,
+    ffi.Pointer<DiplomatWriteable>,
+  ) callback,
+) {
+  final writable = icu4XBindings.diplomat.bufferWriteableCreate(minCap);
+  final res = callback(pointer, writable);
+
+  if (res.is_ok) {
+    final resStr = writable.ref.asAsciiString;
+
+    icu4XBindings.diplomat.bufferWriteableDestroy(writable);
+
+    return resStr;
+  }
+
+  icu4XBindings.diplomat.bufferWriteableDestroy(writable);
+
+
+  if (res.err == ICU4XError.localeUndefinedSubtagError) {
+    return null;
+  }
 
   throw FFIError(res.err);
 }
