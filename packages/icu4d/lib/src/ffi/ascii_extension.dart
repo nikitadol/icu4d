@@ -2,7 +2,7 @@ part of icu4d_ffi;
 
 extension StringAsciiPointer on String {
   ({
-    ffi.Pointer<ffi.Uint8> bytes,
+    ffi.Pointer<ffi.Uint8> pointer,
     int length,
     void Function() free,
   }) toAscii() {
@@ -20,7 +20,7 @@ extension StringAsciiPointer on String {
     }
 
     return (
-      bytes: pointer,
+      pointer: pointer,
       length: length,
       free: () => icu4XAllocator.free(pointer, length, 1),
     );

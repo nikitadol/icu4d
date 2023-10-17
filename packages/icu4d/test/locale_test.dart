@@ -224,11 +224,21 @@ void main() {
           expect(
             () => Locale.fromString(name),
             throwsA(
-              allOf(
-                TypeMatcher<FFIError>(),
-                predicate<FFIError>(
-                  (error) => error.code == 0 || error.toString().contains(text),
-                  'should contain text `$text` if not unknown error',
+              anyOf(
+                allOf(
+                  TypeMatcher<FFIError>(),
+                  predicate<FFIError>(
+                    (error) =>
+                        error.code == 0 || error.toString().contains(text),
+                    'should contain text `$text` if not unknown error',
+                  ),
+                ),
+                allOf(
+                  TypeMatcher<AssertionError>(),
+                  predicate<AssertionError>(
+                    (error) => error.message.toString().contains(text),
+                    'should contain text `$text` if not unknown error',
+                  ),
                 ),
               ),
             ),
@@ -273,6 +283,46 @@ void main() {
         Locale.fromString('En-latn-US-MacOS').toString(),
         Locale.fromString('eN-latN-uS-macOS').toString(),
       );
+      expect(
+        BaseLocale.canonicalize('pL_latn_pl-U-HC-H12'),
+        'pl-Latn-PL-u-hc-h12',
+      );
+    },
+  );
+
+  test(
+    'clone',
+    () {
+      final locale =
+          Locale.fromString('en-US-u-hc-h23-ca-islamic-civil-ss-true');
+
+      expect(locale.toString(), locale.clone().toString());
+      expect(locale.toString(), locale.mutableClone().toString());
+    },
+  );
+
+  test(
+    'mutable',
+    () {
+      final locale = MutableLocale.createUnd();
+
+      expect(locale.toString(), BaseLocale.undTag);
+      locale.language = 'en';
+      expect(locale.toString(), 'en');
+
+      locale.region = 'uk';
+      expect(locale.toString(), 'en-UK');
+
+      locale.script = 'latn';
+      expect(locale.toString(), 'en-Latn-UK');
+
+      locale.region = null;
+      expect(locale.toString(), 'en-Latn');
+
+      locale
+        ..script = null
+        ..region = 'uS';
+      expect(locale.toString(), 'en-US');
     },
   );
 }

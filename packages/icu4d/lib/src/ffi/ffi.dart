@@ -5,6 +5,7 @@ import 'dart:io';
 
 import 'package:icu4d/icu.dart';
 import 'package:icu4d/src/ffi/bindings.dart';
+import 'package:icu4d/src/helpers/ascii.dart';
 
 part 'allocator.dart';
 part 'ascii_extension.dart';

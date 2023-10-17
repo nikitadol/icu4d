@@ -7,6 +7,35 @@ sealed class BaseLocale implements ffi.Finalizable {
 
   static const String undTag = 'und';
 
+  // equal to `Locale.fromString(str).toString()`
+  static String canonicalize(String str) {
+    assert(str.length >= 2);
+    assert(str.isAscii);
+
+    final strPointer = str.toAscii();
+    try {
+      final writable = icu4XBindings.diplomat.bufferWriteableCreate(18);
+
+      try {
+        final res = icu4XBindings.locale.canonicalize(
+          strPointer.pointer,
+          strPointer.length,
+          writable,
+        );
+
+        if (res.is_ok) {
+          return writable.ref.asAsciiString;
+        }
+
+        throw FFIError(res.err);
+      } finally {
+        icu4XBindings.diplomat.bufferWriteableDestroy(writable);
+      }
+    } finally {
+      strPointer.free();
+    }
+  }
+
   final ffi.Pointer<ICU4XLocale> _locale;
 
   BaseLocale._(this._locale) {
@@ -35,9 +64,10 @@ sealed class BaseLocale implements ffi.Finalizable {
     return _returnAsciiNullable(4, _locale, icu4XBindings.locale.script);
   }
 
-  /// empty string == 'true'
+  // empty string == 'true'
   String? getUnicodeExtensionBy(String key) {
     assert(key.length == 2);
+    assert(key.isAscii);
 
     final keyBytes = key.toAscii();
 
@@ -45,7 +75,7 @@ sealed class BaseLocale implements ffi.Finalizable {
 
     final res = icu4XBindings.locale.getUnicodeExtension(
       _locale,
-      keyBytes.bytes,
+      keyBytes.pointer,
       keyBytes.length,
       writable,
     );
@@ -69,26 +99,38 @@ sealed class BaseLocale implements ffi.Finalizable {
     throw FFIError(res.err);
   }
 
+  Locale clone() {
+    return Locale._(icu4XBindings.locale.clone(_locale));
+  }
+
+  MutableLocale mutableClone() {
+    return MutableLocale._(icu4XBindings.locale.clone(_locale));
+  }
+
   @override
   String toString() {
     return _returnAscii(18, _locale, icu4XBindings.locale.toString_);
   }
 
   static ffi.Pointer<ICU4XLocale> _fromString(String name) {
+    assert(name.length >= 2, 'The given language subtag is invalid');
+    assert(name.isAscii);
+
     final namePointer = name.toAscii();
+    try {
+      final res = icu4XBindings.locale.createFromString(
+        namePointer.pointer,
+        namePointer.length,
+      );
 
-    final res = icu4XBindings.locale.createFromString(
-      namePointer.bytes,
-      namePointer.length,
-    );
+      if (res.is_ok) {
+        return res.value.ok;
+      }
 
-    namePointer.free();
-
-    if (res.is_ok) {
-      return res.value.ok;
+      throw FFIError(res.value.err);
+    } finally {
+      namePointer.free();
     }
-
-    throw FFIError(res.value.err);
   }
 
   @pragma('vm:prefer-inline')
@@ -103,19 +145,19 @@ sealed class BaseLocale implements ffi.Finalizable {
     ) callback,
   ) {
     final writable = icu4XBindings.diplomat.bufferWriteableCreate(minCap);
-    final res = callback(pointer, writable);
+    try {
+      final res = callback(pointer, writable);
 
-    if (res.is_ok) {
-      final resStr = writable.ref.asAsciiString;
+      if (res.is_ok) {
+        final resStr = writable.ref.asAsciiString;
 
+        return resStr;
+      }
+
+      throw FFIError(res.err);
+    } finally {
       icu4XBindings.diplomat.bufferWriteableDestroy(writable);
-
-      return resStr;
     }
-
-    icu4XBindings.diplomat.bufferWriteableDestroy(writable);
-
-    throw FFIError(res.err);
   }
 
   @pragma('vm:prefer-inline')
@@ -130,22 +172,22 @@ sealed class BaseLocale implements ffi.Finalizable {
     ) callback,
   ) {
     final writable = icu4XBindings.diplomat.bufferWriteableCreate(minCap);
-    final res = callback(pointer, writable);
+    try {
+      final res = callback(pointer, writable);
 
-    if (res.is_ok) {
-      final resStr = writable.ref.asAsciiString;
+      if (res.is_ok) {
+        final resStr = writable.ref.asAsciiString;
 
+        return resStr;
+      }
+
+      if (res.err == ICU4XError.localeUndefinedSubtagError) {
+        return null;
+      }
+
+      throw FFIError(res.err);
+    } finally {
       icu4XBindings.diplomat.bufferWriteableDestroy(writable);
-
-      return resStr;
     }
-
-    icu4XBindings.diplomat.bufferWriteableDestroy(writable);
-
-    if (res.err == ICU4XError.localeUndefinedSubtagError) {
-      return null;
-    }
-
-    throw FFIError(res.err);
   }
 }
