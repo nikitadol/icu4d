@@ -5,7 +5,8 @@ import 'package:icu4d/icu.dart';
 import 'package:path/path.dart';
 import 'package:test/test.dart';
 
-import 'test_setup.dart';
+import '../helpers/collection.dart';
+import '../helpers/test_setup.dart';
 
 const _fixturesPath = '../../icu4x/components/locid/tests/fixtures';
 
@@ -323,6 +324,82 @@ void main() {
         ..script = null
         ..region = 'uS';
       expect(locale.toString(), 'en-US');
+    },
+  );
+
+  test(
+    'mutable',
+    () {
+      final locale = MutableLocale.createUnd();
+
+      expect(locale.toString(), BaseLocale.undTag);
+      locale.language = 'en';
+      expect(locale.toString(), 'en');
+
+      locale.region = 'uk';
+      expect(locale.toString(), 'en-UK');
+
+      locale.script = 'latn';
+      expect(locale.toString(), 'en-Latn-UK');
+
+      locale.region = null;
+      expect(locale.toString(), 'en-Latn');
+
+      locale
+        ..script = null
+        ..region = 'uS';
+      expect(locale.toString(), 'en-US');
+    },
+  );
+
+  test(
+    'normalizing equality',
+    () {
+      const bcp47Strings = [
+        'pl-LaTn-pL',
+        'uNd',
+        'UND-FONIPA',
+        'UnD-t-m0-TrUe',
+        'uNd-u-CA-Japanese',
+        'ZH',
+      ];
+
+      for (final str in bcp47Strings) {
+        expect(Locale.fromString(str).normalizingEquality(str), true);
+      }
+    },
+  );
+
+  test(
+    'strict compare',
+    () {
+      const bcp47Strings = [
+        'pl-Latn-PL',
+        'und',
+        'und-fonipa',
+        'und-t-m0-true',
+        'und-u-ca-hebrew',
+        'und-u-ca-japanese',
+        'zh',
+      ];
+
+      for (final [a, b] in bcp47Strings.windows(2)) {
+        expect(a.compareTo(b), isNegative);
+
+        final aLocale = Locale.fromString(a);
+
+        expect(aLocale.strictCompare(a), isZero);
+        expect(
+          aLocale.compareTo(Locale.fromString(a)),
+          aLocale.strictCompare(a),
+        );
+
+        expect(aLocale.strictCompare(b), isNegative);
+        expect(
+          aLocale.compareTo(Locale.fromString(b)),
+          aLocale.strictCompare(b),
+        );
+      }
     },
   );
 }

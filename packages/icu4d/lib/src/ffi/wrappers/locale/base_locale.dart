@@ -1,6 +1,6 @@
 part of icu4d_ffi;
 
-sealed class BaseLocale implements ffi.Finalizable {
+sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
   static final _finalizer = ffi.NativeFinalizer(
     icu4XBindings.locale.destroyPointer.cast(),
   );
@@ -105,6 +105,62 @@ sealed class BaseLocale implements ffi.Finalizable {
 
   MutableLocale mutableClone() {
     return MutableLocale._(icu4XBindings.locale.clone(_locale));
+  }
+
+  // equal to this == Locale.fromString(other)
+  bool normalizingEquality(String other) {
+    assert(other.length >= 2);
+    assert(other.isAscii);
+
+    final otherPointer = other.toAscii();
+    try {
+      return icu4XBindings.locale.normalizingEq(
+        _locale,
+        otherPointer.pointer,
+        otherPointer.length,
+      );
+    } finally {
+      otherPointer.free();
+    }
+  }
+
+  // no canonization for other
+  int strictCompare(String other) {
+    assert(other.length >= 2);
+    assert(other.isAscii);
+
+    final otherPointer = other.toAscii();
+    try {
+      return icu4XBindings.locale.strictCmp(
+        _locale,
+        otherPointer.pointer,
+        otherPointer.length,
+      );
+    } finally {
+      otherPointer.free();
+    }
+  }
+
+  @override
+  int compareTo(BaseLocale other) {
+    final writablePointer = icu4XBindings.diplomat.bufferWriteableCreate(18);
+    try {
+      final res =
+          icu4XBindings.locale.toString_(other._locale, writablePointer);
+
+      if (res.is_ok) {
+        final writable = writablePointer.ref;
+        return icu4XBindings.locale.strictCmp(
+          _locale,
+          writable.buf,
+          writable.len,
+        );
+      }
+
+      throw FFIError(res.err);
+    } finally {
+      icu4XBindings.diplomat.bufferWriteableDestroy(writablePointer);
+    }
   }
 
   @override
