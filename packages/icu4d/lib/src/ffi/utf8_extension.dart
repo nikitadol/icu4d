@@ -2,7 +2,7 @@ part of icu4d_ffi;
 
 extension StringUtf8Pointer on String {
   ({
-    ffi.Pointer<ffi.Uint8> bytes,
+    ffi.Pointer<ffi.Uint8> pointer,
     int length,
     void Function() free,
   }) toUtf8() {
@@ -59,7 +59,7 @@ extension StringUtf8Pointer on String {
     } while (index < length);
 
     return (
-      bytes: pointer,
+    pointer: pointer,
       length: offset,
       free: () => icu4XAllocator.free(pointer, bufferLength, 1),
     );
