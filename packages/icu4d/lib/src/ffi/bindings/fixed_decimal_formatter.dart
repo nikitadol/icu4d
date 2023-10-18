@@ -8,6 +8,12 @@ final class _FixedDecimalFormatter {
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
+// C args:
+// - ICU4XDataStruct*
+// - ICU4XFixedDecimalGroupingStrategy
+//
+// C return:
+// - diplomat_result_box_ICU4XFixedDecimalFormatter_ICU4XError
   late final ResultICU4XFixedDecimalFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataStruct> data_struct,
     int grouping_strategy,
@@ -24,6 +30,13 @@ final class _FixedDecimalFormatter {
     isLeaf: true,
   );
 
+// C args:
+// - ICU4XDataProvider*
+// - ICU4XLocale*
+// - ICU4XFixedDecimalGroupingStrategy
+//
+// C return:
+// - diplomat_result_box_ICU4XFixedDecimalFormatter_ICU4XError
   late final ResultICU4XFixedDecimalFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,

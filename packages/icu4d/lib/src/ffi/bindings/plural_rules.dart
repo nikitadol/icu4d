@@ -21,6 +21,12 @@ final class _PluralRules {
     isLeaf: true,
   );
 
+// C args:
+// - ICU4XPluralRules*
+// - ICU4XPluralOperands*
+//
+// C return:
+// - ICU4XPluralCategory
   late final int Function(
     ffi.Pointer<ICU4XPluralRules> self,
     ffi.Pointer<ICU4XPluralOperands> op,

@@ -8,6 +8,15 @@ final class _Collator {
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
+// C args:
+// - ICU4XCollator*
+// - ffi.Uint8*
+// - ffi.Size
+// - ffi.Uint8*
+// - ffi.Size
+//
+// C return:
+// - ICU4XOrdering
   late final int Function(
     ffi.Pointer<ICU4XCollator> self,
     ffi.Pointer<ffi.Uint8> left_data,
@@ -33,6 +42,15 @@ final class _Collator {
     isLeaf: true,
   );
 
+// C args:
+// - ICU4XCollator*
+// - Uint16*
+// - ffi.Size
+// - Uint16*
+// - ffi.Size
+//
+// C return:
+// - ICU4XOrdering
   late final int Function(
     ffi.Pointer<ICU4XCollator> self,
     ffi.Pointer<ffi.Uint16> left_data,
@@ -58,6 +76,15 @@ final class _Collator {
     isLeaf: true,
   );
 
+// C args:
+// - ICU4XCollator*
+// - ffi.Uint8*
+// - ffi.Size
+// - ffi.Uint8*
+// - ffi.Size
+//
+// C return:
+// - ICU4XOrdering
   late final int Function(
     ffi.Pointer<ICU4XCollator> self,
     ffi.Pointer<ffi.Uint8> left_data,

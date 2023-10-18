@@ -48,6 +48,11 @@ final class _WordBreakIteratorUtf8 {
     isLeaf: true,
   );
 
+// C args:
+// - ICU4XWordBreakIteratorUtf8*
+//
+// C return:
+// - ICU4XSegmenterWordType
   late final int Function(
     ffi.Pointer<ICU4XWordBreakIteratorUtf8> self,
   ) wordType = dynamicLibrary.lookupFunction<

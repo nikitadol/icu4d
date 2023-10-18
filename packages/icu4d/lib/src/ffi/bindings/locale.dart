@@ -293,6 +293,13 @@ final class _Locale {
     int bytes_len,
   ) setScript;
 
+// C args:
+// - ICU4XLocale*
+// - ffi.Uint8*
+// - ffi.Size
+//
+// C return:
+// - ICU4XOrdering
   final int Function(
     ffi.Pointer<ICU4XLocale> self,
     ffi.Pointer<ffi.Uint8> other_data,

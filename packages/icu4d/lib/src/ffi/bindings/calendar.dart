@@ -8,6 +8,12 @@ final class _Calendar {
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
+// C args:
+// - ICU4XDataProvider*
+// - ICU4XAnyCalendarKind
+//
+// C return:
+// - diplomat_result_box_ICU4XCalendar_ICU4XError
   late final ResultICU4XCalendarOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     int kind,
@@ -54,6 +60,11 @@ final class _Calendar {
             ffi.Pointer<ICU4XCalendar> self,
           )>>('ICU4XCalendar_destroy');
 
+// C args:
+// - ICU4XCalendar*
+//
+// C return:
+// - ICU4XAnyCalendarKind
   late final int Function(
     ffi.Pointer<ICU4XCalendar> self,
   ) kind = dynamicLibrary.lookupFunction<

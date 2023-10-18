@@ -48,6 +48,12 @@ final class _LocaleExpander {
             ffi.Pointer<ICU4XLocaleExpander> self,
           )>>('ICU4XLocaleExpander_destroy');
 
+// C args:
+// - ICU4XLocaleExpander*
+// - ICU4XLocale*
+//
+// C return:
+// - ICU4XTransformResult
   late final int Function(
     ffi.Pointer<ICU4XLocaleExpander> self,
     ffi.Pointer<ICU4XLocale> locale,
@@ -64,6 +70,12 @@ final class _LocaleExpander {
     isLeaf: true,
   );
 
+// C args:
+// - ICU4XLocaleExpander*
+// - ICU4XLocale*
+//
+// C return:
+// - ICU4XTransformResult
   late final int Function(
     ffi.Pointer<ICU4XLocaleExpander> self,
     ffi.Pointer<ICU4XLocale> locale,

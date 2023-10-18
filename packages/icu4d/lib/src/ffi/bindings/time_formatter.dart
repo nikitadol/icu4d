@@ -8,6 +8,13 @@ final class _TimeFormatter {
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
+// C args:
+// - ICU4XDataProvider*
+// - ICU4XLocale*
+// - ICU4XTimeLength
+//
+// C return:
+// - diplomat_result_box_ICU4XTimeFormatter_ICU4XError
   late final ResultICU4XTimeFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,

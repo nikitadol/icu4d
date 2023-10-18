@@ -8,6 +8,14 @@ final class _ZonedDateTimeFormatter {
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
+// C args:
+// - ICU4XDataProvider*
+// - ICU4XLocale*
+// - ICU4XDateLength
+// - ICU4XTimeLength
+//
+// C return:
+// - diplomat_result_box_ICU4XZonedDateTimeFormatter_ICU4XError
   late final ResultICU4XZonedDateTimeFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,
@@ -30,6 +38,15 @@ final class _ZonedDateTimeFormatter {
     isLeaf: true,
   );
 
+// C args:
+// - ICU4XDataProvider*
+// - ICU4XLocale*
+// - ICU4XDateLength
+// - ICU4XTimeLength
+// - ICU4XIsoTimeZoneOptions
+//
+// C return:
+// - diplomat_result_box_ICU4XZonedDateTimeFormatter_ICU4XError
   late final ResultICU4XZonedDateTimeFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,

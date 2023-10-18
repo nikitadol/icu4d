@@ -310,6 +310,19 @@ void main(List<String> args) {
         ..modifier = code_builder.FieldModifier.final$
         ..type = funcType;
 
+      if (function.functionType.returnType is ffigen.EnumClass ||
+          function.functionType.dartTypeParameters
+              .any((element) => element.type is ffigen.EnumClass)) {
+        field.docs.addAll([
+          '// C args:',
+          for (final parameter in function.functionType.parameters)
+            '// - ${parameter.type}',
+          '//',
+          '// C return:',
+          '// - ${function.functionType.returnType}',
+        ]);
+      }
+
       if (_nonOptionalFunctions.contains(function.name)) {
         bindingConstructorBuilder.initializers.add(
           code_builder.refer(funcName).assign(lookup).code,
@@ -469,6 +482,10 @@ void main(List<String> args) {
           field.annotations.add(code_builder.refer(cType).call([]));
         }
 
+        if (member.type is ffigen.EnumClass) {
+          field.docs.add('// ${member.type}');
+        }
+
         builder.fields.add(field.build());
       }
 
@@ -508,6 +525,10 @@ void main(List<String> args) {
         final cType = member.type.getCType(library.writer);
         if (dartType != cType) {
           field.annotations.add(code_builder.refer(cType).call([]));
+        }
+
+        if (member.type is ffigen.EnumClass) {
+          field.docs.add('// ${member.type}');
         }
 
         builder.fields.add(field.build());

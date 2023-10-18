@@ -24,6 +24,12 @@ final class _WeekCalculator {
     isLeaf: true,
   );
 
+// C args:
+// - ICU4XIsoWeekday
+// - Uint8
+//
+// C return:
+// - ICU4XWeekCalculator*
   late final ffi.Pointer<ICU4XWeekCalculator> Function(
     int first_weekday,
     int min_week_days,
@@ -54,6 +60,11 @@ final class _WeekCalculator {
             ffi.Pointer<ICU4XWeekCalculator> self,
           )>>('ICU4XWeekCalculator_destroy');
 
+// C args:
+// - ICU4XWeekCalculator*
+//
+// C return:
+// - ICU4XIsoWeekday
   late final int Function(
     ffi.Pointer<ICU4XWeekCalculator> self,
   ) firstWeekday = dynamicLibrary.lookupFunction<
