@@ -8,12 +8,12 @@ final class _AnyCalendarKind {
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-// C args:
-// - ICU4XAnyCalendarKind
-// - DiplomatWriteable*
-//
-// C return:
-// - diplomat_result_void_ICU4XError
+  /// C args:
+  /// - [ICU4XAnyCalendarKind]
+  /// - [DiplomatWriteable]*
+  ///
+  /// C return:
+  /// - [ResultVoidOrICU4XError]
   late final ResultVoidOrICU4XError Function(
     int self,
     ffi.Pointer<DiplomatWriteable> write,

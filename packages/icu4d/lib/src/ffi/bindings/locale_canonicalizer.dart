@@ -8,12 +8,12 @@ final class _LocaleCanonicalizer {
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-// C args:
-// - ICU4XLocaleCanonicalizer*
-// - ICU4XLocale*
-//
-// C return:
-// - ICU4XTransformResult
+  /// C args:
+  /// - [ICU4XLocaleCanonicalizer]*
+  /// - [ICU4XLocale]*
+  ///
+  /// C return:
+  /// - [ICU4XTransformResult]
   late final int Function(
     ffi.Pointer<ICU4XLocaleCanonicalizer> self,
     ffi.Pointer<ICU4XLocale> locale,

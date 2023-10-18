@@ -8,12 +8,12 @@ final class _FixedDecimal {
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-// C args:
-// - ICU4XFixedDecimal*
-// - ICU4XFixedDecimalSignDisplay
-//
-// C return:
-// - ffi.Void
+  /// C args:
+  /// - [ICU4XFixedDecimal]*
+  /// - [ICU4XFixedDecimalSignDisplay]
+  ///
+  /// C return:
+  /// - [ffi.Void]
   late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int sign_display,
@@ -459,12 +459,12 @@ final class _FixedDecimal {
     isLeaf: true,
   );
 
-// C args:
-// - ICU4XFixedDecimal*
-// - ICU4XFixedDecimalSign
-//
-// C return:
-// - ffi.Void
+  /// C args:
+  /// - [ICU4XFixedDecimal]*
+  /// - [ICU4XFixedDecimalSign]
+  ///
+  /// C return:
+  /// - [ffi.Void]
   late final void Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
     int sign,
@@ -481,11 +481,11 @@ final class _FixedDecimal {
     isLeaf: true,
   );
 
-// C args:
-// - ICU4XFixedDecimal*
-//
-// C return:
-// - ICU4XFixedDecimalSign
+  /// C args:
+  /// - [ICU4XFixedDecimal]*
+  ///
+  /// C return:
+  /// - [ICU4XFixedDecimalSign]
   late final int Function(
     ffi.Pointer<ICU4XFixedDecimal> self,
   ) sign = dynamicLibrary.lookupFunction<

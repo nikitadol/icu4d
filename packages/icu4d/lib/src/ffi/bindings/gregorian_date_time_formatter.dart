@@ -8,14 +8,14 @@ final class _GregorianDateTimeFormatter {
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-// C args:
-// - ICU4XDataProvider*
-// - ICU4XLocale*
-// - ICU4XDateLength
-// - ICU4XTimeLength
-//
-// C return:
-// - diplomat_result_box_ICU4XGregorianDateTimeFormatter_ICU4XError
+  /// C args:
+  /// - [ICU4XDataProvider]*
+  /// - [ICU4XLocale]*
+  /// - [ICU4XDateLength]
+  /// - [ICU4XTimeLength]
+  ///
+  /// C return:
+  /// - [ResultICU4XGregorianDateTimeFormatterOrICU4XError]
   late final ResultICU4XGregorianDateTimeFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,

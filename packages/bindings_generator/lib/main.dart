@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:dart_style/dart_style.dart';
 import 'package:ffigen/ffigen.dart' as ffigen;
 import 'package:ffigen/src/code_generator.dart' as ffigen;
+import 'package:ffigen/src/code_generator/writer.dart' as ffigen;
 import 'package:path/path.dart';
 import 'package:recase/recase.dart';
 import 'package:yaml/yaml.dart';
@@ -103,6 +104,7 @@ void main(List<String> args) {
   print('Parsing...');
 
   final library = ffigen.parse(ffiGenConfig);
+  final writer = library.writer;
 
   print('Processing...');
 
@@ -121,8 +123,7 @@ void main(List<String> args) {
         final space = name.substring(0, name.indexOf('_'));
 
         if (function.name.endsWith('_destroy') &&
-            function.functionType.returnType.getDartType(library.writer) ==
-                'void' &&
+            function.functionType.returnType.getDartType(writer) == 'void' &&
             function.functionType.parameters.first.type.baseType
                 is ffigen.EnumClass) {
           continue;
@@ -174,16 +175,16 @@ void main(List<String> args) {
   String functionToString(ffigen.FunctionType functionType, bool dart) {
     final sb = StringBuffer();
     if (dart) {
-      sb.write(functionType.returnType.getDartType(library.writer));
+      sb.write(functionType.returnType.getDartType(writer));
     } else {
-      sb.write(functionType.returnType.getCType(library.writer));
+      sb.write(functionType.returnType.getCType(writer));
     }
     sb.write(' Function(');
 
     if (dart) {
       sb.writeAll([
         for (final param in functionType.dartTypeParameters) ...[
-          param.type.getDartType(library.writer),
+          param.type.getDartType(writer),
           ' ',
           param.name,
           ', ',
@@ -192,7 +193,7 @@ void main(List<String> args) {
     } else {
       sb.writeAll([
         for (final param in functionType.parameters) ...[
-          param.type.getCType(library.writer),
+          param.type.getCType(writer),
           ' ',
           param.name,
           ', ',
@@ -314,12 +315,12 @@ void main(List<String> args) {
           function.functionType.dartTypeParameters
               .any((element) => element.type is ffigen.EnumClass)) {
         field.docs.addAll([
-          '// C args:',
+          '/// C args:',
           for (final parameter in function.functionType.parameters)
-            '// - ${parameter.type}',
-          '//',
-          '// C return:',
-          '// - ${function.functionType.returnType}',
+            '/// - ${parameter.type.asCommentString(writer)}',
+          '///',
+          '/// C return:',
+          '/// - ${function.functionType.returnType.asCommentString(writer)}',
         ]);
       }
 
@@ -420,8 +421,9 @@ void main(List<String> args) {
         final fieldBuilder = code_builder.FieldBuilder()
           ..name = constant.name.substring(enum$.name.length + 1).camelCase
           ..static = true
+          ..modifier = code_builder.FieldModifier.constant
           ..type = code_builder.refer(
-            enum$.baseType.getDartType(library.writer),
+            enum$.baseType.getDartType(writer),
           )
           ..assignment = code_builder.literalNum(constant.value).code;
 
@@ -470,20 +472,20 @@ void main(List<String> args) {
             name = member.name;
         }
 
-        final dartType = type.getDartType(library.writer);
+        final dartType = type.getDartType(writer);
 
         final field = code_builder.FieldBuilder()
           ..name = name
           ..external = true
           ..type = code_builder.refer(dartType);
 
-        final cType = type.getCType(library.writer);
+        final cType = type.getCType(writer);
         if (dartType != cType) {
           field.annotations.add(code_builder.refer(cType).call([]));
         }
 
-        if (member.type is ffigen.EnumClass) {
-          field.docs.add('// ${member.type}');
+        if (type is ffigen.EnumClass) {
+          field.docs.add('/// ${type.asCommentString(writer)}');
         }
 
         builder.fields.add(field.build());
@@ -515,20 +517,20 @@ void main(List<String> args) {
         );
 
       for (final member in union.members) {
-        final dartType = member.type.getDartType(library.writer);
+        final dartType = member.type.getDartType(writer);
 
         final field = code_builder.FieldBuilder()
           ..name = member.name
           ..external = true
           ..type = code_builder.refer(dartType);
 
-        final cType = member.type.getCType(library.writer);
+        final cType = member.type.getCType(writer);
         if (dartType != cType) {
           field.annotations.add(code_builder.refer(cType).call([]));
         }
 
         if (member.type is ffigen.EnumClass) {
-          field.docs.add('// ${member.type}');
+          field.docs.add('/// ${member.type.asCommentString(writer)}');
         }
 
         builder.fields.add(field.build());
@@ -589,5 +591,22 @@ extension on File {
         spec.accept(emitter).toString(),
       ),
     );
+  }
+}
+
+extension on ffigen.Type {
+  String asCommentString(ffigen.Writer writer) {
+    final type = this;
+    if (type is ffigen.PointerType) {
+      return '${type.child.asCommentString(writer)}*';
+    } else if (type is ffigen.Struct) {
+      return '[${type.name}]';
+    } else if (type is ffigen.Union) {
+      return '[${type.name}]';
+    } else if (type is ffigen.NativeType) {
+      return '[${type.getCType(writer)}]';
+    }
+
+    return '[$type]';
   }
 }

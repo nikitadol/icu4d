@@ -8,13 +8,13 @@ final class _ListFormatter {
   @visibleForTesting
   final ffi.DynamicLibrary dynamicLibrary;
 
-// C args:
-// - ICU4XDataProvider*
-// - ICU4XLocale*
-// - ICU4XListLength
-//
-// C return:
-// - diplomat_result_box_ICU4XListFormatter_ICU4XError
+  /// C args:
+  /// - [ICU4XDataProvider]*
+  /// - [ICU4XLocale]*
+  /// - [ICU4XListLength]
+  ///
+  /// C return:
+  /// - [ResultICU4XListFormatterOrICU4XError]
   late final ResultICU4XListFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,
@@ -34,13 +34,13 @@ final class _ListFormatter {
     isLeaf: true,
   );
 
-// C args:
-// - ICU4XDataProvider*
-// - ICU4XLocale*
-// - ICU4XListLength
-//
-// C return:
-// - diplomat_result_box_ICU4XListFormatter_ICU4XError
+  /// C args:
+  /// - [ICU4XDataProvider]*
+  /// - [ICU4XLocale]*
+  /// - [ICU4XListLength]
+  ///
+  /// C return:
+  /// - [ResultICU4XListFormatterOrICU4XError]
   late final ResultICU4XListFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,
@@ -60,13 +60,13 @@ final class _ListFormatter {
     isLeaf: true,
   );
 
-// C args:
-// - ICU4XDataProvider*
-// - ICU4XLocale*
-// - ICU4XListLength
-//
-// C return:
-// - diplomat_result_box_ICU4XListFormatter_ICU4XError
+  /// C args:
+  /// - [ICU4XDataProvider]*
+  /// - [ICU4XLocale]*
+  /// - [ICU4XListLength]
+  ///
+  /// C return:
+  /// - [ResultICU4XListFormatterOrICU4XError]
   late final ResultICU4XListFormatterOrICU4XError Function(
     ffi.Pointer<ICU4XDataProvider> provider,
     ffi.Pointer<ICU4XLocale> locale,

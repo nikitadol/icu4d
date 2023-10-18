@@ -51,12 +51,12 @@ final class _LocaleDirectionality {
             ffi.Pointer<ICU4XLocaleDirectionality> self,
           )>>('ICU4XLocaleDirectionality_destroy');
 
-// C args:
-// - ICU4XLocaleDirectionality*
-// - ICU4XLocale*
-//
-// C return:
-// - ICU4XLocaleDirection
+  /// C args:
+  /// - [ICU4XLocaleDirectionality]*
+  /// - [ICU4XLocale]*
+  ///
+  /// C return:
+  /// - [ICU4XLocaleDirection]
   late final int Function(
     ffi.Pointer<ICU4XLocaleDirectionality> self,
     ffi.Pointer<ICU4XLocale> locale,

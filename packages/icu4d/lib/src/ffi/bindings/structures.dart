@@ -69,31 +69,31 @@ final class ICU4XCodePointSetData extends ffi.Opaque {}
 final class ICU4XCollator extends ffi.Opaque {}
 
 final class ICU4XCollatorOptionsV1 extends ffi.Struct {
-  // ICU4XCollatorStrength
+  /// [ICU4XCollatorStrength]
   @ffi.Int32()
   external int strength;
 
-// ICU4XCollatorAlternateHandling
+  /// [ICU4XCollatorAlternateHandling]
   @ffi.Int32()
   external int alternate_handling;
 
-// ICU4XCollatorCaseFirst
+  /// [ICU4XCollatorCaseFirst]
   @ffi.Int32()
   external int case_first;
 
-// ICU4XCollatorMaxVariable
+  /// [ICU4XCollatorMaxVariable]
   @ffi.Int32()
   external int max_variable;
 
-// ICU4XCollatorCaseLevel
+  /// [ICU4XCollatorCaseLevel]
   @ffi.Int32()
   external int case_level;
 
-// ICU4XCollatorNumeric
+  /// [ICU4XCollatorNumeric]
   @ffi.Int32()
   external int numeric;
 
-// ICU4XCollatorBackwardSecondLevel
+  /// [ICU4XCollatorBackwardSecondLevel]
   @ffi.Int32()
   external int backward_second_level;
 }
@@ -125,15 +125,15 @@ final class ICU4XDecomposed extends ffi.Struct {
 final class ICU4XDecomposingNormalizer extends ffi.Opaque {}
 
 final class ICU4XDisplayNamesOptionsV1 extends ffi.Struct {
-  // ICU4XDisplayNamesStyle
+  /// [ICU4XDisplayNamesStyle]
   @ffi.Int32()
   external int style;
 
-// ICU4XDisplayNamesFallback
+  /// [ICU4XDisplayNamesFallback]
   @ffi.Int32()
   external int fallback;
 
-// ICU4XLanguageDisplay
+  /// [ICU4XLanguageDisplay]
   @ffi.Int32()
   external int language_display;
 }
@@ -165,15 +165,15 @@ final class ICU4XIsoDate extends ffi.Opaque {}
 final class ICU4XIsoDateTime extends ffi.Opaque {}
 
 final class ICU4XIsoTimeZoneOptions extends ffi.Struct {
-  // ICU4XIsoTimeZoneFormat
+  /// [ICU4XIsoTimeZoneFormat]
   @ffi.Int32()
   external int format;
 
-// ICU4XIsoTimeZoneMinuteDisplay
+  /// [ICU4XIsoTimeZoneMinuteDisplay]
   @ffi.Int32()
   external int minutes;
 
-// ICU4XIsoTimeZoneSecondDisplay
+  /// [ICU4XIsoTimeZoneSecondDisplay]
   @ffi.Int32()
   external int seconds;
 }
@@ -185,11 +185,11 @@ final class ICU4XLineBreakIteratorUtf16 extends ffi.Opaque {}
 final class ICU4XLineBreakIteratorUtf8 extends ffi.Opaque {}
 
 final class ICU4XLineBreakOptionsV1 extends ffi.Struct {
-  // ICU4XLineBreakStrictness
+  /// [ICU4XLineBreakStrictness]
   @ffi.Int32()
   external int strictness;
 
-// ICU4XLineBreakWordOption
+  /// [ICU4XLineBreakWordOption]
   @ffi.Int32()
   external int word_option;
 
@@ -214,13 +214,13 @@ final class ICU4XLocaleDisplayNamesFormatter extends ffi.Opaque {}
 final class ICU4XLocaleExpander extends ffi.Opaque {}
 
 final class ICU4XLocaleFallbackConfig extends ffi.Struct {
-  // ICU4XLocaleFallbackPriority
+  /// [ICU4XLocaleFallbackPriority]
   @ffi.Int32()
   external int priority;
 
   external DiplomatStringView extension_key;
 
-// ICU4XLocaleFallbackSupplement
+  /// [ICU4XLocaleFallbackSupplement]
   @ffi.Int32()
   external int fallback_supplement;
 }
@@ -288,11 +288,11 @@ final class ICU4XTimeZoneFormatter extends ffi.Opaque {}
 final class ICU4XTitlecaseMapper extends ffi.Opaque {}
 
 final class ICU4XTitlecaseOptionsV1 extends ffi.Struct {
-  // ICU4XLeadingAdjustment
+  /// [ICU4XLeadingAdjustment]
   @ffi.Int32()
   external int leading_adjustment;
 
-// ICU4XTrailingCase
+  /// [ICU4XTrailingCase]
   @ffi.Int32()
   external int trailing_case;
 }
@@ -305,7 +305,7 @@ final class ICU4XWeekOf extends ffi.Struct {
   @ffi.Uint16()
   external int week;
 
-// ICU4XWeekRelativeUnit
+  /// [ICU4XWeekRelativeUnit]
   @ffi.Int32()
   external int unit;
 }
@@ -328,6 +328,7 @@ final class ResultBoolOrICU4XError extends ffi.Struct {
 }
 
 final class ResultICU4XAnyCalendarKindOrVoid extends ffi.Struct {
+  /// [ICU4XAnyCalendarKind]
   @ffi.Int32()
   external int ok;
 
@@ -629,6 +630,7 @@ final class ResultICU4XMetazoneCalculatorOrICU4XError extends ffi.Struct {
 }
 
 final class ResultICU4XPluralCategoryOrVoid extends ffi.Struct {
+  /// [ICU4XPluralCategory]
   @ffi.Int32()
   external int ok;
 
@@ -758,6 +760,7 @@ final class ResultUint16OrTOrVoid extends ffi.Struct {
 }
 
 final class ResultVoidOrICU4XError extends ffi.Struct {
+  /// [ICU4XError]
   @ffi.Int32()
   external int err;
 

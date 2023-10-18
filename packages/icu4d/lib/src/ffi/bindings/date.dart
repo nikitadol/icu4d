@@ -87,11 +87,11 @@ final class _Date {
     isLeaf: true,
   );
 
-// C args:
-// - ICU4XDate*
-//
-// C return:
-// - ICU4XIsoWeekday
+  /// C args:
+  /// - [ICU4XDate]*
+  ///
+  /// C return:
+  /// - [ICU4XIsoWeekday]
   late final int Function(
     ffi.Pointer<ICU4XDate> self,
   ) dayOfWeek = dynamicLibrary.lookupFunction<
@@ -232,12 +232,12 @@ final class _Date {
     isLeaf: true,
   );
 
-// C args:
-// - ICU4XDate*
-// - ICU4XIsoWeekday
-//
-// C return:
-// - Uint32
+  /// C args:
+  /// - [ICU4XDate]*
+  /// - [ICU4XIsoWeekday]
+  ///
+  /// C return:
+  /// - [ffi.Uint32]
   late final int Function(
     ffi.Pointer<ICU4XDate> self,
     int first_weekday,

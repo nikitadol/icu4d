@@ -22,11 +22,11 @@ final class _BidiParagraph {
             ffi.Pointer<ICU4XBidiParagraph> self,
           )>>('ICU4XBidiParagraph_destroy');
 
-// C args:
-// - ICU4XBidiParagraph*
-//
-// C return:
-// - ICU4XBidiDirection
+  /// C args:
+  /// - [ICU4XBidiParagraph]*
+  ///
+  /// C return:
+  /// - [ICU4XBidiDirection]
   late final int Function(
     ffi.Pointer<ICU4XBidiParagraph> self,
   ) direction = dynamicLibrary.lookupFunction<
