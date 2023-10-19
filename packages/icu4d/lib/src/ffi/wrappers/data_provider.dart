@@ -1,15 +1,15 @@
-part of icu4d_ffi;
+part of '../ffi.dart';
 
 final class DataProvider implements ffi.Finalizable {
   static final _finalizer = ffi.NativeFinalizer(
     icu4XBindings.dataProvider.destroyPointer.cast(),
   );
 
-  final ffi.Pointer<ICU4XDataProvider> _dataProvider;
+  final ffi.Pointer<ICU4XDataProvider> _pointer;
   _DataProviderState _state;
 
-  DataProvider._(this._dataProvider, this._state) {
-    _finalizer.attach(this, _dataProvider.cast());
+  DataProvider._(this._pointer, this._state) {
+    _finalizer.attach(this, _pointer.cast());
   }
 
   factory DataProvider.compiled() {
@@ -53,22 +53,21 @@ final class DataProvider implements ffi.Finalizable {
   }
 
   factory DataProvider.fromPath(String path) {
-    final pathPointer = path.toUtf8();
-    try {
-      final res = icu4XBindings.dataProvider
-          .createFs(pathPointer.pointer, pathPointer.length);
+    final pathPointer = StringPointer.toUtf8(path);
 
-      if (res.is_ok) {
-        return DataProvider._(
-          res.value.ok,
-          _DataProviderState.buffer,
-        );
-      }
+    final res = icu4XBindings.dataProvider
+        .createFs(pathPointer.pointer, pathPointer.size);
 
-      throw FFIError(res.value.err);
-    } finally {
-      pathPointer.free();
+    pathPointer.free();
+
+    if (res.is_ok) {
+      return DataProvider._(
+        res.value.ok,
+        _DataProviderState.buffer,
+      );
     }
+
+    throw FFIError(res.value.err);
   }
 
   void enableLocaleFallback() {
@@ -78,7 +77,7 @@ final class DataProvider implements ffi.Finalizable {
       '$_state provider cannot be modified',
     );
 
-    final res = icu4XBindings.dataProvider.enableLocaleFallback(_dataProvider);
+    final res = icu4XBindings.dataProvider.enableLocaleFallback(_pointer);
 
     if (res.is_ok) {
       return;
@@ -124,7 +123,7 @@ final class DataProvider implements ffi.Finalizable {
     _state = _DataProviderState.destroyed;
     other._state = _DataProviderState.destroyed;
 
-    final res = forkBy(_dataProvider, other._dataProvider);
+    final res = forkBy(_pointer, other._pointer);
 
     if (res.is_ok) {
       // only that possible

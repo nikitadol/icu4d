@@ -1,4 +1,4 @@
-part of icu4d_shared;
+part of 'shared.dart';
 
 final class FFIError extends Error {
   final int code;

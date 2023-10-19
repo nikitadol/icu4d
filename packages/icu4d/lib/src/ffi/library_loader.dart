@@ -1,4 +1,4 @@
-part of icu4d_ffi;
+part of 'ffi.dart';
 
 final LibraryLoader libraryLoader = LibraryLoader._();
 

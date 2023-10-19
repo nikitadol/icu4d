@@ -1,4 +1,4 @@
-part of icu4d_ffi;
+part of '../../ffi.dart';
 
 sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
   static final _finalizer = ffi.NativeFinalizer(
@@ -12,34 +12,28 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     assert(str.length >= 2);
     assert(str.isAscii);
 
-    final strPointer = str.toAscii();
-    try {
-      final writable = icu4XBindings.diplomat.bufferWriteableCreate(18);
+    final strPointer = StringPointer.toAscii(str);
+    final writeable = Writeable(18);
 
-      try {
-        final res = icu4XBindings.locale.canonicalize(
-          strPointer.pointer,
-          strPointer.length,
-          writable,
-        );
+    final res = icu4XBindings.locale.canonicalize(
+      strPointer.pointer,
+      strPointer.size,
+      writeable.pointer,
+    );
 
-        if (res.is_ok) {
-          return writable.ref.asAsciiString;
-        }
+    strPointer.free();
 
-        throw FFIError(res.err);
-      } finally {
-        icu4XBindings.diplomat.bufferWriteableDestroy(writable);
-      }
-    } finally {
-      strPointer.free();
+    if (res.is_ok) {
+      return writeable.asAsciiString;
     }
+
+    throw FFIError(res.err);
   }
 
-  final ffi.Pointer<ICU4XLocale> _locale;
+  final ffi.Pointer<ICU4XLocale> _pointer;
 
-  BaseLocale._(this._locale) {
-    _finalizer.attach(this, _locale.cast());
+  BaseLocale._(this._pointer) {
+    _finalizer.attach(this, _pointer.cast());
   }
 
   String get basename {
@@ -49,19 +43,19 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     // variants - 4...8 - list - 0...?
     // 3 + 4 + 3 + 8 = 18
 
-    return _returnAscii(18, _locale, icu4XBindings.locale.basename);
+    return _returnAscii(18, _pointer, icu4XBindings.locale.basename);
   }
 
   String get language {
-    return _returnAscii(3, _locale, icu4XBindings.locale.language);
+    return _returnAscii(3, _pointer, icu4XBindings.locale.language);
   }
 
   String? get region {
-    return _returnAsciiNullable(3, _locale, icu4XBindings.locale.region);
+    return _returnAsciiNullable(3, _pointer, icu4XBindings.locale.region);
   }
 
   String? get script {
-    return _returnAsciiNullable(4, _locale, icu4XBindings.locale.script);
+    return _returnAsciiNullable(4, _pointer, icu4XBindings.locale.script);
   }
 
   // empty string == 'true'
@@ -69,28 +63,24 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     assert(key.length == 2);
     assert(key.isAscii);
 
-    final keyBytes = key.toAscii();
+    final keyPointer = StringPointer.toAscii(key);
 
-    final writable = icu4XBindings.diplomat.bufferWriteableCreate(8);
+    final writeable = Writeable(8);
 
     final res = icu4XBindings.locale.getUnicodeExtension(
-      _locale,
-      keyBytes.pointer,
-      keyBytes.length,
-      writable,
+      _pointer,
+      keyPointer.pointer,
+      keyPointer.size,
+      writeable.pointer,
     );
 
-    keyBytes.free();
+    keyPointer.free();
 
     if (res.is_ok) {
-      final resStr = writable.ref.asAsciiString;
-
-      icu4XBindings.diplomat.bufferWriteableDestroy(writable);
+      final resStr = writeable.asAsciiString;
 
       return resStr;
     }
-
-    icu4XBindings.diplomat.bufferWriteableDestroy(writable);
 
     if (res.err == ICU4XError.localeUndefinedSubtagError) {
       return null;
@@ -100,11 +90,11 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
   }
 
   Locale clone() {
-    return Locale._(icu4XBindings.locale.clone(_locale));
+    return Locale._(icu4XBindings.locale.clone(_pointer));
   }
 
   MutableLocale mutableClone() {
-    return MutableLocale._(icu4XBindings.locale.clone(_locale));
+    return MutableLocale._(icu4XBindings.locale.clone(_pointer));
   }
 
   // equal to this == Locale.fromString(other)
@@ -112,16 +102,17 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     assert(other.length >= 2);
     assert(other.isAscii);
 
-    final otherPointer = other.toAscii();
-    try {
-      return icu4XBindings.locale.normalizingEq(
-        _locale,
-        otherPointer.pointer,
-        otherPointer.length,
-      );
-    } finally {
-      otherPointer.free();
-    }
+    final otherPointer = StringPointer.toAscii(other);
+
+    final result = icu4XBindings.locale.normalizingEq(
+      _pointer,
+      otherPointer.pointer,
+      otherPointer.size,
+    );
+
+    otherPointer.free();
+
+    return result;
   }
 
   // no canonization for other
@@ -129,64 +120,68 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     assert(other.length >= 2);
     assert(other.isAscii);
 
-    final otherPointer = other.toAscii();
-    try {
-      return icu4XBindings.locale.strictCmp(
-        _locale,
-        otherPointer.pointer,
-        otherPointer.length,
-      );
-    } finally {
-      otherPointer.free();
-    }
+    final otherPointer = StringPointer.toAscii(other);
+
+    final res = icu4XBindings.locale.strictCmp(
+      _pointer,
+      otherPointer.pointer,
+      otherPointer.size,
+    );
+
+    otherPointer.free();
+
+    return res;
   }
 
   @override
   int compareTo(BaseLocale other) {
-    final writablePointer = icu4XBindings.diplomat.bufferWriteableCreate(18);
-    try {
-      final res =
-          icu4XBindings.locale.toString_(other._locale, writablePointer);
+    final writeable = Writeable(18);
 
-      if (res.is_ok) {
-        final writable = writablePointer.ref;
-        return icu4XBindings.locale.strictCmp(
-          _locale,
-          writable.buf,
-          writable.len,
-        );
-      }
+    final res = icu4XBindings.locale.toString_(
+      other._pointer,
+      writeable.pointer,
+    );
 
-      throw FFIError(res.err);
-    } finally {
-      icu4XBindings.diplomat.bufferWriteableDestroy(writablePointer);
+    if (res.is_ok) {
+      final writable = writeable.pointer.ref;
+
+      final res = icu4XBindings.locale.strictCmp(
+        _pointer,
+        writable.buf,
+        writable.len,
+      );
+
+      writeable.free();
+
+      return res;
     }
+
+    throw FFIError(res.err);
   }
 
   @override
   String toString() {
-    return _returnAscii(18, _locale, icu4XBindings.locale.toString_);
+    return _returnAscii(18, _pointer, icu4XBindings.locale.toString_);
   }
 
   static ffi.Pointer<ICU4XLocale> _fromString(String name) {
     assert(name.length >= 2, 'The given language subtag is invalid');
     assert(name.isAscii);
 
-    final namePointer = name.toAscii();
-    try {
-      final res = icu4XBindings.locale.createFromString(
-        namePointer.pointer,
-        namePointer.length,
-      );
+    final namePointer = StringPointer.toAscii(name);
 
-      if (res.is_ok) {
-        return res.value.ok;
-      }
+    final res = icu4XBindings.locale.createFromString(
+      namePointer.pointer,
+      namePointer.size,
+    );
 
-      throw FFIError(res.value.err);
-    } finally {
-      namePointer.free();
+    namePointer.free();
+
+    if (res.is_ok) {
+      return res.value.ok;
     }
+
+    throw FFIError(res.value.err);
   }
 
   @pragma('vm:prefer-inline')
@@ -200,20 +195,16 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
       ffi.Pointer<DiplomatWriteable>,
     ) callback,
   ) {
-    final writable = icu4XBindings.diplomat.bufferWriteableCreate(minCap);
-    try {
-      final res = callback(pointer, writable);
+    final writeable = Writeable(minCap);
+    final res = callback(pointer, writeable.pointer);
 
-      if (res.is_ok) {
-        final resStr = writable.ref.asAsciiString;
+    if (res.is_ok) {
+      final resStr = writeable.asAsciiString;
 
-        return resStr;
-      }
-
-      throw FFIError(res.err);
-    } finally {
-      icu4XBindings.diplomat.bufferWriteableDestroy(writable);
+      return resStr;
     }
+
+    throw FFIError(res.err);
   }
 
   @pragma('vm:prefer-inline')
@@ -227,23 +218,19 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
       ffi.Pointer<DiplomatWriteable>,
     ) callback,
   ) {
-    final writable = icu4XBindings.diplomat.bufferWriteableCreate(minCap);
-    try {
-      final res = callback(pointer, writable);
+    final writeable = Writeable(minCap);
+    final res = callback(pointer, writeable.pointer);
 
-      if (res.is_ok) {
-        final resStr = writable.ref.asAsciiString;
+    if (res.is_ok) {
+      final resStr = writeable.asAsciiString;
 
-        return resStr;
-      }
-
-      if (res.err == ICU4XError.localeUndefinedSubtagError) {
-        return null;
-      }
-
-      throw FFIError(res.err);
-    } finally {
-      icu4XBindings.diplomat.bufferWriteableDestroy(writable);
+      return resStr;
     }
+
+    if (res.err == ICU4XError.localeUndefinedSubtagError) {
+      return null;
+    }
+
+    throw FFIError(res.err);
   }
 }

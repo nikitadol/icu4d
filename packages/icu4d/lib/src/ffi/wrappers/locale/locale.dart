@@ -1,7 +1,7 @@
-part of icu4d_ffi;
+part of '../../ffi.dart';
 
 final class Locale extends BaseLocale {
-  Locale._(ffi.Pointer<ICU4XLocale> locale) : super._(locale);
+  Locale._(super.locale) : super._();
 
   factory Locale.createUnd() {
     return Locale._(icu4XBindings.locale.createUnd());

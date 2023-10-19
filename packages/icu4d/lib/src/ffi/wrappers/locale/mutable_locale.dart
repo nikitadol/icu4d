@@ -1,7 +1,7 @@
-part of icu4d_ffi;
+part of '../../ffi.dart';
 
 final class MutableLocale extends BaseLocale {
-  MutableLocale._(ffi.Pointer<ICU4XLocale> locale) : super._(locale);
+  MutableLocale._(super.locale) : super._();
 
   factory MutableLocale.createUnd() {
     return MutableLocale._(icu4XBindings.locale.createUnd());
@@ -14,7 +14,7 @@ final class MutableLocale extends BaseLocale {
     assert(2 <= value.length && value.length <= 3);
     assert(value.isAscii);
 
-    _setAscii(value, _locale, icu4XBindings.locale.setLanguage);
+    _setAscii(value, _pointer, icu4XBindings.locale.setLanguage);
   }
 
   set region(String? value) {
@@ -25,7 +25,7 @@ final class MutableLocale extends BaseLocale {
       assert(value.isAscii);
     }
 
-    _setAscii(value, _locale, icu4XBindings.locale.setRegion);
+    _setAscii(value, _pointer, icu4XBindings.locale.setRegion);
   }
 
   set script(String? value) {
@@ -36,7 +36,7 @@ final class MutableLocale extends BaseLocale {
       assert(value.isAscii);
     }
 
-    _setAscii(value, _locale, icu4XBindings.locale.setScript);
+    _setAscii(value, _pointer, icu4XBindings.locale.setScript);
   }
 
   @pragma('vm:prefer-inline')
@@ -51,18 +51,16 @@ final class MutableLocale extends BaseLocale {
       int,
     ) callback,
   ) {
-    final valuePointer = value.toAscii();
+    final valuePointer = StringPointer.toAscii(value);
 
-    try {
-      final res = callback(pointer, valuePointer.pointer, valuePointer.length);
+    final res = callback(pointer, valuePointer.pointer, valuePointer.size);
 
-      if (res.is_ok) {
-        return;
-      }
+    valuePointer.free();
 
-      throw FFIError(res.err);
-    } finally {
-      valuePointer.free();
+    if (res.is_ok) {
+      return;
     }
+
+    throw FFIError(res.err);
   }
 }

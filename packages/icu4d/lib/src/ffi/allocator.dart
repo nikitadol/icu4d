@@ -1,4 +1,4 @@
-part of icu4d_ffi;
+part of 'ffi.dart';
 
 class Icu4XAllocator {
   const Icu4XAllocator();
