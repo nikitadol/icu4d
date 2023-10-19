@@ -12,6 +12,7 @@ import 'package:icu4d/src/helpers/ascii.dart';
 part 'allocator.dart';
 part 'library_loader.dart';
 part 'wrappers/any_calendar_kind.dart';
+part 'wrappers/bcp47_to_iana_mapper.dart';
 part 'wrappers/data_provider.dart';
 part 'wrappers/locale/base_locale.dart';
 part 'wrappers/locale/locale.dart';

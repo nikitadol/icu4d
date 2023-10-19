@@ -1,6 +1,6 @@
 part of '../ffi.dart';
 
-class Writeable implements ffi.Finalizable {
+final class Writeable implements ffi.Finalizable {
   final _nativeFinalizer = ffi.NativeFinalizer(
     icu4XBindings.diplomat.bufferWriteableDestroyPointer.cast(),
   );
