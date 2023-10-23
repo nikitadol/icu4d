@@ -1,4 +1,4 @@
-part of '../ffi.dart';
+part of '../../ffi.dart';
 
 final class CanonicalCombiningClassMap implements ffi.Finalizable {
   static final _finalizer = ffi.NativeFinalizer(
