@@ -330,9 +330,9 @@ void main() {
   test(
     'mutable',
     () {
-      final locale = MutableLocale.createUnd();
+      final locale = MutableLocale.fromString('en');
 
-      expect(locale.toString(), BaseLocale.undTag);
+      expect(locale.toString(), 'en');
       locale.language = 'en';
       expect(locale.toString(), 'en');
 

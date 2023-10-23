@@ -1,6 +1,6 @@
-part of '../ffi.dart';
+part of '../../ffi.dart';
 
-enum AnyCalendarKind {
+enum CalendarKind {
   iso._(ICU4XAnyCalendarKind.iso),
   gregorian._(ICU4XAnyCalendarKind.gregorian),
   buddhist._(ICU4XAnyCalendarKind.buddhist),
@@ -20,9 +20,9 @@ enum AnyCalendarKind {
   persian._(ICU4XAnyCalendarKind.persian),
   roc._(ICU4XAnyCalendarKind.roc);
 
-  const AnyCalendarKind._(this._icu4xValue);
+  const CalendarKind._(this._icu4xValue);
 
-  static AnyCalendarKind? forBcp47(String str) {
+  static CalendarKind? forBcp47(String str) {
     assert(str.length >= 3);
     assert(str.isAscii);
 
@@ -38,7 +38,7 @@ enum AnyCalendarKind {
     return _findFromRes(res);
   }
 
-  static AnyCalendarKind? forLocale(Locale locale) {
+  static CalendarKind? forLocale(Locale locale) {
     final res = icu4XBindings.anyCalendarKind.getForLocale(locale._pointer);
 
     return _findFromRes(res);
@@ -66,14 +66,21 @@ enum AnyCalendarKind {
   @pragma('vm:prefer-inline')
   @pragma('vm:always-consider-inlining')
   @pragma('dart2js:prefer-inline')
-  static AnyCalendarKind? _findFromRes(ResultICU4XAnyCalendarKindOrVoid res) {
+  static CalendarKind? _findFromRes(ResultICU4XAnyCalendarKindOrVoid res) {
     if (res.is_ok) {
-      final icu4xValue = res.ok;
+      return _findFromIcu4XValue(res.ok);
+    }
 
-      for (final value in AnyCalendarKind.values) {
-        if (value._icu4xValue == icu4xValue) {
-          return value;
-        }
+    return null;
+  }
+
+  @pragma('vm:prefer-inline')
+  @pragma('vm:always-consider-inlining')
+  @pragma('dart2js:prefer-inline')
+  static CalendarKind? _findFromIcu4XValue(int icu4xValue) {
+    for (final value in CalendarKind.values) {
+      if (value._icu4xValue == icu4xValue) {
+        return value;
       }
     }
 

@@ -9,14 +9,14 @@ void main() {
   test(
     'any calendar kind',
     () {
-      expect(AnyCalendarKind.islamicUmmAlQura.bcp47, 'islamic-umalqura');
-      expect(AnyCalendarKind.iso.bcp47, 'iso');
-      expect(AnyCalendarKind.forBcp47('iso'), AnyCalendarKind.iso);
-      expect(AnyCalendarKind.forBcp47('iso1'), null);
-      expect(AnyCalendarKind.forLocale(Locale.fromString('en')), null);
+      expect(CalendarKind.islamicUmmAlQura.bcp47, 'islamic-umalqura');
+      expect(CalendarKind.iso.bcp47, 'iso');
+      expect(CalendarKind.forBcp47('iso'), CalendarKind.iso);
+      expect(CalendarKind.forBcp47('iso1'), null);
+      expect(CalendarKind.forLocale(Locale.fromString('en')), null);
       expect(
-        AnyCalendarKind.forLocale(Locale.fromString('en-u-ca-japanese')),
-        AnyCalendarKind.japanese,
+        CalendarKind.forLocale(Locale.fromString('en-u-ca-japanese')),
+        CalendarKind.japanese,
       );
     },
   );

@@ -12,12 +12,13 @@ import '../shared/shared.dart';
 
 part 'allocator.dart';
 part 'library_loader.dart';
-part 'wrappers/any_calendar_kind.dart';
 part 'wrappers/bcp47_to_iana_mapper.dart';
 part 'wrappers/bidi/bidi.dart';
 part 'wrappers/bidi/bidi_direction.dart';
 part 'wrappers/bidi/bidi_info.dart';
 part 'wrappers/bidi/bidi_paragraph.dart';
+part 'wrappers/calendar/calendar_kind.dart';
+part 'wrappers/calendar/calendar.dart';
 part 'wrappers/data_provider.dart';
 part 'wrappers/locale/base_locale.dart';
 part 'wrappers/locale/locale.dart';
