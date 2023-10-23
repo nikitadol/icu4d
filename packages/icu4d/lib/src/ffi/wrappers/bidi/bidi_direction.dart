@@ -5,6 +5,7 @@ enum BidiDirection {
   rtl._(ICU4XBidiDirection.rtl),
   mixed._(ICU4XBidiDirection.mixed);
 
+  // ignore: unused_field
   final int _icu4xValue;
 
   const BidiDirection._(this._icu4xValue);

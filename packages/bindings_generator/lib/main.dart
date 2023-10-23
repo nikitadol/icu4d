@@ -62,6 +62,11 @@ const _structuresNeedAllow = {
   'DiplomatStringView',
   'DiplomatUsizeView',
 };
+
+bool _generatePointerIf(String name) {
+  return name.endsWith('_destroy') || name.endsWith('_free');
+}
+
 final formatter = DartFormatter();
 
 void main(List<String> args) {
@@ -248,7 +253,7 @@ void main(List<String> args) {
       final code_builder.Expression lookup;
       final code_builder.Reference funcType;
 
-      if (function.name.endsWith('_destroy')) {
+      if (_generatePointerIf(function.name)) {
         final oldFuncName = funcName;
         funcName = '${funcName}Pointer';
 

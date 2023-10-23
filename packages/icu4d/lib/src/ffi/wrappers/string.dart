@@ -1,13 +1,18 @@
 part of '../ffi.dart';
 
-final class StringPointer {
-  static final _finalizer = Finalizer(_free);
+final class StringPointer implements ffi.Finalizable {
+  static final _finalizer = ffi.NativeFinalizer(icu4XAllocator.nativeFree);
 
   final ffi.Pointer<ffi.Uint8> pointer;
   final int size;
 
   StringPointer._(this.pointer, this.size) {
-    _finalizer.attach(this, this, detach: this);
+    _finalizer.attach(
+      this,
+      pointer.cast(),
+      detach: this,
+      externalSize: size,
+    );
   }
 
   factory StringPointer.toAscii(String str) {
@@ -90,13 +95,6 @@ final class StringPointer {
 
   void free() {
     _finalizer.detach(this);
-    _free(this);
-  }
-
-  @pragma('vm:prefer-inline')
-  @pragma('vm:always-consider-inlining')
-  @pragma('dart2js:prefer-inline')
-  static void _free(StringPointer pointer) {
-    icu4XAllocator.free(pointer.pointer, pointer.size, 1);
+    icu4XAllocator.free(pointer);
   }
 }

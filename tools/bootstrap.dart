@@ -67,6 +67,20 @@ Future<void> main() async {
 
   print('Building $_icu4x for tests...');
 
+  const dartAllocatorRs = 'dart_allocator.rs';
+
+  {
+    final src = path.join(_icu4x, 'ffi', 'diplomat', 'src');
+
+    io.File(path.join('tools', dartAllocatorRs))
+        .copySync(path.join(src, dartAllocatorRs));
+
+    io.File(path.join(src, 'lib.rs')).writeAsStringSync(
+      'mod dart_allocator;',
+      mode: io.FileMode.writeOnlyAppend,
+    );
+  }
+
   final buildResult = io.Process.runSync(
     'cargo',
     const [
