@@ -25,6 +25,7 @@ part 'wrappers/locale/locale.dart';
 part 'wrappers/locale/mutable_locale.dart';
 part 'wrappers/normalizer_properties/canonical_combining_class_map.dart';
 part 'wrappers/normalizer_properties/canonical_composition.dart';
+part 'wrappers/normalizer_properties/canonical_decomposition.dart';
 part 'wrappers/string.dart';
 part 'wrappers/writable.dart';
 
