@@ -1,7 +1,7 @@
 part of '../ffi.dart';
 
 final class Writeable implements ffi.Finalizable {
-  final _nativeFinalizer = ffi.NativeFinalizer(
+  static final _nativeFinalizer = ffi.NativeFinalizer(
     icu4XBindings.diplomat.bufferWriteableDestroyPointer.cast(),
   );
 
@@ -15,10 +15,16 @@ final class Writeable implements ffi.Finalizable {
     return Writeable._(icu4XBindings.diplomat.bufferWriteableCreate(cap));
   }
 
-  String get asAsciiString {
+  String get fromAsciiAsString {
     final ref = pointer.ref;
 
     return String.fromCharCodes(ref.buf.asTypedList(ref.len));
+  }
+
+  String get fromUtf8AsString {
+    final ref = pointer.ref;
+
+    return utf8.decode(ref.buf.asTypedList(ref.len));
   }
 
   void free() {

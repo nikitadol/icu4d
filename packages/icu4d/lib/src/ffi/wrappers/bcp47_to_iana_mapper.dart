@@ -1,7 +1,7 @@
 part of '../ffi.dart';
 
 final class Bcp47ToIanaMapper implements ffi.Finalizable {
-  final _finalizer = ffi.NativeFinalizer(
+  static final _finalizer = ffi.NativeFinalizer(
     icu4XBindings.bcp47ToIanaMapper.destroyPointer.cast(),
   );
 
@@ -38,7 +38,7 @@ final class Bcp47ToIanaMapper implements ffi.Finalizable {
     valuePointer.free();
 
     if (res.is_ok) {
-      final resStr = writeable.asAsciiString;
+      final resStr = writeable.fromAsciiAsString;
 
       writeable.free();
 

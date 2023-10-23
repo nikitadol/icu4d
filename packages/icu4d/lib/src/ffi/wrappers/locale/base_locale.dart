@@ -24,7 +24,7 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     strPointer.free();
 
     if (res.is_ok) {
-      return writeable.asAsciiString;
+      return writeable.fromAsciiAsString;
     }
 
     throw FFIError(res.err);
@@ -77,7 +77,7 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     keyPointer.free();
 
     if (res.is_ok) {
-      final resStr = writeable.asAsciiString;
+      final resStr = writeable.fromAsciiAsString;
 
       return resStr;
     }
@@ -199,7 +199,7 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     final res = callback(pointer, writeable.pointer);
 
     if (res.is_ok) {
-      final resStr = writeable.asAsciiString;
+      final resStr = writeable.fromAsciiAsString;
 
       return resStr;
     }
@@ -222,7 +222,7 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     final res = callback(pointer, writeable.pointer);
 
     if (res.is_ok) {
-      final resStr = writeable.asAsciiString;
+      final resStr = writeable.fromAsciiAsString;
 
       return resStr;
     }

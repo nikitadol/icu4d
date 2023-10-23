@@ -53,7 +53,7 @@ enum AnyCalendarKind {
         icu4XBindings.anyCalendarKind.bcp47(_icu4xValue, writable.pointer);
 
     if (res.is_ok) {
-      final res = writable.asAsciiString;
+      final res = writable.fromAsciiAsString;
 
       writable.free();
 
