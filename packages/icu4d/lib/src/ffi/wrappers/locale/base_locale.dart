@@ -187,11 +187,11 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
   @pragma('vm:prefer-inline')
   @pragma('vm:always-consider-inlining')
   @pragma('dart2js:prefer-inline')
-  static String _returnAscii<T>(
+  static String _returnAscii(
     int minCap,
-    T pointer,
+    ffi.Pointer<ICU4XLocale> pointer,
     ResultVoidOrICU4XError Function(
-      T,
+      ffi.Pointer<ICU4XLocale>,
       ffi.Pointer<DiplomatWriteable>,
     ) callback,
   ) {
@@ -210,11 +210,11 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
   @pragma('vm:prefer-inline')
   @pragma('vm:always-consider-inlining')
   @pragma('dart2js:prefer-inline')
-  static String? _returnAsciiNullable<T>(
+  static String? _returnAsciiNullable(
     int minCap,
-    T pointer,
+    ffi.Pointer<ICU4XLocale> pointer,
     ResultVoidOrICU4XError Function(
-      T,
+      ffi.Pointer<ICU4XLocale>,
       ffi.Pointer<DiplomatWriteable>,
     ) callback,
   ) {
