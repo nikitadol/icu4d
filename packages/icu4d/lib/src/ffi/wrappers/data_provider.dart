@@ -2,7 +2,7 @@ part of '../ffi.dart';
 
 final class DataProvider implements ffi.Finalizable {
   static final _finalizer = ffi.NativeFinalizer(
-    icu4XBindings.dataProvider.destroyPointer.cast(),
+    _bindings.dataProvider.destroyPointer.cast(),
   );
 
   final ffi.Pointer<ICU4XDataProvider> _pointer;
@@ -14,48 +14,22 @@ final class DataProvider implements ffi.Finalizable {
 
   factory DataProvider.compiled() {
     return DataProvider._(
-      icu4XBindings.dataProvider.createCompiled(),
+      _bindings.dataProvider.createCompiled(),
       _DataProviderState.compiled,
     );
   }
 
   factory DataProvider.empty() {
     return DataProvider._(
-      icu4XBindings.dataProvider.createEmpty(),
+      _bindings.dataProvider.createEmpty(),
       _DataProviderState.empty,
     );
   }
 
-  static DataProvider fromBytes(Uint8List bytes) {
-    final bytesLength = bytes.length;
-    assert(bytesLength > 0);
-
-    final bytesPointer = icu4XAllocator.allocate(bytesLength, 1);
-    final bytesPointerBytes = bytesPointer.asTypedList(bytesLength);
-
-    // no CheckWritable in cycle
-    bytesPointerBytes[0] = 0;
-
-    for (int i = 0; i < bytesLength; i++) {
-      bytesPointerBytes[i] = bytes[i];
-    }
-
-    final res = icu4XBindings.dataProvider.createFs(bytesPointer, bytesLength);
-
-    if (res.is_ok) {
-      return DataProvider._(
-        res.value.ok,
-        _DataProviderState.buffer,
-      );
-    }
-
-    throw FFIError(res.value.err);
-  }
-
   factory DataProvider.fromPath(String path) {
-    final pathPointer = StringPointer.toUtf8(path);
+    final pathPointer = _StringPointer.toUtf8(path);
 
-    final res = icu4XBindings.dataProvider
+    final res = _bindings.dataProvider
         .createFs(pathPointer.pointer, pathPointer.size);
 
     pathPointer.free();
@@ -77,7 +51,7 @@ final class DataProvider implements ffi.Finalizable {
       '$_state provider cannot be modified',
     );
 
-    final res = icu4XBindings.dataProvider.enableLocaleFallback(_pointer);
+    final res = _bindings.dataProvider.enableLocaleFallback(_pointer);
 
     if (res.is_ok) {
       return;
@@ -97,11 +71,11 @@ final class DataProvider implements ffi.Finalizable {
   }
 
   void forkByKey(DataProvider other) {
-    _forkBy(other, icu4XBindings.dataProvider.forkByKey);
+    _forkBy(other, _bindings.dataProvider.forkByKey);
   }
 
   void forkByLocale(DataProvider other) {
-    _forkBy(other, icu4XBindings.dataProvider.forkByLocale);
+    _forkBy(other, _bindings.dataProvider.forkByLocale);
   }
 
   void _forkBy(

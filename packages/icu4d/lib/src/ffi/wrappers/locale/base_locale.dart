@@ -2,7 +2,7 @@ part of '../../ffi.dart';
 
 sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
   static final _finalizer = ffi.NativeFinalizer(
-    icu4XBindings.locale.destroyPointer.cast(),
+    _bindings.locale.destroyPointer.cast(),
   );
 
   static const String undTag = 'und';
@@ -12,10 +12,10 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     assert(str.length >= 2);
     assert(str.isAscii);
 
-    final strPointer = StringPointer.toAscii(str);
+    final strPointer = _StringPointer.toAscii(str);
     final writeable = Writeable(18);
 
-    final res = icu4XBindings.locale.canonicalize(
+    final res = _bindings.locale.canonicalize(
       strPointer.pointer,
       strPointer.size,
       writeable.pointer,
@@ -43,19 +43,19 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     // variants - 4...8 - list - 0...?
     // 3 + 4 + 3 + 8 = 18
 
-    return _returnAscii(18, _pointer, icu4XBindings.locale.basename);
+    return _returnAscii(18, _pointer, _bindings.locale.basename);
   }
 
   String get language {
-    return _returnAscii(3, _pointer, icu4XBindings.locale.language);
+    return _returnAscii(3, _pointer, _bindings.locale.language);
   }
 
   String? get region {
-    return _returnAsciiNullable(3, _pointer, icu4XBindings.locale.region);
+    return _returnAsciiNullable(3, _pointer, _bindings.locale.region);
   }
 
   String? get script {
-    return _returnAsciiNullable(4, _pointer, icu4XBindings.locale.script);
+    return _returnAsciiNullable(4, _pointer, _bindings.locale.script);
   }
 
   // empty string == 'true'
@@ -63,11 +63,11 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     assert(key.length == 2);
     assert(key.isAscii);
 
-    final keyPointer = StringPointer.toAscii(key);
+    final keyPointer = _StringPointer.toAscii(key);
 
     final writeable = Writeable(8);
 
-    final res = icu4XBindings.locale.getUnicodeExtension(
+    final res = _bindings.locale.getUnicodeExtension(
       _pointer,
       keyPointer.pointer,
       keyPointer.size,
@@ -90,11 +90,11 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
   }
 
   Locale clone() {
-    return Locale._(icu4XBindings.locale.clone(_pointer));
+    return Locale._(_bindings.locale.clone(_pointer));
   }
 
   MutableLocale mutableClone() {
-    return MutableLocale._(icu4XBindings.locale.clone(_pointer));
+    return MutableLocale._(_bindings.locale.clone(_pointer));
   }
 
   // equal to this == Locale.fromString(other)
@@ -102,9 +102,9 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     assert(other.length >= 2);
     assert(other.isAscii);
 
-    final otherPointer = StringPointer.toAscii(other);
+    final otherPointer = _StringPointer.toAscii(other);
 
-    final result = icu4XBindings.locale.normalizingEq(
+    final result = _bindings.locale.normalizingEq(
       _pointer,
       otherPointer.pointer,
       otherPointer.size,
@@ -120,9 +120,9 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     assert(other.length >= 2);
     assert(other.isAscii);
 
-    final otherPointer = StringPointer.toAscii(other);
+    final otherPointer = _StringPointer.toAscii(other);
 
-    final res = icu4XBindings.locale.strictCmp(
+    final res = _bindings.locale.strictCmp(
       _pointer,
       otherPointer.pointer,
       otherPointer.size,
@@ -137,7 +137,7 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
   int compareTo(BaseLocale other) {
     final writeable = Writeable(18);
 
-    final res = icu4XBindings.locale.toString_(
+    final res = _bindings.locale.toString_(
       other._pointer,
       writeable.pointer,
     );
@@ -145,7 +145,7 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     if (res.is_ok) {
       final writable = writeable.pointer.ref;
 
-      final res = icu4XBindings.locale.strictCmp(
+      final res = _bindings.locale.strictCmp(
         _pointer,
         writable.buf,
         writable.len,
@@ -161,16 +161,21 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
 
   @override
   String toString() {
-    return _returnAscii(18, _pointer, icu4XBindings.locale.toString_);
+    return _returnAscii(18, _pointer, _bindings.locale.toString_);
   }
 
-  static ffi.Pointer<ICU4XLocale> _fromString(String name) {
-    assert(name.length >= 2, 'The given language subtag is invalid');
+  static ffi.Pointer<ICU4XLocale> _fromString(String? name) {
+    if (name == null) {
+      return _bindings.locale.createUnd();
+    }
+
     assert(name.isAscii);
+    assert(name.trim().length == name.length);
+    assert(name.length >= 2, 'The given language subtag is invalid');
 
-    final namePointer = StringPointer.toAscii(name);
+    final namePointer = _StringPointer.toAscii(name);
 
-    final res = icu4XBindings.locale.createFromString(
+    final res = _bindings.locale.createFromString(
       namePointer.pointer,
       namePointer.size,
     );

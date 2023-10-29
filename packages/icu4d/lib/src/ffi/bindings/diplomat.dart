@@ -16,6 +16,35 @@ final class _Diplomat {
           'diplomat_simple_writeable',
           isLeaf: true,
         ),
+        dartAlloc = dynamicLibrary.lookupFunction<
+            ffi.Pointer<ffi.Uint8> Function(
+              ffi.Size size,
+              ffi.Size align,
+            ),
+            ffi.Pointer<ffi.Uint8> Function(
+              int size,
+              int align,
+            )>(
+          'diplomat_dart_alloc',
+          isLeaf: true,
+        ),
+        dartRealloc = dynamicLibrary.lookupFunction<
+            ffi.Pointer<ffi.NativeType> Function(
+              ffi.Pointer<ffi.NativeType> ptr,
+              ffi.Size size,
+            ),
+            ffi.Pointer<ffi.NativeType> Function(
+              ffi.Pointer<ffi.NativeType> ptr,
+              int size,
+            )>(
+          'diplomat_dart_realloc',
+          isLeaf: true,
+        ),
+        dartFreePointer = dynamicLibrary.lookup<
+            ffi.NativeFunction<
+                ffi.Void Function(
+                  ffi.Pointer<ffi.Uint8> ptr,
+                )>>('diplomat_dart_free'),
         bufferWriteableCreate = dynamicLibrary.lookupFunction<
             ffi.Pointer<DiplomatWriteable> Function(
               ffi.Size cap,
@@ -50,35 +79,25 @@ final class _Diplomat {
             ffi.Pointer<DiplomatWriteable> this_,
           )>> bufferWriteableDestroyPointer;
 
-  late final ffi.Pointer<ffi.Uint8> Function(
+  final ffi.Pointer<ffi.Uint8> Function(
     int size,
     int align,
-  ) dartAlloc = dynamicLibrary.lookupFunction<
-      ffi.Pointer<ffi.Uint8> Function(
-        ffi.Size size,
-        ffi.Size align,
-      ),
-      ffi.Pointer<ffi.Uint8> Function(
-        int size,
-        int align,
-      )>(
-    'diplomat_dart_alloc',
-    isLeaf: true,
-  );
+  ) dartAlloc;
 
   late final void Function(
     ffi.Pointer<ffi.Uint8> ptr,
   ) dartFree = dartFreePointer.asFunction(isLeaf: true);
 
-  late final ffi.Pointer<
+  final ffi.Pointer<
       ffi.NativeFunction<
           ffi.Void Function(
             ffi.Pointer<ffi.Uint8> ptr,
-          )>> dartFreePointer = dynamicLibrary.lookup<
-      ffi.NativeFunction<
-          ffi.Void Function(
-            ffi.Pointer<ffi.Uint8> ptr,
-          )>>('diplomat_dart_free');
+          )>> dartFreePointer;
+
+  final ffi.Pointer<ffi.NativeType> Function(
+    ffi.Pointer<ffi.NativeType> ptr,
+    int size,
+  ) dartRealloc;
 
   final DiplomatWriteable Function(
     ffi.Pointer<ffi.Uint8> buf,

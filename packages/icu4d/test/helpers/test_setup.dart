@@ -1,15 +1,19 @@
 import 'dart:ffi' as ffi;
 
 import 'package:icu4d/icu_ffi.dart';
+import 'package:path/path.dart';
 
-const icu4xDirPath = '../../icu4x';
+final icu4xDirPath = join('..', '..', 'icu4x');
 
 void setupTest() {
-  libraryLoader.overrideForAll(
-    () => ffi.DynamicLibrary.open(
-      '$icu4xDirPath/target/debug/libicu_capi_cdylib.dylib',
-    ),
+  final dynamicLibrary = ffi.DynamicLibrary.open(
+    join(icu4xDirPath, 'target', 'release', 'libicu_capi_cdylib.dylib'),
   );
 
-  icu4XBindings.logger.initSimpleLogger();
+  libraryLoader.overrideForAll(() => dynamicLibrary);
+
+  dynamicLibrary.lookupFunction<ffi.Bool Function(), bool Function()>(
+    'ICU4XLogger_init_simple_logger',
+    isLeaf: true,
+  )();
 }

@@ -2,7 +2,7 @@ part of '../../ffi.dart';
 
 final class CanonicalDecomposition implements ffi.Finalizable {
   static final _finalizer = ffi.NativeFinalizer(
-    icu4XBindings.canonicalComposition.destroyPointer.cast(),
+    _bindings.canonicalComposition.destroyPointer.cast(),
   );
 
   final ffi.Pointer<ICU4XCanonicalDecomposition> _pointer;
@@ -12,7 +12,7 @@ final class CanonicalDecomposition implements ffi.Finalizable {
   }
 
   factory CanonicalDecomposition.from(DataProvider dataProvider) {
-    final res = icu4XBindings.canonicalDecomposition.create(
+    final res = _bindings.canonicalDecomposition.create(
       dataProvider._pointer,
     );
 
@@ -26,7 +26,7 @@ final class CanonicalDecomposition implements ffi.Finalizable {
   (int, int?) decompose(int c) {
     assert(c >= 0 && c <= 0x10ffff);
 
-    final res = icu4XBindings.canonicalDecomposition.decompose(
+    final res = _bindings.canonicalDecomposition.decompose(
       _pointer,
       c,
     );

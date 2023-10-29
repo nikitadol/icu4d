@@ -2,7 +2,7 @@ part of '../../ffi.dart';
 
 final class CaseMapper implements ffi.Finalizable {
   static final _finalizer = ffi.NativeFinalizer(
-    icu4XBindings.caseMapper.destroyPointer.cast(),
+    _bindings.caseMapper.destroyPointer.cast(),
   );
   final ffi.Pointer<ICU4XCaseMapper> _pointer;
 
@@ -11,7 +11,7 @@ final class CaseMapper implements ffi.Finalizable {
   }
 
   factory CaseMapper.from(DataProvider dataProvider) {
-    final res = icu4XBindings.caseMapper.create(dataProvider._pointer);
+    final res = _bindings.caseMapper.create(dataProvider._pointer);
 
     if (res.is_ok) {
       return CaseMapper._(res.value.ok);
@@ -25,7 +25,7 @@ final class CaseMapper implements ffi.Finalizable {
       _pointer,
       str,
       locale,
-      icu4XBindings.caseMapper.lowercase,
+      _bindings.caseMapper.lowercase,
     );
   }
 
@@ -34,7 +34,7 @@ final class CaseMapper implements ffi.Finalizable {
       _pointer,
       str,
       locale,
-      icu4XBindings.caseMapper.uppercase,
+      _bindings.caseMapper.uppercase,
     );
   }
 
@@ -55,7 +55,7 @@ final class CaseMapper implements ffi.Finalizable {
       leadingAdjustment,
       trailingCase,
       _pointer,
-      icu4XBindings.caseMapper.titlecaseSegmentWithOnlyCaseDataV1,
+      _bindings.caseMapper.titlecaseSegmentWithOnlyCaseDataV1,
     );
   }
 
@@ -63,7 +63,7 @@ final class CaseMapper implements ffi.Finalizable {
     return _fold(
       _pointer,
       str,
-      icu4XBindings.caseMapper.fold,
+      _bindings.caseMapper.fold,
     );
   }
 
@@ -71,7 +71,7 @@ final class CaseMapper implements ffi.Finalizable {
     return _fold(
       _pointer,
       str,
-      icu4XBindings.caseMapper.foldTurkic,
+      _bindings.caseMapper.foldTurkic,
     );
   }
 
@@ -94,7 +94,7 @@ final class CaseMapper implements ffi.Finalizable {
       return '';
     }
 
-    final strPointer = StringPointer.toUtf8(str);
+    final strPointer = _StringPointer.toUtf8(str);
     final writeable = Writeable(0);
 
     final res = func(
@@ -137,7 +137,7 @@ final class CaseMapper implements ffi.Finalizable {
       return '';
     }
 
-    final strPointer = StringPointer.toUtf8(str);
+    final strPointer = _StringPointer.toUtf8(str);
     final writeable = Writeable(0);
 
     final res = func(

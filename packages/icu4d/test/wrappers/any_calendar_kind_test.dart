@@ -13,9 +13,9 @@ void main() {
       expect(CalendarKind.iso.bcp47, 'iso');
       expect(CalendarKind.forBcp47('iso'), CalendarKind.iso);
       expect(CalendarKind.forBcp47('iso1'), null);
-      expect(CalendarKind.forLocale(Locale.fromString('en')), null);
+      expect(CalendarKind.forLocale(Locale('en')), null);
       expect(
-        CalendarKind.forLocale(Locale.fromString('en-u-ca-japanese')),
+        CalendarKind.forLocale(Locale('en-u-ca-japanese')),
         CalendarKind.japanese,
       );
     },

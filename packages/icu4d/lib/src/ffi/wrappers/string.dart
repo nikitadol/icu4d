@@ -1,12 +1,13 @@
 part of '../ffi.dart';
 
-final class StringPointer implements ffi.Finalizable {
-  static final _finalizer = ffi.NativeFinalizer(icu4XAllocator.nativeFree);
+final class _StringPointer<T extends ffi.NativeType>
+    implements ffi.Finalizable {
+  static final _finalizer = ffi.NativeFinalizer(_allocator.nativeFree);
 
-  final ffi.Pointer<ffi.Uint8> pointer;
+  final ffi.Pointer<T> pointer;
   final int size;
 
-  StringPointer._(this.pointer, this.size) {
+  _StringPointer._(this.pointer, this.size) {
     _finalizer.attach(
       this,
       pointer.cast(),
@@ -15,13 +16,17 @@ final class StringPointer implements ffi.Finalizable {
     );
   }
 
-  factory StringPointer.toAscii(String str) {
+  static _StringPointer<ffi.Uint8> toAscii(String str) {
     assert(str.isAscii);
 
     final length = str.length;
 
-    final pointer = icu4XAllocator.allocate(length, 1);
-    final buffer = pointer.asTypedList(length);
+    final pointer = _allocator.allocate<ffi.Uint8>(
+      length,
+      alignment: 1,
+    );
+
+    final Uint8List buffer = pointer.asTypedList(length);
 
     if (length > 0) {
       // remove CheckWritable
@@ -32,10 +37,10 @@ final class StringPointer implements ffi.Finalizable {
       }
     }
 
-    return StringPointer._(pointer, length);
+    return _StringPointer._(pointer, length);
   }
 
-  factory StringPointer.toUtf8(String str) {
+  static _StringPointer<ffi.Uint8> toUtf8(String str) {
     assert(utf8.decode(utf8.encode(str)) == str);
 
     final length = str.length;
@@ -56,8 +61,13 @@ final class StringPointer implements ffi.Finalizable {
         bufferLength += 4;
       }
     }
-    final pointer = icu4XAllocator.allocate(bufferLength, 1);
-    final buffer = pointer.asTypedList(bufferLength);
+
+    final pointer = _allocator.allocate<ffi.Uint8>(
+      bufferLength,
+      alignment: 1,
+    );
+
+    final Uint8List buffer = pointer.asTypedList(bufferLength);
     // remove CheckWritable
     buffer[0] = 0;
 
@@ -90,11 +100,45 @@ final class StringPointer implements ffi.Finalizable {
       }
     } while (index < length);
 
-    return StringPointer._(pointer, bufferLength);
+    return _StringPointer._(pointer, bufferLength);
+  }
+
+  static _StringPointer<ffi.Uint16> toUtf16(String str) {
+    final length = str.length;
+
+    final pointer = _allocator.allocate<ffi.Uint16>(
+      ffi.sizeOf<ffi.Uint16>() * length,
+      alignment: 2,
+    );
+
+    _toUtf16IntoPointer(str, pointer);
+
+    return _StringPointer._(pointer, length);
+  }
+
+  @pragma('vm:prefer-inline')
+  @pragma('vm:always-consider-inlining')
+  @pragma('dart2js:prefer-inline')
+  static void _toUtf16IntoPointer(
+    String str,
+    ffi.Pointer<ffi.Uint16> pointer,
+  ) {
+    final length = str.length;
+
+    final Uint16List buffer = pointer.asTypedList(length);
+
+    if (length > 0) {
+      // remove CheckWritable
+      buffer[0] = 0;
+
+      for (int i = 0; i < length; i++) {
+        buffer[i] = str.codeUnitAt(i);
+      }
+    }
   }
 
   void free() {
     _finalizer.detach(this);
-    icu4XAllocator.free(pointer);
+    _allocator.free(pointer);
   }
 }

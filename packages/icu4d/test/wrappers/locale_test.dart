@@ -38,7 +38,7 @@ void main() {
       test(
         'en-US-u-ca-buddhist',
         () {
-          final locale = Locale.fromString('en-US-u-ca-buddhist');
+          final locale = Locale('en-US-u-ca-buddhist');
 
           expect(locale.basename, 'en-US');
           expect(locale.language, 'en');
@@ -50,7 +50,7 @@ void main() {
       test(
         'und-u-hc-h23-kc-true',
         () {
-          final locale = Locale.fromString('und-u-hc-h23-kc-true');
+          final locale = Locale('und-u-hc-h23-kc-true');
 
           expect(locale.basename, 'und');
           expect(locale.language, 'und');
@@ -73,7 +73,7 @@ void main() {
             :testOutput as Map<String, Object?>,
           ) in _parse('locale.json')) {
         if (testInput case {'identifier': String identifier}) {
-          final locale = Locale.fromString(identifier);
+          final locale = Locale(identifier);
 
           if (testOutput case {'language': String language}) {
             expect(locale.language, language);
@@ -152,7 +152,7 @@ void main() {
             :testInput as String,
             :testOutput as Map<String, Object?>,
           ) in _parse('langid.json')) {
-        final locale = Locale.fromString(testInput);
+        final locale = Locale(testInput);
 
         if (testOutput case {'language': String language}) {
           expect(locale.language, language);
@@ -186,7 +186,7 @@ void main() {
         if (testInput case {'identifier': String identifier}) {
           if (testOutput case {'text': String text}) {
             expect(
-              () => Locale.fromString(identifier),
+              () => Locale(identifier),
               throwsA(
                 allOf(
                   TypeMatcher<FFIError>(),
@@ -223,7 +223,7 @@ void main() {
 
         if (testOutput case {'text': String text}) {
           expect(
-            () => Locale.fromString(name),
+            () => Locale(name),
             throwsA(
               anyOf(
                 allOf(
@@ -261,7 +261,7 @@ void main() {
             :testInput as String,
             :testOutput as String,
           ) in _parse('canonicalize.json')) {
-        final locale = Locale.fromString(testInput);
+        final locale = Locale(testInput);
 
         expect(locale.toString(), testOutput);
       }
@@ -271,7 +271,7 @@ void main() {
   test(
     'locale is empty',
     () {
-      final locale = Locale.createUnd();
+      final locale = Locale();
 
       expect(locale.toString(), BaseLocale.undTag);
     },
@@ -281,8 +281,8 @@ void main() {
     'locale canonicalize',
     () {
       expect(
-        Locale.fromString('En-latn-US-MacOS').toString(),
-        Locale.fromString('eN-latN-uS-macOS').toString(),
+        Locale('En-latn-US-MacOS').toString(),
+        Locale('eN-latN-uS-macOS').toString(),
       );
       expect(
         BaseLocale.canonicalize('pL_latn_pl-U-HC-H12'),
@@ -294,8 +294,7 @@ void main() {
   test(
     'clone',
     () {
-      final locale =
-          Locale.fromString('en-US-u-hc-h23-ca-islamic-civil-ss-true');
+      final locale = Locale('en-US-u-hc-h23-ca-islamic-civil-ss-true');
 
       expect(locale.toString(), locale.clone().toString());
       expect(locale.toString(), locale.mutableClone().toString());
@@ -305,7 +304,7 @@ void main() {
   test(
     'mutable',
     () {
-      final locale = MutableLocale.createUnd();
+      final locale = MutableLocale();
 
       expect(locale.toString(), BaseLocale.undTag);
       locale.language = 'en';
@@ -330,7 +329,7 @@ void main() {
   test(
     'mutable',
     () {
-      final locale = MutableLocale.fromString('en');
+      final locale = MutableLocale('en');
 
       expect(locale.toString(), 'en');
       locale.language = 'en';
@@ -365,7 +364,7 @@ void main() {
       ];
 
       for (final str in bcp47Strings) {
-        expect(Locale.fromString(str).normalizingEquality(str), true);
+        expect(Locale(str).normalizingEquality(str), true);
       }
     },
   );
@@ -386,17 +385,17 @@ void main() {
       for (final [a, b] in bcp47Strings.windows(2)) {
         expect(a.compareTo(b), isNegative);
 
-        final aLocale = Locale.fromString(a);
+        final aLocale = Locale(a);
 
         expect(aLocale.strictCompare(a), isZero);
         expect(
-          aLocale.compareTo(Locale.fromString(a)),
+          aLocale.compareTo(Locale(a)),
           aLocale.strictCompare(a),
         );
 
         expect(aLocale.strictCompare(b), isNegative);
         expect(
-          aLocale.compareTo(Locale.fromString(b)),
+          aLocale.compareTo(Locale(b)),
           aLocale.strictCompare(b),
         );
       }

@@ -2,7 +2,7 @@ part of '../ffi.dart';
 
 final class Writeable implements ffi.Finalizable {
   static final _nativeFinalizer = ffi.NativeFinalizer(
-    icu4XBindings.diplomat.bufferWriteableDestroyPointer.cast(),
+    _bindings.diplomat.bufferWriteableDestroyPointer.cast(),
   );
 
   final ffi.Pointer<DiplomatWriteable> pointer;
@@ -12,7 +12,7 @@ final class Writeable implements ffi.Finalizable {
   }
 
   factory Writeable(int cap) {
-    return Writeable._(icu4XBindings.diplomat.bufferWriteableCreate(cap));
+    return Writeable._(_bindings.diplomat.bufferWriteableCreate(cap));
   }
 
   String get fromAsciiAsString {
@@ -29,6 +29,6 @@ final class Writeable implements ffi.Finalizable {
 
   void free() {
     _nativeFinalizer.detach(this);
-    icu4XBindings.diplomat.bufferWriteableDestroy(pointer);
+    _bindings.diplomat.bufferWriteableDestroy(pointer);
   }
 }

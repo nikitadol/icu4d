@@ -2,7 +2,7 @@ part of '../../ffi.dart';
 
 final class CanonicalCombiningClassMap implements ffi.Finalizable {
   static final _finalizer = ffi.NativeFinalizer(
-    icu4XBindings.canonicalCombiningClassMap.destroyPointer.cast(),
+    _bindings.canonicalCombiningClassMap.destroyPointer.cast(),
   );
 
   final ffi.Pointer<ICU4XCanonicalCombiningClassMap> _pointer;
@@ -12,7 +12,7 @@ final class CanonicalCombiningClassMap implements ffi.Finalizable {
   }
 
   factory CanonicalCombiningClassMap.from(DataProvider provider) {
-    final res = icu4XBindings.canonicalCombiningClassMap.create(
+    final res = _bindings.canonicalCombiningClassMap.create(
       provider._pointer,
     );
 
@@ -27,7 +27,7 @@ final class CanonicalCombiningClassMap implements ffi.Finalizable {
   int get(int char) {
     assert(char >= 0 && char <= 0x10ffff);
 
-    return icu4XBindings.canonicalCombiningClassMap.get32(
+    return _bindings.canonicalCombiningClassMap.get32(
       _pointer,
       char,
     );

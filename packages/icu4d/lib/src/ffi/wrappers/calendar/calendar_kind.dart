@@ -26,9 +26,9 @@ enum CalendarKind {
     assert(str.length >= 3);
     assert(str.isAscii);
 
-    final strPointer = StringPointer.toAscii(str);
+    final strPointer = _StringPointer.toAscii(str);
 
-    final res = icu4XBindings.anyCalendarKind.getForBcp47(
+    final res = _bindings.anyCalendarKind.getForBcp47(
       strPointer.pointer,
       strPointer.size,
     );
@@ -39,7 +39,7 @@ enum CalendarKind {
   }
 
   static CalendarKind? forLocale(Locale locale) {
-    final res = icu4XBindings.anyCalendarKind.getForLocale(locale._pointer);
+    final res = _bindings.anyCalendarKind.getForLocale(locale._pointer);
 
     return _findFromRes(res);
   }
@@ -50,7 +50,7 @@ enum CalendarKind {
     final writable = Writeable(16);
 
     final res =
-        icu4XBindings.anyCalendarKind.bcp47(_icu4xValue, writable.pointer);
+        _bindings.anyCalendarKind.bcp47(_icu4xValue, writable.pointer);
 
     if (res.is_ok) {
       final res = writable.fromAsciiAsString;

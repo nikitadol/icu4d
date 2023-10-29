@@ -2,7 +2,7 @@ part of '../../ffi.dart';
 
 final class Calendar implements ffi.Finalizable {
   static final _finalizer = ffi.NativeFinalizer(
-    icu4XBindings.calendar.destroyPointer.cast(),
+    _bindings.calendar.destroyPointer.cast(),
   );
 
   final ffi.Pointer<ICU4XCalendar> _pointer;
@@ -12,7 +12,7 @@ final class Calendar implements ffi.Finalizable {
   }
 
   factory Calendar.forKind(DataProvider provider, CalendarKind kind) {
-    final res = icu4XBindings.calendar.createForKind(
+    final res = _bindings.calendar.createForKind(
       provider._pointer,
       kind._icu4xValue,
     );
@@ -25,7 +25,7 @@ final class Calendar implements ffi.Finalizable {
   }
 
   factory Calendar.forLocale(DataProvider provider, BaseLocale locale) {
-    final res = icu4XBindings.calendar.createForLocale(
+    final res = _bindings.calendar.createForLocale(
       provider._pointer,
       locale._pointer,
     );
@@ -39,7 +39,7 @@ final class Calendar implements ffi.Finalizable {
 
   CalendarKind get kind {
     final kind = CalendarKind._findFromIcu4XValue(
-      icu4XBindings.calendar.kind(_pointer),
+      _bindings.calendar.kind(_pointer),
     );
 
     if (kind == null) {

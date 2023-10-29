@@ -53,6 +53,9 @@ const _nonOptionalFunctions = {
   'diplomat_buffer_writeable_len',
   'diplomat_free',
   'diplomat_simple_writeable',
+  'diplomat_dart_alloc',
+  'diplomat_dart_realloc',
+  'diplomat_dart_free',
 };
 
 const _needReplaceFieldName = {'toString'};
@@ -100,6 +103,11 @@ void main(List<String> args) {
               'lib': _ffiPrefix,
               'dart-type': 'int',
               'c-type': 'Uint32',
+            },
+            'dart_ffi_type': {
+              'lib': _ffiPrefix,
+              'dart-type': 'NativeType',
+              'c-type': 'NativeType',
             },
           },
         },
@@ -424,6 +432,7 @@ void main(List<String> args) {
 
       for (final constant in enum$.enumConstants) {
         final fieldBuilder = code_builder.FieldBuilder()
+          // Name in C -> ICU4XCollatorAlternateHandling_Auto
           ..name = constant.name.substring(enum$.name.length + 1).camelCase
           ..static = true
           ..modifier = code_builder.FieldModifier.constant

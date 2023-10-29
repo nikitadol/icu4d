@@ -3,10 +3,7 @@ part of '../../ffi.dart';
 final class Locale extends BaseLocale {
   Locale._(super.locale) : super._();
 
-  factory Locale.createUnd() {
-    return Locale._(icu4XBindings.locale.createUnd());
+  factory Locale([String? name]) {
+    return Locale._(BaseLocale._fromString(name));
   }
-
-  factory Locale.fromString(String name) =>
-      Locale._(BaseLocale._fromString(name));
 }

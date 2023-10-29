@@ -15,7 +15,7 @@ void main() {
       test(
         'lowerCase',
         () {
-          final locale = Locale.createUnd();
+          final locale = Locale();
 
           final tests = [
             ('hEllO WorLd', locale, 'hello world'),
@@ -23,7 +23,7 @@ void main() {
             ('नमस्ते दुनिया', locale, 'नमस्ते दुनिया'),
             ('Привет мир', locale, 'привет мир'),
             ('CONSTANTINOPLE', locale, 'constantinople'),
-            ('CONSTANTINOPLE', Locale.fromString('tr'), 'constantınople'),
+            ('CONSTANTINOPLE', Locale('tr'), 'constantınople'),
           ];
 
           for (final (source, locale, result) in tests) {
@@ -39,7 +39,7 @@ void main() {
       test(
         'upperCase',
         () {
-          final locale = Locale.createUnd();
+          final locale = Locale();
 
           final tests = [
             ('hEllO WorLd', locale, 'HELLO WORLD'),
@@ -47,9 +47,9 @@ void main() {
             ('नमस्ते दुनिया', locale, 'नमस्ते दुनिया'),
             ('Привет мир', locale, 'ПРИВЕТ МИР'),
             ('istanbul', locale, 'ISTANBUL'),
-            ('istanbul', Locale.fromString('tr'), 'İSTANBUL'),
+            ('istanbul', Locale('tr'), 'İSTANBUL'),
             ('և Երևանի', locale, 'ԵՒ ԵՐԵՒԱՆԻ'),
-            ('և Երևանի', Locale.fromString('hy'), 'ԵՎ ԵՐԵՎԱՆԻ'),
+            ('և Երևանի', Locale('hy'), 'ԵՎ ԵՐԵՎԱՆԻ'),
           ];
 
           for (final (source, locale, result) in tests) {
@@ -65,7 +65,7 @@ void main() {
       test(
         'titlecaseSegmentWithOnlyCaseData',
         () {
-          final locale = Locale.createUnd();
+          final locale = Locale();
 
           final List<(String, Locale, String)> deafultTests = [
             ('hEllO WorLd', locale, 'Hello world'),
@@ -73,11 +73,11 @@ void main() {
             ('नमस्ते दुनिया', locale, 'नमस्ते दुनिया'),
             ('Привет мир', locale, 'Привет мир'),
             ('istanbul', locale, 'Istanbul'),
-            ('istanbul', Locale.fromString('tr'), 'İstanbul'),
+            ('istanbul', Locale('tr'), 'İstanbul'),
             ('և Երևանի', locale, 'Եւ երևանի'),
-            ('և Երևանի', Locale.fromString('hy'), 'Եվ երևանի'),
+            ('և Երևանի', Locale('hy'), 'Եվ երևանի'),
             ('ijkdijk', locale, 'Ijkdijk'),
-            ('ijkdijk', Locale.fromString('nl'), 'IJkdijk'),
+            ('ijkdijk', Locale('nl'), 'IJkdijk'),
           ];
 
           for (final (source, locale, result) in deafultTests) {

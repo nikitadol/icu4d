@@ -2,7 +2,7 @@ part of '../../ffi.dart';
 
 final class CanonicalComposition implements ffi.Finalizable {
   static final _finalizer = ffi.NativeFinalizer(
-    icu4XBindings.canonicalComposition.destroyPointer.cast(),
+    _bindings.canonicalComposition.destroyPointer.cast(),
   );
 
   final ffi.Pointer<ICU4XCanonicalComposition> _pointer;
@@ -12,7 +12,7 @@ final class CanonicalComposition implements ffi.Finalizable {
   }
 
   factory CanonicalComposition.from(DataProvider dataProvider) {
-    final res = icu4XBindings.canonicalComposition.create(
+    final res = _bindings.canonicalComposition.create(
       dataProvider._pointer,
     );
 
@@ -27,7 +27,7 @@ final class CanonicalComposition implements ffi.Finalizable {
     assert(starter >= 0 && starter <= 0x10ffff);
     assert(second >= 0 && second <= 0x10ffff);
 
-    final res = icu4XBindings.canonicalComposition.compose(
+    final res = _bindings.canonicalComposition.compose(
       _pointer,
       starter,
       second,

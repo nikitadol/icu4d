@@ -2,7 +2,7 @@ part of '../../ffi.dart';
 
 final class Bidi implements ffi.Finalizable {
   static final _finalizer = ffi.NativeFinalizer(
-    icu4XBindings.bidi.destroyPointer.cast(),
+    _bindings.bidi.destroyPointer.cast(),
   );
 
   final ffi.Pointer<ICU4XBidi> _pointer;
@@ -12,7 +12,7 @@ final class Bidi implements ffi.Finalizable {
   }
 
   factory Bidi.from(DataProvider provider) {
-    final res = icu4XBindings.bidi.create(provider._pointer);
+    final res = _bindings.bidi.create(provider._pointer);
 
     if (res.is_ok) {
       return Bidi._(res.value.ok);
@@ -23,10 +23,10 @@ final class Bidi implements ffi.Finalizable {
 
   BidiInfo forText(String text, [int defaultLevel = 0]) {
     assert(defaultLevel >= 0 && defaultLevel <= 126);
-    final textPointer = StringPointer.toUtf8(text);
+    final textPointer = _StringPointer.toUtf8(text);
 
     return BidiInfo._(
-      icu4XBindings.bidi.forText(
+      _bindings.bidi.forText(
         _pointer,
         textPointer.pointer,
         textPointer.size,
@@ -39,21 +39,21 @@ final class Bidi implements ffi.Finalizable {
   bool levelIsLtr(int level) {
     assert(level >= 0 && level <= 126);
 
-    return icu4XBindings.bidi.levelIsLtr(level);
+    return _bindings.bidi.levelIsLtr(level);
   }
 
   bool levelIsRtl(int level) {
     assert(level >= 0 && level <= 126);
 
-    return icu4XBindings.bidi.levelIsRtl(level);
+    return _bindings.bidi.levelIsRtl(level);
   }
 
   int get levelLtr {
-    return icu4XBindings.bidi.levelLtr();
+    return _bindings.bidi.levelLtr();
   }
 
   int get levelRtl {
-    return icu4XBindings.bidi.levelRtl();
+    return _bindings.bidi.levelRtl();
   }
 
   List<int> reorderVisual(List<int> levels) {
@@ -65,7 +65,10 @@ final class Bidi implements ffi.Finalizable {
 
     assert(levels.every((level) => level >= 0 && level <= 126));
 
-    final levelsPointer = icu4XAllocator.allocate(length, 1);
+    final levelsPointer = _allocator.allocate<ffi.Uint8>(
+      length,
+      alignment: 1,
+    );
 
     final list = levelsPointer.asTypedList(length);
 
@@ -74,25 +77,25 @@ final class Bidi implements ffi.Finalizable {
       list[index] = levels[index];
     }
 
-    final reorderedIndexMap = icu4XBindings.bidi.reorderVisual(
+    final reorderedIndexMap = _bindings.bidi.reorderVisual(
       _pointer,
       levelsPointer,
       length,
     );
 
-    final slice = icu4XBindings.reorderedIndexMap.asSlice(reorderedIndexMap);
+    final slice = _bindings.reorderedIndexMap.asSlice(reorderedIndexMap);
 
     final List<int> resultList;
     if (ffi.sizeOf<ffi.Size>() == ffi.sizeOf<ffi.Uint64>()) {
       resultList = slice.data.cast<ffi.Uint64>().asTypedList(
             slice.len,
-            finalizer: icu4XBindings.reorderedIndexMap.destroyPointer.cast(),
+            finalizer: _bindings.reorderedIndexMap.destroyPointer.cast(),
             token: reorderedIndexMap.cast(),
           );
     } else {
       resultList = slice.data.cast<ffi.Uint32>().asTypedList(
             slice.len,
-            finalizer: icu4XBindings.reorderedIndexMap.destroyPointer.cast(),
+            finalizer: _bindings.reorderedIndexMap.destroyPointer.cast(),
             token: reorderedIndexMap.cast(),
           );
     }

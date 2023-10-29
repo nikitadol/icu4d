@@ -15,7 +15,7 @@ void main() {
       test(
         'titlecaseSegment',
         () {
-          final locale = Locale.createUnd();
+          final locale = Locale();
 
           final List<(String, Locale, String)> deafultTests = [
             ('hEllO WorLd', locale, 'Hello world'),
@@ -23,11 +23,11 @@ void main() {
             ('नमस्ते दुनिया', locale, 'नमस्ते दुनिया'),
             ('Привет мир', locale, 'Привет мир'),
             ('istanbul', locale, 'Istanbul'),
-            ('istanbul', Locale.fromString('tr'), 'İstanbul'),
+            ('istanbul', Locale('tr'), 'İstanbul'),
             ('և Երևանի', locale, 'Եւ երևանի'),
-            ('և Երևանի', Locale.fromString('hy'), 'Եվ երևանի'),
+            ('և Երևանի', Locale('hy'), 'Եվ երևանի'),
             ('ijkdijk', locale, 'Ijkdijk'),
-            ('ijkdijk', Locale.fromString('nl'), 'IJkdijk'),
+            ('ijkdijk', Locale('nl'), 'IJkdijk'),
           ];
 
           for (final (source, locale, result) in deafultTests) {

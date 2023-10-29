@@ -2,7 +2,7 @@ part of '../../ffi.dart';
 
 final class TitlecaseMapper implements ffi.Finalizable {
   static final _finalizer = ffi.NativeFinalizer(
-    icu4XBindings.titlecaseMapper.destroyPointer.cast(),
+    _bindings.titlecaseMapper.destroyPointer.cast(),
   );
 
   final ffi.Pointer<ICU4XTitlecaseMapper> _pointer;
@@ -12,7 +12,7 @@ final class TitlecaseMapper implements ffi.Finalizable {
   }
 
   factory TitlecaseMapper.from(DataProvider dataProvider) {
-    final res = icu4XBindings.titlecaseMapper.create(
+    final res = _bindings.titlecaseMapper.create(
       dataProvider._pointer,
     );
 
@@ -35,7 +35,7 @@ final class TitlecaseMapper implements ffi.Finalizable {
       leadingAdjustment,
       trailingCase,
       _pointer,
-      icu4XBindings.titlecaseMapper.titlecaseSegmentV1,
+      _bindings.titlecaseMapper.titlecaseSegmentV1,
     );
   }
 
@@ -61,10 +61,10 @@ final class TitlecaseMapper implements ffi.Finalizable {
       return '';
     }
 
-    final strPointer = StringPointer.toUtf8(str);
+    final strPointer = _StringPointer.toUtf8(str);
     final writeable = Writeable(0);
 
-    final options = icu4XBindings.titlecaseOptionsV1.defaultOptions();
+    final options = _bindings.titlecaseOptionsV1.defaultOptions();
 
     options
       ..leading_adjustment = leadingAdjustment._icu4xValue

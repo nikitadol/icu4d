@@ -2,7 +2,7 @@ part of '../ffi.dart';
 
 final class Bcp47ToIanaMapper implements ffi.Finalizable {
   static final _finalizer = ffi.NativeFinalizer(
-    icu4XBindings.bcp47ToIanaMapper.destroyPointer.cast(),
+    _bindings.bcp47ToIanaMapper.destroyPointer.cast(),
   );
 
   final ffi.Pointer<ICU4XBcp47ToIanaMapper> _pointer;
@@ -12,7 +12,7 @@ final class Bcp47ToIanaMapper implements ffi.Finalizable {
   }
 
   factory Bcp47ToIanaMapper.from(DataProvider dataProvider) {
-    final res = icu4XBindings.bcp47ToIanaMapper.create(dataProvider._pointer);
+    final res = _bindings.bcp47ToIanaMapper.create(dataProvider._pointer);
 
     if (res.is_ok) {
       return Bcp47ToIanaMapper._(res.value.ok);
@@ -25,10 +25,10 @@ final class Bcp47ToIanaMapper implements ffi.Finalizable {
     assert(value.isNotEmpty);
     assert(value.isAscii);
 
-    final valuePointer = StringPointer.toAscii(value);
+    final valuePointer = _StringPointer.toAscii(value);
     final writeable = Writeable(0);
 
-    final res = icu4XBindings.bcp47ToIanaMapper.get(
+    final res = _bindings.bcp47ToIanaMapper.get(
       _pointer,
       valuePointer.pointer,
       valuePointer.size,
