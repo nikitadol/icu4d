@@ -49,8 +49,7 @@ enum CalendarKind {
   String get bcp47 {
     final writable = Writeable(16);
 
-    final res =
-        _bindings.anyCalendarKind.bcp47(_icu4xValue, writable.pointer);
+    final res = _bindings.anyCalendarKind.bcp47(_icu4xValue, writable.pointer);
 
     if (res.is_ok) {
       final res = writable.fromAsciiAsString;
@@ -61,6 +60,11 @@ enum CalendarKind {
     }
 
     throw FFIError(res.err);
+  }
+
+  @override
+  String toString() {
+    return 'CalendarKind{$bcp47}';
   }
 
   @pragma('vm:prefer-inline')

@@ -43,11 +43,11 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     // variants - 4...8 - list - 0...?
     // 3 + 4 + 3 + 8 = 18
 
-    return _returnAscii(18, _pointer, _bindings.locale.basename);
+    return Writeable._returnAscii(18, _pointer, _bindings.locale.basename);
   }
 
   String get language {
-    return _returnAscii(3, _pointer, _bindings.locale.language);
+    return Writeable._returnAscii(3, _pointer, _bindings.locale.language);
   }
 
   String? get region {
@@ -161,7 +161,7 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
 
   @override
   String toString() {
-    return _returnAscii(18, _pointer, _bindings.locale.toString_);
+    return Writeable._returnAscii(18, _pointer, _bindings.locale.toString_);
   }
 
   static ffi.Pointer<ICU4XLocale> _fromString(String? name) {
@@ -187,29 +187,6 @@ sealed class BaseLocale implements ffi.Finalizable, Comparable<BaseLocale> {
     }
 
     throw FFIError(res.value.err);
-  }
-
-  @pragma('vm:prefer-inline')
-  @pragma('vm:always-consider-inlining')
-  @pragma('dart2js:prefer-inline')
-  static String _returnAscii(
-    int minCap,
-    ffi.Pointer<ICU4XLocale> pointer,
-    ResultVoidOrICU4XError Function(
-      ffi.Pointer<ICU4XLocale>,
-      ffi.Pointer<DiplomatWriteable>,
-    ) callback,
-  ) {
-    final writeable = Writeable(minCap);
-    final res = callback(pointer, writeable.pointer);
-
-    if (res.is_ok) {
-      final resStr = writeable.fromAsciiAsString;
-
-      return resStr;
-    }
-
-    throw FFIError(res.err);
   }
 
   @pragma('vm:prefer-inline')

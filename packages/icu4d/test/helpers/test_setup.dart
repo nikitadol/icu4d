@@ -7,7 +7,7 @@ final icu4xDirPath = join('..', '..', 'icu4x');
 
 void setupTest() {
   final dynamicLibrary = ffi.DynamicLibrary.open(
-    join(icu4xDirPath, 'target', 'release', 'libicu_capi_cdylib.dylib'),
+    join(icu4xDirPath, 'target', 'debug', 'libicu_capi_cdylib.dylib'),
   );
 
   libraryLoader.overrideForAll(() => dynamicLibrary);
