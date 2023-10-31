@@ -5,6 +5,7 @@ enum WeekRelativeUnit {
   current._(ICU4XWeekRelativeUnit.current),
   next._(ICU4XWeekRelativeUnit.next);
 
+  // ignore: unused_field
   final int _icu4xValue;
 
   const WeekRelativeUnit._(this._icu4xValue);
