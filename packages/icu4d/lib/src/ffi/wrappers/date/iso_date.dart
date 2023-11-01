@@ -12,9 +12,7 @@ final class IsoDate implements ffi.Finalizable {
   }
 
   factory IsoDate(int year, int month, int day) {
-    assert(year.isU32);
-    assert(month.isU8);
-    assert(day.isU8);
+    _debugValidateInput(year, month, day);
 
     final res = _bindings.isoDate.create(year, month, day);
 
@@ -23,6 +21,14 @@ final class IsoDate implements ffi.Finalizable {
     }
 
     throw FFIError(res.value.err);
+  }
+
+  static void _debugValidateInput(int year, int month, int day) {
+    assert(year.isI32);
+    assert(month.isU8);
+    assert(month > 0);
+    assert(day.isU8);
+    assert(day > 0);
   }
 
   /// IsoDate(1970, 1, 1)

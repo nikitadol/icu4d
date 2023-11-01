@@ -54,7 +54,8 @@ final class Calendar implements ffi.Finalizable {
       identical(this, other) ||
       other is Calendar &&
           runtimeType == other.runtimeType &&
-          _pointer == other._pointer;
+          _bindings.calendar.kind(_pointer) ==
+              _bindings.calendar.kind(other._pointer);
 
   @override
   int get hashCode => _pointer.hashCode;

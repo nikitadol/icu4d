@@ -11,7 +11,6 @@ final class Date implements ffi.Finalizable {
     _finalizer.attach(this, _pointer.cast());
   }
 
-
   // month from 1
   // day from 1
   factory Date.fromIso(int year, int month, int day, Calendar calendar) {

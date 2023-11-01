@@ -34,6 +34,7 @@ part 'wrappers/data_provider.dart';
 part 'wrappers/date/date.dart';
 part 'wrappers/date/iso_date.dart';
 part 'wrappers/date/iso_weekday.dart';
+part 'wrappers/date_time/iso_date_time.dart';
 part 'wrappers/locale/base_locale.dart';
 part 'wrappers/locale/locale.dart';
 part 'wrappers/locale/mutable_locale.dart';
