@@ -1,4 +1,3 @@
 library icu4d;
 
-export 'src/shared/shared.dart';
-export 'src/ffi/ffi.dart';
+export 'src/wrappers.dart' if (dart.library.io) 'src/ffi/ffi.dart';

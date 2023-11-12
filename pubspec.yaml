@@ -4,20 +4,46 @@ version: 0.0.1
 publish_to: none
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.1.0 <4.0.0'
 
 dependencies:
   collection: ^1.18.0
   meta: ^1.11.0
   path: ^1.8.3
-  tar: ^1.0.1
+  tar: ^1.0.2
   http: ^1.1.0
 
   bindings_generator:
     path: packages/bindings_generator
 
 dev_dependencies:
-  lints: ^2.1.1
+  lints: ^3.0.0
+  test: ^1.24.9
+  ffigen: ^9.0.1
 
-
-  test: ^1.24.8
+ffigen:
+  output: 'packages/icu4d/lib/src/ffi/generated_bindings.dart'
+  compiler-opts:
+    - '-DU_HIDE_INTERNAL_API -DU_HIDE_DEPRECATED_API -DU_SHOW_CPLUSPLUS_API=0'
+  headers:
+    entry-points:
+      - 'icu/icu4c/source/common/unicode/uloc.h'
+  exclude-all-by-default: true
+  functions:
+    leaf:
+      include:
+        - .*
+    include:
+      - utf8_length_from_utf16
+      - convert_utf16_to_utf8
+      - convert_valid_utf8_to_utf16
+      - count_utf8
+  macros:
+    include:
+      - ULOC_FULLNAME_CAPACITY
+  type-map:
+    native-types:
+      char:
+        lib: ffi
+        c-type: 'Uint8'
+        dart-type: 'int'
