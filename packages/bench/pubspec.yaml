@@ -1,0 +1,14 @@
+name: bench
+description: A sample command-line application.
+version: 1.0.0
+publish_to: none
+
+environment:
+  sdk: ^3.5.0
+
+dependencies:
+  path: any
+
+dev_dependencies:
+  lints: ^4.0.0
+  benchmark_runner: ^0.1.9
