@@ -1,17 +1,3 @@
-include: package:lints/recommended.yaml
-
 analyzer:
-  language:
-    strict-inference: true
-    strict-casts: true
-    strict-raw-types: true
-
   exclude:
     - "icu4x/**"
-
-linter:
-  rules:
-    prefer_single_quotes: true
-    require_trailing_commas: true
-    collection_methods_unrelated_type: true
-    unrelated_type_equality_checks: true

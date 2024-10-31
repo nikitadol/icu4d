@@ -15,7 +15,7 @@ final class LibraryLoader {
   final Map<String, LibraryOpener> _overridePlatforms = {};
   LibraryOpener? _overrideForAll;
 
-  ffi.DynamicLibrary openIcu4x() {
+  ffi.DynamicLibrary open() {
     final opener = _overrideForAll ??
         _overridePlatforms[Platform.operatingSystem] ??
         _default;

@@ -3,13 +3,31 @@ name: root
 packages:
   - packages/**
 
+ide:
+  intellij: false
+
 command:
   bootstrap:
     environment:
-      sdk: ^3.5.0
+      sdk: '>=3.5.0 <4.0.0'
+
     dependencies:
-      path: ^1.9.0
+      path: ^1.9.1
+      tar: ^2.0.0
+      dio: ^5.7.0
+
     dev_dependencies:
       lints: ^5.0.0
       test: ^1.25.8
       benchmark_runner: ^1.0.0
+
+  clean:
+    hooks:
+      pre: cd ./icu4x && cargo clean
+
+scripts:
+  build_icu:debug:
+    run: cd ./icu4x && cargo rustc -p icu_capi --crate-type cdylib
+
+  gen_bindings:
+    run: cd ./packages/_tools && dart run ffigen

@@ -7,8 +7,33 @@ environment:
   sdk: ^3.5.0
 
 dependencies:
-
+  tar: ^2.0.0
+  dio: ^5.7.0
+  path: ^1.9.1
+  recase: ^4.1.0
+  ffigen: ^15.0.0
+  code_builder: ^4.10.1
+  dart_style: ^2.3.7
+  yaml: any
 
 dev_dependencies:
   lints: ^5.0.0
-  test: ^1.25.8
+
+ffigen:
+  name: IcuLib
+  output: ../icu4d/lib/src/ffi/generated_bindings.dart
+  exclude-all-by-default: true
+  headers:
+    entry-points:
+      - ../../icu4x/ffi/capi/bindings/c/**.h
+      - lib/fixed_diplomat_runtime.h
+  ignore-source-errors: true
+  functions:
+    leaf:
+      include:
+        - .*
+    include:
+      - diplomat_buffer_writeable_create
+      - diplomat_buffer_writeable_destroy
+      - ICU4XLocale_create_from_string
+      - ICU4XLocale_basename
