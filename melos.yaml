@@ -24,6 +24,7 @@ command:
   clean:
     hooks:
       pre: cd ./icu4x && cargo clean
+      post: find . -name "pubspec.lock" -type f -delete
 
 scripts:
   build_icu:debug:

@@ -1,1 +1,1 @@
-library icu4d;
+export 'src/ffi/ffi.dart';

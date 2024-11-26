@@ -38,9 +38,19 @@ class IcuLib {
           diplomat_result_box_ICU4XLocale_ICU4XError Function(
               ffi.Pointer<ffi.Char>, int)>(isLeaf: true);
 
+  ffi.Pointer<ICU4XLocale> ICU4XLocale_create_und() {
+    return _ICU4XLocale_create_und();
+  }
+
+  late final _ICU4XLocale_create_undPtr =
+      _lookup<ffi.NativeFunction<ffi.Pointer<ICU4XLocale> Function()>>(
+          'ICU4XLocale_create_und');
+  late final _ICU4XLocale_create_und = _ICU4XLocale_create_undPtr.asFunction<
+      ffi.Pointer<ICU4XLocale> Function()>(isLeaf: true);
+
   diplomat_result_void_ICU4XError ICU4XLocale_basename(
     ffi.Pointer<ICU4XLocale> self,
-    ffi.Pointer<DiplomatWriteable> write,
+    ffi.Pointer<ICU4XDiplomatWriteable> write,
   ) {
     return _ICU4XLocale_basename(
       self,
@@ -51,12 +61,189 @@ class IcuLib {
   late final _ICU4XLocale_basenamePtr = _lookup<
       ffi.NativeFunction<
           diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
-              ffi.Pointer<DiplomatWriteable>)>>('ICU4XLocale_basename');
+              ffi.Pointer<ICU4XDiplomatWriteable>)>>('ICU4XLocale_basename');
   late final _ICU4XLocale_basename = _ICU4XLocale_basenamePtr.asFunction<
       diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
-          ffi.Pointer<DiplomatWriteable>)>(isLeaf: true);
+          ffi.Pointer<ICU4XDiplomatWriteable>)>(isLeaf: true);
 
-  ffi.Pointer<DiplomatWriteable> diplomat_buffer_writeable_create(
+  diplomat_result_void_ICU4XError ICU4XLocale_get_unicode_extension(
+    ffi.Pointer<ICU4XLocale> self,
+    ffi.Pointer<ffi.Char> bytes_data,
+    int bytes_len,
+    ffi.Pointer<ICU4XDiplomatWriteable> write,
+  ) {
+    return _ICU4XLocale_get_unicode_extension(
+      self,
+      bytes_data,
+      bytes_len,
+      write,
+    );
+  }
+
+  late final _ICU4XLocale_get_unicode_extensionPtr = _lookup<
+          ffi.NativeFunction<
+              diplomat_result_void_ICU4XError Function(
+                  ffi.Pointer<ICU4XLocale>,
+                  ffi.Pointer<ffi.Char>,
+                  ffi.Size,
+                  ffi.Pointer<ICU4XDiplomatWriteable>)>>(
+      'ICU4XLocale_get_unicode_extension');
+  late final _ICU4XLocale_get_unicode_extension =
+      _ICU4XLocale_get_unicode_extensionPtr.asFunction<
+          diplomat_result_void_ICU4XError Function(
+              ffi.Pointer<ICU4XLocale>,
+              ffi.Pointer<ffi.Char>,
+              int,
+              ffi.Pointer<ICU4XDiplomatWriteable>)>(isLeaf: true);
+
+  diplomat_result_void_ICU4XError ICU4XLocale_language(
+    ffi.Pointer<ICU4XLocale> self,
+    ffi.Pointer<ICU4XDiplomatWriteable> write,
+  ) {
+    return _ICU4XLocale_language(
+      self,
+      write,
+    );
+  }
+
+  late final _ICU4XLocale_languagePtr = _lookup<
+      ffi.NativeFunction<
+          diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+              ffi.Pointer<ICU4XDiplomatWriteable>)>>('ICU4XLocale_language');
+  late final _ICU4XLocale_language = _ICU4XLocale_languagePtr.asFunction<
+      diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+          ffi.Pointer<ICU4XDiplomatWriteable>)>(isLeaf: true);
+
+  diplomat_result_void_ICU4XError ICU4XLocale_set_language(
+    ffi.Pointer<ICU4XLocale> self,
+    ffi.Pointer<ffi.Char> bytes_data,
+    int bytes_len,
+  ) {
+    return _ICU4XLocale_set_language(
+      self,
+      bytes_data,
+      bytes_len,
+    );
+  }
+
+  late final _ICU4XLocale_set_languagePtr = _lookup<
+      ffi.NativeFunction<
+          diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+              ffi.Pointer<ffi.Char>, ffi.Size)>>('ICU4XLocale_set_language');
+  late final _ICU4XLocale_set_language =
+      _ICU4XLocale_set_languagePtr.asFunction<
+          diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+              ffi.Pointer<ffi.Char>, int)>(isLeaf: true);
+
+  diplomat_result_void_ICU4XError ICU4XLocale_region(
+    ffi.Pointer<ICU4XLocale> self,
+    ffi.Pointer<ICU4XDiplomatWriteable> write,
+  ) {
+    return _ICU4XLocale_region(
+      self,
+      write,
+    );
+  }
+
+  late final _ICU4XLocale_regionPtr = _lookup<
+      ffi.NativeFunction<
+          diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+              ffi.Pointer<ICU4XDiplomatWriteable>)>>('ICU4XLocale_region');
+  late final _ICU4XLocale_region = _ICU4XLocale_regionPtr.asFunction<
+      diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+          ffi.Pointer<ICU4XDiplomatWriteable>)>(isLeaf: true);
+
+  diplomat_result_void_ICU4XError ICU4XLocale_set_region(
+    ffi.Pointer<ICU4XLocale> self,
+    ffi.Pointer<ffi.Char> bytes_data,
+    int bytes_len,
+  ) {
+    return _ICU4XLocale_set_region(
+      self,
+      bytes_data,
+      bytes_len,
+    );
+  }
+
+  late final _ICU4XLocale_set_regionPtr = _lookup<
+      ffi.NativeFunction<
+          diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+              ffi.Pointer<ffi.Char>, ffi.Size)>>('ICU4XLocale_set_region');
+  late final _ICU4XLocale_set_region = _ICU4XLocale_set_regionPtr.asFunction<
+      diplomat_result_void_ICU4XError Function(
+          ffi.Pointer<ICU4XLocale>, ffi.Pointer<ffi.Char>, int)>(isLeaf: true);
+
+  diplomat_result_void_ICU4XError ICU4XLocale_script(
+    ffi.Pointer<ICU4XLocale> self,
+    ffi.Pointer<ICU4XDiplomatWriteable> write,
+  ) {
+    return _ICU4XLocale_script(
+      self,
+      write,
+    );
+  }
+
+  late final _ICU4XLocale_scriptPtr = _lookup<
+      ffi.NativeFunction<
+          diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+              ffi.Pointer<ICU4XDiplomatWriteable>)>>('ICU4XLocale_script');
+  late final _ICU4XLocale_script = _ICU4XLocale_scriptPtr.asFunction<
+      diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+          ffi.Pointer<ICU4XDiplomatWriteable>)>(isLeaf: true);
+
+  diplomat_result_void_ICU4XError ICU4XLocale_set_script(
+    ffi.Pointer<ICU4XLocale> self,
+    ffi.Pointer<ffi.Char> bytes_data,
+    int bytes_len,
+  ) {
+    return _ICU4XLocale_set_script(
+      self,
+      bytes_data,
+      bytes_len,
+    );
+  }
+
+  late final _ICU4XLocale_set_scriptPtr = _lookup<
+      ffi.NativeFunction<
+          diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+              ffi.Pointer<ffi.Char>, ffi.Size)>>('ICU4XLocale_set_script');
+  late final _ICU4XLocale_set_script = _ICU4XLocale_set_scriptPtr.asFunction<
+      diplomat_result_void_ICU4XError Function(
+          ffi.Pointer<ICU4XLocale>, ffi.Pointer<ffi.Char>, int)>(isLeaf: true);
+
+  diplomat_result_void_ICU4XError ICU4XLocale_to_string(
+    ffi.Pointer<ICU4XLocale> self,
+    ffi.Pointer<ICU4XDiplomatWriteable> write,
+  ) {
+    return _ICU4XLocale_to_string(
+      self,
+      write,
+    );
+  }
+
+  late final _ICU4XLocale_to_stringPtr = _lookup<
+      ffi.NativeFunction<
+          diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+              ffi.Pointer<ICU4XDiplomatWriteable>)>>('ICU4XLocale_to_string');
+  late final _ICU4XLocale_to_string = _ICU4XLocale_to_stringPtr.asFunction<
+      diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
+          ffi.Pointer<ICU4XDiplomatWriteable>)>(isLeaf: true);
+
+  void ICU4XLocale_destroy(
+    ffi.Pointer<ICU4XLocale> self,
+  ) {
+    return _ICU4XLocale_destroy(
+      self,
+    );
+  }
+
+  late final _ICU4XLocale_destroyPtr =
+      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ICU4XLocale>)>>(
+          'ICU4XLocale_destroy');
+  late final _ICU4XLocale_destroy = _ICU4XLocale_destroyPtr.asFunction<
+      void Function(ffi.Pointer<ICU4XLocale>)>(isLeaf: true);
+
+  ffi.Pointer<ICU4XDiplomatWriteable> diplomat_buffer_writeable_create(
     int cap,
   ) {
     return _diplomat_buffer_writeable_create(
@@ -65,16 +252,16 @@ class IcuLib {
   }
 
   late final _diplomat_buffer_writeable_createPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Pointer<DiplomatWriteable> Function(ffi.Size)>>(
-      'diplomat_buffer_writeable_create');
+      ffi.NativeFunction<
+          ffi.Pointer<ICU4XDiplomatWriteable> Function(
+              ffi.Size)>>('diplomat_buffer_writeable_create');
   late final _diplomat_buffer_writeable_create =
       _diplomat_buffer_writeable_createPtr
-          .asFunction<ffi.Pointer<DiplomatWriteable> Function(int)>(
+          .asFunction<ffi.Pointer<ICU4XDiplomatWriteable> Function(int)>(
               isLeaf: true);
 
   void diplomat_buffer_writeable_destroy(
-    ffi.Pointer<DiplomatWriteable> t,
+    ffi.Pointer<ICU4XDiplomatWriteable> t,
   ) {
     return _diplomat_buffer_writeable_destroy(
       t,
@@ -82,32 +269,49 @@ class IcuLib {
   }
 
   late final _diplomat_buffer_writeable_destroyPtr = _lookup<
-          ffi
-          .NativeFunction<ffi.Void Function(ffi.Pointer<DiplomatWriteable>)>>(
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<ICU4XDiplomatWriteable>)>>(
       'diplomat_buffer_writeable_destroy');
   late final _diplomat_buffer_writeable_destroy =
       _diplomat_buffer_writeable_destroyPtr
-          .asFunction<void Function(ffi.Pointer<DiplomatWriteable>)>(
+          .asFunction<void Function(ffi.Pointer<ICU4XDiplomatWriteable>)>(
               isLeaf: true);
+
+  late final addresses = _SymbolAddresses(this);
 }
 
-final class diplomat_result_box_ICU4XLocale_ICU4XError extends ffi.Struct {
-  external UnnamedUnion1 unnamed;
-
-  @ffi.Bool()
-  external bool is_ok;
+class _SymbolAddresses {
+  final IcuLib _library;
+  _SymbolAddresses(this._library);
+  ffi.Pointer<ffi.NativeFunction<ffi.Void Function(ffi.Pointer<ICU4XLocale>)>>
+      get ICU4XLocale_destroy => _library._ICU4XLocale_destroyPtr;
+  ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Void Function(ffi.Pointer<ICU4XDiplomatWriteable>)>>
+      get diplomat_buffer_writeable_destroy =>
+          _library._diplomat_buffer_writeable_destroyPtr;
 }
 
-final class UnnamedUnion1 extends ffi.Union {
-  external ffi.Pointer<ICU4XLocale> ok;
+final class ICU4XDiplomatWriteable extends ffi.Struct {
+  external ffi.Pointer<ffi.Void> context;
 
-  @ffi.UnsignedInt()
-  external int errAsInt;
+  external ffi.Pointer<ffi.Char> buf;
 
-  ICU4XError get err => ICU4XError.fromValue(errAsInt);
+  @ffi.Size()
+  external int len;
+
+  @ffi.Size()
+  external int cap;
+
+  external ffi.Pointer<
+      ffi.NativeFunction<
+          ffi.Void Function(ffi.Pointer<ICU4XDiplomatWriteable>)>> flush;
+
+  external ffi.Pointer<
+          ffi.NativeFunction<
+              ffi.Bool Function(ffi.Pointer<ICU4XDiplomatWriteable>, ffi.Size)>>
+      grow;
 }
-
-final class ICU4XLocale extends ffi.Opaque {}
 
 enum ICU4XError {
   ICU4XError_UnknownError(0),
@@ -233,13 +437,6 @@ enum ICU4XError {
       };
 }
 
-final class diplomat_result_void_ICU4XError extends ffi.Struct {
-  external UnnamedUnion2 unnamed;
-
-  @ffi.Bool()
-  external bool is_ok;
-}
-
 final class UnnamedUnion2 extends ffi.Union {
   @ffi.UnsignedInt()
   external int errAsInt;
@@ -247,22 +444,27 @@ final class UnnamedUnion2 extends ffi.Union {
   ICU4XError get err => ICU4XError.fromValue(errAsInt);
 }
 
-final class DiplomatWriteable extends ffi.Struct {
-  external ffi.Pointer<ffi.Void> context;
+final class diplomat_result_void_ICU4XError extends ffi.Struct {
+  external UnnamedUnion2 unnamed;
 
-  external ffi.Pointer<ffi.Char> buf;
+  @ffi.Bool()
+  external bool is_ok;
+}
 
-  @ffi.Size()
-  external int len;
+final class ICU4XLocale extends ffi.Opaque {}
 
-  @ffi.Size()
-  external int cap;
+final class UnnamedUnion4 extends ffi.Union {
+  external ffi.Pointer<ICU4XLocale> ok;
 
-  external ffi.Pointer<
-          ffi.NativeFunction<ffi.Void Function(ffi.Pointer<DiplomatWriteable>)>>
-      flush;
+  @ffi.UnsignedInt()
+  external int errAsInt;
 
-  external ffi.Pointer<
-      ffi.NativeFunction<
-          ffi.Bool Function(ffi.Pointer<DiplomatWriteable>, ffi.Size)>> grow;
+  ICU4XError get err => ICU4XError.fromValue(errAsInt);
+}
+
+final class diplomat_result_box_ICU4XLocale_ICU4XError extends ffi.Struct {
+  external UnnamedUnion4 unnamed;
+
+  @ffi.Bool()
+  external bool is_ok;
 }

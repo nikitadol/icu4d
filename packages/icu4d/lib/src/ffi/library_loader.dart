@@ -17,7 +17,7 @@ final class LibraryLoader {
 
   ffi.DynamicLibrary open() {
     final opener = _overrideForAll ??
-        _overridePlatforms[Platform.operatingSystem] ??
+        _overridePlatforms[io.Platform.operatingSystem] ??
         _default;
 
     return opener();

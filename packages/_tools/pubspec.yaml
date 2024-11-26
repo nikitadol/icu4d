@@ -11,10 +11,12 @@ dependencies:
   dio: ^5.7.0
   path: ^1.9.1
   recase: ^4.1.0
-  ffigen: ^15.0.0
+  ffigen: ^16.0.0
   code_builder: ^4.10.1
   dart_style: ^2.3.7
   yaml: any
+  glob: any
+  collection: any
 
 dev_dependencies:
   lints: ^5.0.0
@@ -28,7 +30,13 @@ ffigen:
       - ../../icu4x/ffi/capi/bindings/c/**.h
       - lib/fixed_diplomat_runtime.h
   ignore-source-errors: true
+  structs:
+    rename:
+      'DiplomatWriteable': 'ICU4XDiplomatWriteable'
   functions:
+    symbol-address:
+      include:
+        - .*_destroy
     leaf:
       include:
         - .*
@@ -36,4 +44,15 @@ ffigen:
       - diplomat_buffer_writeable_create
       - diplomat_buffer_writeable_destroy
       - ICU4XLocale_create_from_string
+      - ICU4XLocale_create_und
       - ICU4XLocale_basename
+      - ICU4XLocale_to_string
+      - ICU4XLocale_basename
+      - ICU4XLocale_get_unicode_extension
+      - ICU4XLocale_language
+      - ICU4XLocale_set_language
+      - ICU4XLocale_region
+      - ICU4XLocale_set_region
+      - ICU4XLocale_script
+      - ICU4XLocale_set_script
+      - ICU4XLocale_destroy
