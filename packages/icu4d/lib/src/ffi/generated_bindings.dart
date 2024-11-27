@@ -48,6 +48,22 @@ class IcuLib {
   late final _ICU4XLocale_create_und = _ICU4XLocale_create_undPtr.asFunction<
       ffi.Pointer<ICU4XLocale> Function()>(isLeaf: true);
 
+  ffi.Pointer<ICU4XLocale> ICU4XLocale_clone(
+    ffi.Pointer<ICU4XLocale> self,
+  ) {
+    return _ICU4XLocale_clone(
+      self,
+    );
+  }
+
+  late final _ICU4XLocale_clonePtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<ICU4XLocale> Function(
+              ffi.Pointer<ICU4XLocale>)>>('ICU4XLocale_clone');
+  late final _ICU4XLocale_clone = _ICU4XLocale_clonePtr.asFunction<
+      ffi.Pointer<ICU4XLocale> Function(
+          ffi.Pointer<ICU4XLocale>)>(isLeaf: true);
+
   diplomat_result_void_ICU4XError ICU4XLocale_basename(
     ffi.Pointer<ICU4XLocale> self,
     ffi.Pointer<ICU4XDiplomatWriteable> write,
@@ -211,6 +227,28 @@ class IcuLib {
       diplomat_result_void_ICU4XError Function(
           ffi.Pointer<ICU4XLocale>, ffi.Pointer<ffi.Char>, int)>(isLeaf: true);
 
+  diplomat_result_void_ICU4XError ICU4XLocale_canonicalize(
+    ffi.Pointer<ffi.Char> bytes_data,
+    int bytes_len,
+    ffi.Pointer<ICU4XDiplomatWriteable> write,
+  ) {
+    return _ICU4XLocale_canonicalize(
+      bytes_data,
+      bytes_len,
+      write,
+    );
+  }
+
+  late final _ICU4XLocale_canonicalizePtr = _lookup<
+          ffi.NativeFunction<
+              diplomat_result_void_ICU4XError Function(ffi.Pointer<ffi.Char>,
+                  ffi.Size, ffi.Pointer<ICU4XDiplomatWriteable>)>>(
+      'ICU4XLocale_canonicalize');
+  late final _ICU4XLocale_canonicalize =
+      _ICU4XLocale_canonicalizePtr.asFunction<
+          diplomat_result_void_ICU4XError Function(ffi.Pointer<ffi.Char>, int,
+              ffi.Pointer<ICU4XDiplomatWriteable>)>(isLeaf: true);
+
   diplomat_result_void_ICU4XError ICU4XLocale_to_string(
     ffi.Pointer<ICU4XLocale> self,
     ffi.Pointer<ICU4XDiplomatWriteable> write,
@@ -228,6 +266,24 @@ class IcuLib {
   late final _ICU4XLocale_to_string = _ICU4XLocale_to_stringPtr.asFunction<
       diplomat_result_void_ICU4XError Function(ffi.Pointer<ICU4XLocale>,
           ffi.Pointer<ICU4XDiplomatWriteable>)>(isLeaf: true);
+
+  ICU4XOrdering ICU4XLocale_total_cmp(
+    ffi.Pointer<ICU4XLocale> self,
+    ffi.Pointer<ICU4XLocale> other,
+  ) {
+    return ICU4XOrdering.fromValue(_ICU4XLocale_total_cmp(
+      self,
+      other,
+    ));
+  }
+
+  late final _ICU4XLocale_total_cmpPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Int Function(ffi.Pointer<ICU4XLocale>,
+              ffi.Pointer<ICU4XLocale>)>>('ICU4XLocale_total_cmp');
+  late final _ICU4XLocale_total_cmp = _ICU4XLocale_total_cmpPtr.asFunction<
+      int Function(
+          ffi.Pointer<ICU4XLocale>, ffi.Pointer<ICU4XLocale>)>(isLeaf: true);
 
   void ICU4XLocale_destroy(
     ffi.Pointer<ICU4XLocale> self,
@@ -467,4 +523,20 @@ final class diplomat_result_box_ICU4XLocale_ICU4XError extends ffi.Struct {
 
   @ffi.Bool()
   external bool is_ok;
+}
+
+enum ICU4XOrdering {
+  ICU4XOrdering_Less(-1),
+  ICU4XOrdering_Equal(0),
+  ICU4XOrdering_Greater(1);
+
+  final int value;
+  const ICU4XOrdering(this.value);
+
+  static ICU4XOrdering fromValue(int value) => switch (value) {
+        -1 => ICU4XOrdering_Less,
+        0 => ICU4XOrdering_Equal,
+        1 => ICU4XOrdering_Greater,
+        _ => throw ArgumentError("Unknown value for ICU4XOrdering: $value"),
+      };
 }

@@ -28,7 +28,6 @@ ffigen:
   headers:
     entry-points:
       - ../../icu4x/ffi/capi/bindings/c/**.h
-      - lib/fixed_diplomat_runtime.h
   ignore-source-errors: true
   structs:
     rename:
@@ -40,6 +39,12 @@ ffigen:
     leaf:
       include:
         - .*
+    exclude:
+      - diplomat_simple_writeable
+      - ICU4XLocale_create_bn
+      - ICU4XLocale_create_en
+      - ICU4XLocale_normalizing_eq
+      - ICU4XLocale_strict_cmp
     include:
       - diplomat_buffer_writeable_create
       - diplomat_buffer_writeable_destroy
@@ -56,3 +61,6 @@ ffigen:
       - ICU4XLocale_script
       - ICU4XLocale_set_script
       - ICU4XLocale_destroy
+      - ICU4XLocale_canonicalize
+      - ICU4XLocale_clone
+      - ICU4XLocale_total_cmp

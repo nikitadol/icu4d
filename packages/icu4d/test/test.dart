@@ -45,6 +45,23 @@ void main() {
   }
 
   checkLocale(Locale());
-  checkLocale(Locale('en_US_u_ca_japanese'.uString));
-  checkLocale(Locale('en-Latn-US'.uString));
+  checkLocale(Locale.parse('en_US_u_ca_japanese'.uString)!);
+  checkLocale(Locale.parse('en-Latn-US'.uString)!);
+
+  void checkList<T>(List<T> list) {
+    print('-' * 10);
+    print(T);
+    print(list);
+    print(list..sort());
+  }
+
+  checkList([
+    Locale.parse('en'.uString),
+    Locale.parse('en_US'.uString),
+    Locale.parse('en_UK'.uString),
+    Locale.parse('ru'.uString),
+    Locale.parse('ru_RU'.uString),
+    Locale.parse('ru_BY'.uString),
+    Locale.parse('ru_UA'.uString),
+  ]);
 }

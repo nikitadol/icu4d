@@ -2,9 +2,11 @@ import 'dart:io';
 
 import 'package:bench/utf16_to_utf8/dart_native.dart' as dart_native;
 import 'package:bench/utf16_to_utf8/other.dart' as other;
-import 'package:bench/utf16_to_utf8/other.dart' as other_pragma_no_bounds_checks;
+import 'package:bench/utf16_to_utf8/other.dart'
+    as other_pragma_no_bounds_checks;
 import 'package:bench/utf16_to_utf8/other.dart' as other_pragma_no_interrupts;
-import 'package:bench/utf16_to_utf8/other_all_pragmas.dart' as other_all_pragmas;
+import 'package:bench/utf16_to_utf8/other_all_pragmas.dart'
+    as other_all_pragmas;
 import 'package:benchmark_runner/benchmark_runner.dart';
 import 'package:path/path.dart';
 

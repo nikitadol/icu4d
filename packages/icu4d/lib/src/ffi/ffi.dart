@@ -11,7 +11,7 @@ export 'generated_bindings.dart';
 
 part 'diplomat_writeable.dart';
 part 'library_loader.dart';
-part 'base_locale.dart';
+part 'locale.dart';
 part 'u_string.dart';
 
 final IcuLib _icuLib = IcuLib(libraryLoader.open());

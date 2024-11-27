@@ -537,26 +537,22 @@
   - [ ] ICU4XListFormatter_format
 - [ ] ICU4XListLength
   - [ ] ICU4XListLength_destroy
-- [ ] ICU4XLocale
+- [x] ICU4XLocale
   - [x] ICU4XLocale_basename
-  - [ ] ICU4XLocale_canonicalize
-  - [ ] ICU4XLocale_clone
-  - [ ] ICU4XLocale_create_bn
-  - [ ] ICU4XLocale_create_en
+  - [x] ICU4XLocale_canonicalize
+  - [x] ICU4XLocale_clone
   - [x] ICU4XLocale_create_from_string
   - [x] ICU4XLocale_create_und
   - [x] ICU4XLocale_destroy
   - [x] ICU4XLocale_get_unicode_extension
   - [x] ICU4XLocale_language
-  - [ ] ICU4XLocale_normalizing_eq
   - [x] ICU4XLocale_region
   - [x] ICU4XLocale_script
   - [x] ICU4XLocale_set_language
   - [x] ICU4XLocale_set_region
   - [x] ICU4XLocale_set_script
-  - [ ] ICU4XLocale_strict_cmp
   - [x] ICU4XLocale_to_string
-  - [ ] ICU4XLocale_total_cmp
+  - [x] ICU4XLocale_total_cmp
 - [ ] ICU4XLocaleCanonicalizer
   - [ ] ICU4XLocaleCanonicalizer_canonicalize
   - [ ] ICU4XLocaleCanonicalizer_create
@@ -805,5 +801,3 @@
   - [ ] ICU4XZonedDateTimeFormatter_destroy
   - [ ] ICU4XZonedDateTimeFormatter_format_datetime_with_custom_time_zone
   - [ ] ICU4XZonedDateTimeFormatter_format_iso_datetime_with_custom_time_zone
-- [x] diplomat
-  - [x] diplomat_simple_writeable

@@ -1,6 +1,7 @@
 part of 'ffi.dart';
 
-abstract class LocaleBase implements ffi.Finalizable {
+abstract base class LocaleBase
+    implements ffi.Finalizable, Comparable<LocaleBase> {
   static final _nativeFinalizer = ffi.NativeFinalizer(
     _icuLib.addresses.ICU4XLocale_destroy.cast(),
   );
@@ -11,11 +12,15 @@ abstract class LocaleBase implements ffi.Finalizable {
     _nativeFinalizer.attach(this, _pointer.cast());
   }
 
-  static ffi.Pointer<ICU4XLocale> _createLocalePointer([UString? str]) {
-    final ffi.Pointer<ICU4XLocale> pointer;
+  static ffi.Pointer<ICU4XLocale> _createUndLocale() {
+    return _icuLib.ICU4XLocale_create_und();
+  }
+
+  static ffi.Pointer<ICU4XLocale>? _createLocalePointer([UString? str]) {
+    final ffi.Pointer<ICU4XLocale>? pointer;
 
     if (str == null || str.isEmpty) {
-      pointer = _icuLib.ICU4XLocale_create_und();
+      pointer = null;
     } else {
       final result = _icuLib.ICU4XLocale_create_from_string(
         str._pointer,
@@ -24,11 +29,34 @@ abstract class LocaleBase implements ffi.Finalizable {
       if (result.is_ok) {
         pointer = result.unnamed.ok;
       } else {
-        throw result.unnamed.err;
+        pointer = null;
       }
     }
 
     return pointer;
+  }
+
+  static UString? canonicalize(UString str) {
+    final writeable = DiplomatWriteable();
+    final res = _icuLib.ICU4XLocale_canonicalize(
+      str._pointer,
+      str._utf8Length,
+      writeable._pointer,
+    );
+
+    if (res.is_ok) {
+      return UString('$writeable');
+    }
+
+    return null;
+  }
+
+  Locale copy() {
+    return Locale._(_icuLib.ICU4XLocale_clone(_pointer));
+  }
+
+  LocaleMutable copyMutable() {
+    return LocaleMutable._(_icuLib.ICU4XLocale_clone(_pointer));
   }
 
   UString get basename {
@@ -108,21 +136,47 @@ abstract class LocaleBase implements ffi.Finalizable {
 
     throw res.unnamed.err;
   }
+
+  @override
+  int compareTo(LocaleBase other) {
+    return _icuLib.ICU4XLocale_total_cmp(
+      _pointer,
+      other._pointer,
+    ).value;
+  }
 }
 
 final class Locale extends LocaleBase {
   Locale._(super.pointer) : super._();
 
-  factory Locale([UString? str]) {
-    return Locale._(LocaleBase._createLocalePointer(str));
+  factory Locale() {
+    return Locale._(LocaleBase._createUndLocale());
+  }
+
+  static Locale? parse(UString str) {
+    final pointer = LocaleBase._createLocalePointer(str);
+    if (pointer == null) {
+      return null;
+    }
+
+    return Locale._(pointer);
   }
 }
 
 final class LocaleMutable extends LocaleBase {
   LocaleMutable._(super.pointer) : super._();
 
-  factory LocaleMutable([UString? str]) {
-    return LocaleMutable._(LocaleBase._createLocalePointer(str));
+  factory LocaleMutable() {
+    return LocaleMutable._(LocaleBase._createUndLocale());
+  }
+
+  static LocaleMutable? parse(UString str) {
+    final pointer = LocaleBase._createLocalePointer(str);
+    if (pointer == null) {
+      return null;
+    }
+
+    return LocaleMutable._(pointer);
   }
 
   set language(UString value) {
